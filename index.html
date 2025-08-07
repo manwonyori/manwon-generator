@@ -15,7 +15,7 @@
 
         <main>
             <div class="input-section">
-                <h2>🚀 간편 명령어 시스템</h2>
+                <h2>[실행] 간편 명령어 시스템</h2>
                 <div class="form-group" style="background: #f0f9ff; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
                     <label for="commandInput" style="font-weight: bold; color: #1e40af;">명령어 입력 (제품명 + 참조사이트 + 이미지)</label>
                     <textarea id="commandInput" rows="8" placeholder="[인생]국물닭발800g
@@ -24,10 +24,10 @@
 https://example.com/image1.jpg
 https://example.com/image2.jpg" style="font-family: monospace; background: white;"></textarea>
                     <button onclick="executeCommand()" class="btn-primary" style="width: 100%; margin-top: 10px; background: #1e40af;">
-                        ⚡ 즉시 생성하기
+                        [즉시] 즉시 생성하기
                     </button>
                     <div style="margin-top: 10px;">
-                        <small style="color: #6b7280;">💡 샘플 명령어:</small>
+                        <small style="color: #6b7280;">[팁] 샘플 명령어:</small>
                         <button onclick="loadSampleCommand()" class="btn-secondary" style="padding: 5px 10px; font-size: 12px; margin-left: 10px;">
                             [인생]국물닭발800g 예제 불러오기
                         </button>
@@ -41,7 +41,7 @@ https://example.com/image2.jpg" style="font-family: monospace; background: white
                     <label for="openaiKey">OpenAI API Key (GPT)</label>
                     <div style="display: flex; gap: 10px; align-items: center;">
                         <input type="password" id="openaiKey" placeholder="sk-..." style="flex: 1;">
-                        <button type="button" onclick="toggleKeyVisibility('openaiKey')" class="btn-secondary" style="width: 60px;">👁️</button>
+                        <button type="button" onclick="toggleKeyVisibility('openaiKey')" class="btn-secondary" style="width: 60px;">[보기]</button>
                     </div>
                     <button type="button" onclick="saveApiKey('openai')" class="btn-secondary" style="margin-top: 10px;">Save OpenAI Key</button>
                     <small id="openaiStatus" style="color: #666; display: block; margin-top: 5px;">Status: Not configured</small>
@@ -51,7 +51,7 @@ https://example.com/image2.jpg" style="font-family: monospace; background: white
                     <label for="claudeKey">Claude API Key (Anthropic)</label>
                     <div style="display: flex; gap: 10px; align-items: center;">
                         <input type="password" id="claudeKey" placeholder="sk-ant-..." style="flex: 1;">
-                        <button type="button" onclick="toggleKeyVisibility('claudeKey')" class="btn-secondary" style="width: 60px;">👁️</button>
+                        <button type="button" onclick="toggleKeyVisibility('claudeKey')" class="btn-secondary" style="width: 60px;">[보기]</button>
                     </div>
                     <button type="button" onclick="saveApiKey('claude')" class="btn-secondary" style="margin-top: 10px;">Save Claude Key</button>
                     <small id="claudeStatus" style="color: #666; display: block; margin-top: 5px;">Status: Not configured</small>
@@ -68,7 +68,7 @@ https://example.com/image2.jpg" style="font-family: monospace; background: white
                             <option value="10000">10초 (최고 품질)</option>
                         </select>
                     </div>
-                    <small style="color: #666;">💡 충분한 시간으로 더 품질 높은 콘텐츠를 생성합니다.</small>
+                    <small style="color: #666;">[팁] 충분한 시간으로 더 품질 높은 콘텐츠를 생성합니다.</small>
                 </div>
                 
                 <h2>Page Information</h2>
@@ -164,7 +164,7 @@ https://example.com/image2.jpg" style="font-family: monospace; background: white
                 </div>
 
                 <div class="button-group">
-                    <button onclick="analyzeProduct(event)" class="btn-secondary" style="background-color: #E4A853;">🔍 제품 분석</button>
+                    <button onclick="analyzeProduct(event)" class="btn-secondary" style="background-color: #E4A853;">[검색] 제품 분석</button>
                     <button onclick="generatePage()" class="btn-primary">Generate Page</button>
                     <button onclick="previewPage()" class="btn-secondary">Preview</button>
                     <button onclick="resetForm()" class="btn-secondary">Reset</button>
@@ -210,15 +210,15 @@ https://example.com/image2.jpg" style="font-family: monospace; background: white
             
             if (input.type === 'password') {
                 input.type = 'text';
-                button.textContent = '🙈';
+                button.textContent = '[숨김]';
                 // Auto-hide after 3 seconds
                 setTimeout(() => {
                     input.type = 'password';
-                    button.textContent = '👁️';
+                    button.textContent = '[보기]';
                 }, 3000);
             } else {
                 input.type = 'password';
-                button.textContent = '👁️';
+                button.textContent = '[보기]';
             }
         }
         
@@ -277,11 +277,11 @@ https://example.com/image2.jpg" style="font-family: monospace; background: white
             const apiKey = localStorage.getItem(keyName);
             
             if (apiKey && apiKey !== 'YOUR_API_KEY_HERE' && apiKey.trim() !== '') {
-                statusElement.innerHTML = `Status: ✅ Configured (${maskApiKey(apiKey)})`;
+                statusElement.innerHTML = `Status: [성공] Configured (${maskApiKey(apiKey)})`;
                 statusElement.style.color = '#4caf50';
                 return true;
             } else {
-                statusElement.textContent = 'Status: ❌ Not configured';
+                statusElement.textContent = 'Status: [실패] Not configured';
                 statusElement.style.color = '#f44336';
                 return false;
             }
@@ -361,7 +361,7 @@ https://ecimg.cafe24img.com/pg1966b42244249021/manwonyori/web/product/life/feer8
             
             const analyzeBtn = event ? event.target : document.querySelector('button[onclick*="analyzeProduct"]');
             const originalText = analyzeBtn.textContent;
-            analyzeBtn.textContent = '🔄 분석 중...';
+            analyzeBtn.textContent = '[처리중] 분석 중...';
             analyzeBtn.disabled = true;
             
             try {

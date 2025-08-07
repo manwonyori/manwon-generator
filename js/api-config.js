@@ -16,7 +16,7 @@ function loadV9Prompt() {
         if (typeof window !== 'undefined' && window.MANWON_SYSTEM_PROMPT_V9) {
             MANWON_SYSTEM_PROMPT_V9 = window.MANWON_SYSTEM_PROMPT_V9;
             getEnhancedPrompt = window.getEnhancedPrompt || defaultGetEnhancedPrompt;
-            console.log('✅ v9.0 프롬프트 로드 완료');
+            console.log('[성공] v9.0 프롬프트 로드 완료');
             return true;
         } else {
             getEnhancedPrompt = defaultGetEnhancedPrompt;

@@ -294,7 +294,7 @@
 <body>
     <div class="container">
         <div class="mode-header">
-            <h1>📝 상세 정보 입력 모드</h1>
+            <h1>[입력] 상세 정보 입력 모드</h1>
             <p>제품의 구체적인 정보를 입력하여 완벽한 상세페이지를 생성합니다</p>
             <div class="mode-switch">
                 <button onclick="window.location.href='mode-selector.html'">모드 변경</button>
@@ -465,17 +465,17 @@
             <button class="btn-secondary" onclick="resetForm()">초기화</button>
             <button class="btn-secondary" onclick="saveTemplate()">템플릿 저장</button>
             <button class="btn-primary" onclick="generateDetailPage()">
-                <span id="generateBtnText">🚀 상세페이지 생성</span>
+                <span id="generateBtnText">[생성] 상세페이지 생성</span>
             </button>
         </div>
     </div>
     
     <!-- 미리보기 패널 -->
-    <button class="preview-toggle" onclick="togglePreview()">👁️</button>
+    <button class="preview-toggle" onclick="togglePreview()">[미리보기]</button>
     <div class="preview-section" id="previewPanel">
         <div class="preview-header">
             <h3>실시간 미리보기</h3>
-            <button onclick="togglePreview()" style="float: right; background: none; border: none; font-size: 20px; cursor: pointer;">✕</button>
+            <button onclick="togglePreview()" style="float: right; background: none; border: none; font-size: 20px; cursor: pointer;">[닫기]</button>
         </div>
         <div class="preview-content" id="previewContent">
             <p style="color: #9ca3af; text-align: center; padding: 40px;">

@@ -19,8 +19,8 @@ def check_deployment():
     print("="*50)
     print("   Render 배포 상태 확인")
     print("="*50)
-    print(f"\n🔍 URL: {url}")
-    print("⏳ 배포 확인 중... (최대 10분 대기)\n")
+    print(f"\n[검색] URL: {url}")
+    print("[대기] 배포 확인 중... (최대 10분 대기)\n")
     
     while attempt < max_attempts:
         attempt += 1
@@ -32,15 +32,15 @@ def check_deployment():
             if response.status_code == 200:
                 data = response.json()
                 if data.get('status') == 'healthy':
-                    print("✅ 성공!")
+                    print("[성공] 성공!")
                     print("\n" + "="*50)
-                    print("🎉 배포 완료!")
+                    print("[완료] 배포 완료!")
                     print("="*50)
-                    print(f"\n✅ 서비스 URL: https://manwon-generator.onrender.com")
-                    print(f"✅ Health Check: {data}")
+                    print(f"\n[성공] 서비스 URL: https://manwon-generator.onrender.com")
+                    print(f"[성공] Health Check: {data}")
                     
                     # 추가 엔드포인트 테스트
-                    print("\n📋 추가 테스트:")
+                    print("\n[테스트] 추가 테스트:")
                     test_endpoints = [
                         "/",
                         "/mode-selector.html",
@@ -53,11 +53,11 @@ def check_deployment():
                         try:
                             r = requests.get(test_url, timeout=5)
                             if r.status_code == 200:
-                                print(f"  ✅ {endpoint}")
+                                print(f"  [성공] {endpoint}")
                             else:
-                                print(f"  ⚠️ {endpoint} - Status: {r.status_code}")
+                                print(f"  [경고] {endpoint} - Status: {r.status_code}")
                         except:
-                            print(f"  ❌ {endpoint} - 접속 실패")
+                            print(f"  [실패] {endpoint} - 접속 실패")
                     
                     return True
             else:
@@ -75,13 +75,13 @@ def check_deployment():
             time.sleep(30)
     
     print("\n" + "="*50)
-    print("⚠️ 배포 확인 실패")
+    print("[경고] 배포 확인 실패")
     print("="*50)
     print("\n다음을 확인해주세요:")
     print("1. Render.com 대시보드에서 배포 상태 확인")
     print("2. Build logs 확인")
     print("3. 수동으로 Web Service 생성 필요할 수 있음")
-    print("\n📌 수동 배포 방법:")
+    print("\n[안내] 수동 배포 방법:")
     print("1. https://render.com 접속")
     print("2. New + > Web Service")
     print("3. GitHub 저장소 연결: manwonyori/manwon-generator")

@@ -29,7 +29,7 @@ const ProductAnalyzer = {
         // 4단계: 핵심 메시지 도출
         analysis.keyMessages = await this.extractKeyMessages(analysis);
         
-        console.log('✅ 제품 분석 완료:', analysis);
+        console.log('[성공] 제품 분석 완료:', analysis);
         return analysis;
     },
     
@@ -273,7 +273,7 @@ const ProductAnalyzer = {
     </div>
     
     <div style="margin-bottom: 20px;">
-        <h3 style="color: #1F2937;">✨ 핵심 특징</h3>
+        <h3 style="color: #1F2937;">[완료] 핵심 특징</h3>
         <ul style="color: #6B7280;">
             ${analysis.keyFeatures ? analysis.keyFeatures.map(feature => `<li>${feature}</li>`).join('') : '<li>뛰어난 가성비</li><li>검증된 품질</li><li>만원요리 최씨남매의 엄선</li>'}
         </ul>
@@ -312,4 +312,4 @@ const ProductAnalyzer = {
 // 전역 객체로 노출
 window.ProductAnalyzer = ProductAnalyzer;
 
-console.log('✅ 제품 분석 모듈 로드 완료');
+console.log('[성공] 제품 분석 모듈 로드 완료');

@@ -39,7 +39,7 @@ git push -u origin main
 
 echo.
 echo ==========================================
-echo ✅ 배포 준비 완료!
+echo [성공] 배포 준비 완료!
 echo.
 echo 다음 단계:
 echo 1. https://github.com/manwonyori/manwon-generator 확인

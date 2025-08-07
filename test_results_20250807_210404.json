@@ -1,0 +1,100 @@
+{
+  "timestamp": "2025-08-07T21:03:58.123571",
+  "base_url": "https://manwon-generator.onrender.com",
+  "tests": {
+    "/health_Health_Check": {
+      "endpoint": "/health",
+      "description": "Health Check",
+      "status_code": 404,
+      "response_time": 0.62,
+      "success": false,
+      "message": "HTTP 404"
+    },
+    "/_메인_페이지": {
+      "endpoint": "/",
+      "description": "메인 페이지",
+      "status_code": 200,
+      "response_time": 0.51,
+      "success": true,
+      "message": "유효한 HTML 페이지"
+    },
+    "/mode-selector.html_모드_선택_페이지": {
+      "endpoint": "/mode-selector.html",
+      "description": "모드 선택 페이지",
+      "status_code": 404,
+      "response_time": 0.65,
+      "success": false,
+      "message": "HTTP 404"
+    },
+    "/index.html_AI_자동_생성_모드": {
+      "endpoint": "/index.html",
+      "description": "AI 자동 생성 모드",
+      "status_code": 404,
+      "response_time": 0.44,
+      "success": false,
+      "message": "HTTP 404"
+    },
+    "/detail-input.html_상세_입력_모드": {
+      "endpoint": "/detail-input.html",
+      "description": "상세 입력 모드",
+      "status_code": 404,
+      "response_time": 0.48,
+      "success": false,
+      "message": "HTTP 404"
+    },
+    "/css/style.css_CSS_스타일시트": {
+      "endpoint": "/css/style.css",
+      "description": "CSS 스타일시트",
+      "status_code": 404,
+      "response_time": 0.62,
+      "success": false,
+      "message": "HTTP 404"
+    },
+    "/js/generator.js_JavaScript_파일": {
+      "endpoint": "/js/generator.js",
+      "description": "JavaScript 파일",
+      "status_code": 404,
+      "response_time": 0.63,
+      "success": false,
+      "message": "HTTP 404"
+    },
+    "/products/_제품_목록_API": {
+      "endpoint": "/products/",
+      "description": "제품 목록 API",
+      "status_code": 404,
+      "response_time": 0.61,
+      "success": false,
+      "message": "HTTP 404"
+    },
+    "/products/인생_국물닭발800g/index.html_제품:_인생_국물닭발800g": {
+      "endpoint": "/products/인생_국물닭발800g/index.html",
+      "description": "제품: 인생_국물닭발800g",
+      "status_code": 404,
+      "response_time": 0.41,
+      "success": false,
+      "message": "HTTP 404"
+    },
+    "/products/인생_나가사키짬뽕탕410g/index.html_제품:_인생_나가사키짬뽕탕410g": {
+      "endpoint": "/products/인생_나가사키짬뽕탕410g/index.html",
+      "description": "제품: 인생_나가사키짬뽕탕410g",
+      "status_code": 404,
+      "response_time": 0.41,
+      "success": false,
+      "message": "HTTP 404"
+    },
+    "/nonexistent.html_404_에러_처리": {
+      "endpoint": "/nonexistent.html",
+      "description": "404 에러 처리",
+      "status_code": 404,
+      "response_time": 0.61,
+      "success": false,
+      "message": "HTTP 404"
+    }
+  },
+  "summary": {
+    "total": 12,
+    "passed": 1,
+    "failed": 10,
+    "warnings": 1
+  }
+}

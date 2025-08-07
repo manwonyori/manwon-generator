@@ -13,7 +13,7 @@ def wait_and_check(wait_minutes=3):
     base_url = "https://manwon-generator.onrender.com"
     
     print("="*60)
-    print(f"⏳ {wait_minutes}분 대기 후 배포 확인")
+    print(f"[대기] {wait_minutes}분 대기 후 배포 확인")
     print("="*60)
     
     # 대기 시간을 30초 단위로 표시
@@ -26,7 +26,7 @@ def wait_and_check(wait_minutes=3):
         if i < total_seconds - 30:
             time.sleep(30)
     
-    print("\n\n🔍 배포 상태 확인 중...")
+    print("\n\n[검색] 배포 상태 확인 중...")
     print("-"*60)
     
     # 테스트할 URL들
@@ -51,41 +51,41 @@ def wait_and_check(wait_minutes=3):
                     try:
                         data = r.json()
                         if data.get('status') == 'healthy':
-                            print(f"✅ {description}: OK")
+                            print(f"[성공] {description}: OK")
                             success_count += 1
                         else:
-                            print(f"⚠️ {description}: {data}")
+                            print(f"[경고] {description}: {data}")
                             fail_count += 1
                     except:
-                        print(f"⚠️ {description}: Invalid JSON")
+                        print(f"[경고] {description}: Invalid JSON")
                         fail_count += 1
                 elif endpoint in ["/mode-selector.html", "/detail-input.html"]:
                     # 새 페이지 확인
                     if "모드" in r.text or "mode" in r.text.lower():
-                        print(f"✅ {description}: OK (신규 페이지)")
+                        print(f"[성공] {description}: OK (신규 페이지)")
                         success_count += 1
                     else:
-                        print(f"⚠️ {description}: 페이지 내용 확인 필요")
+                        print(f"[경고] {description}: 페이지 내용 확인 필요")
                         fail_count += 1
                 else:
-                    print(f"✅ {description}: OK")
+                    print(f"[성공] {description}: OK")
                     success_count += 1
             else:
-                print(f"❌ {description}: HTTP {r.status_code}")
+                print(f"[실패] {description}: HTTP {r.status_code}")
                 fail_count += 1
         except Exception as e:
-            print(f"❌ {description}: {str(e)[:50]}")
+            print(f"[실패] {description}: {str(e)[:50]}")
             fail_count += 1
     
     print("-"*60)
-    print(f"\n📊 결과: 성공 {success_count}/{len(test_urls)}, 실패 {fail_count}/{len(test_urls)}")
+    print(f"\n[결과] 결과: 성공 {success_count}/{len(test_urls)}, 실패 {fail_count}/{len(test_urls)}")
     
     if success_count == len(test_urls):
-        print("\n🎉 배포 완료! 모든 페이지가 정상 작동합니다!")
-        print(f"🔗 접속: {base_url}")
+        print("\n[성공] 배포 완료! 모든 페이지가 정상 작동합니다!")
+        print(f"[링크] 접속: {base_url}")
         return True
     elif fail_count > 0:
-        print("\n⚠️ 일부 페이지에 문제가 있습니다.")
+        print("\n[경고] 일부 페이지에 문제가 있습니다.")
         print("Render Dashboard에서 수동 배포를 실행해주세요.")
         return False
     

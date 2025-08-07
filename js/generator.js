@@ -397,7 +397,7 @@ async function getTemplate(templateName) {
         }
         
         .benefit-list li:before {
-            content: "✨";
+            content: "[완료]";
             position: absolute;
             left: 0;
             font-size: 20px;
@@ -538,7 +538,7 @@ async function getTemplate(templateName) {
                 {{trustContent}}
             </div>
             
-            <h3 style="margin-top: 32px;">✨ 제품의 특별한 특징</h3>
+            <h3 style="margin-top: 32px;">[완료] 제품의 특별한 특징</h3>
             <ul class="benefit-list">
                 {{features}}
             </ul>
@@ -549,7 +549,7 @@ async function getTemplate(templateName) {
         <!-- 6. FAQ Section -->
         <div class="section">
             <div style="text-align: center;">
-                <span class="section-icon">❓</span>
+                <span class="section-icon">[질문]</span>
                 <h2>자주 묻는 질문</h2>
             </div>
             <div>
@@ -669,7 +669,7 @@ function showSafePreview(htmlContent, container) {
             URL.revokeObjectURL(blobURL);
         }, 300000);
         
-        console.log('✅ Safe preview display completed');
+        console.log('[성공] Safe preview display completed');
         
     } catch (error) {
         console.error('Safe preview failed:', error);
@@ -685,13 +685,13 @@ function showSafePreview(htmlContent, container) {
             container.innerHTML = '';
             container.appendChild(iframe);
             
-            console.log('✅ Alternative preview display completed');
+            console.log('[성공] Alternative preview display completed');
             
         } catch (fallbackError) {
             console.error('All preview methods failed:', fallbackError);
             container.innerHTML = `
                 <div style="padding: 20px; text-align: center; color: #666; border: 1px solid #ddd; border-radius: 8px;">
-                    <h3>⚠️ Preview Display Error</h3>
+                    <h3>[경고] Preview Display Error</h3>
                     <p>Cannot display preview. Please generate and download the page.</p>
                     <button onclick="generatePage()" style="margin-top: 10px; padding: 8px 16px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
                         Generate Page

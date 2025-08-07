@@ -199,7 +199,7 @@ function validateScriptLoading() {
         console.error('누락된 항목들:', missingItems);
         showErrorMessage(`필수 스크립트 누락: ${missingItems.join(', ')}`);
     } else {
-        console.log('✅ 모든 필수 스크립트 로드 완료');
+        console.log('[성공] 모든 필수 스크립트 로드 완료');
     }
     
     return allLoaded;
@@ -303,4 +303,4 @@ window.ErrorHandling = {
     safeGetElement
 };
 
-console.log('✅ 오류 처리 모듈 로드 완료');
+console.log('[성공] 오류 처리 모듈 로드 완료');

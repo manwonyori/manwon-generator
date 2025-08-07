@@ -36,7 +36,7 @@ class MarketingResearchSystem {
             // 1-4. 법적 컴플라이언스 체크
             this.researchData.legalCheck = await this.checkCompliance(crawledData);
             
-            console.log('✅ STEP 1 완료: 시장조사 및 정보 수집 완료');
+            console.log('[성공] STEP 1 완료: 시장조사 및 정보 수집 완료');
             
             // 리서치 보고서 생성
             await this.generateResearchReport();
@@ -67,7 +67,7 @@ class MarketingResearchSystem {
                 this.researchData.targetAudience
             );
             
-            console.log('✅ STEP 2 완료: 마케팅 전략 수립 완료');
+            console.log('[성공] STEP 2 완료: 마케팅 전략 수립 완료');
             
             return {
                 target: this.researchData.targetAudience,
@@ -245,7 +245,7 @@ class MarketingResearchSystem {
             }
         }
         
-        console.log('✅ STEP 3 완료: 상품페이지 생성 완료');
+        console.log('[성공] STEP 3 완료: 상품페이지 생성 완료');
         return html;
     }
 

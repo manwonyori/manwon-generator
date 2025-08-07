@@ -130,7 +130,7 @@
         }
         
         .mode-features li::before {
-            content: '✓';
+            content: '[완료]';
             position: absolute;
             left: 0;
             color: #667eea;
@@ -208,7 +208,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎯 만원요리 상세페이지 생성기</h1>
+            <h1>[목표] 만원요리 상세페이지 생성기</h1>
             <p>최적의 방식을 선택하여 완벽한 상세페이지를 생성하세요</p>
         </div>
         
@@ -216,7 +216,7 @@
             <!-- AI 자동 생성 모드 -->
             <div class="mode-card" onclick="selectMode('ai')">
                 <span class="badge">추천</span>
-                <div class="mode-icon">🤖</div>
+                <div class="mode-icon">[AI]</div>
                 <h2 class="mode-title">AI 자동 생성</h2>
                 <p class="mode-description">
                     제품명만 입력하면 AI가 자동으로 완벽한 상세페이지를 생성합니다
@@ -236,7 +236,7 @@
             <!-- 상세 정보 입력 모드 -->
             <div class="mode-card" onclick="selectMode('detail')">
                 <span class="badge new">NEW</span>
-                <div class="mode-icon">📝</div>
+                <div class="mode-icon">[상세]</div>
                 <h2 class="mode-title">상세 정보 입력</h2>
                 <p class="mode-description">
                     제품의 구체적인 정보를 직접 입력하여 정확한 상세페이지를 생성합니다

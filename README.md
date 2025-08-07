@@ -1,10 +1,10 @@
 # 만원요리 최씨남매 상세페이지 생성기 v9.0
 
-## 🚀 간편 명령어 시스템
+## 간편 명령어 시스템
 
 제품명, 참조 사이트, 이미지 링크만 입력하면 완벽한 상세페이지를 자동 생성합니다.
 
-## 📋 사용 방법
+## 사용 방법
 
 ### 1. API 키 설정
 - OpenAI (GPT) 또는 Claude API 키 입력
@@ -27,7 +27,7 @@ https://ecimg.cafe24img.com/pg1966b42244249021/manwonyori/web/product/life/feer8
   - 파일명 형식: `회사명_제품명_날짜_시간.html`
   - 예시: `인생_국물닭발800g_20250107_1430.html`
 
-## ✨ 특징
+## 특징
 
 ### 자동 분석
 - 제품 카테고리 자동 감지
@@ -44,13 +44,13 @@ https://ecimg.cafe24img.com/pg1966b42244249021/manwonyori/web/product/life/feer8
 - 텍스트 기반 명령어
 - 샘플 예제 제공
 
-## 🛠️ 기술 스택
+## 기술 스택
 - Vanilla JavaScript
 - OpenAI GPT / Claude API
 - 반응형 HTML/CSS
 - Cafe24 최적화
 
-## 📁 파일 구조
+## 파일 구조
 ```
 manwon-generator/
 ├── index.html          # 메인 페이지
@@ -79,11 +79,11 @@ manwon-generator/
         └── cafe24_seo.txt
 ```
 
-## 🔧 실행 방법
+## 실행 방법
 1. `index.html` 파일을 웹 브라우저에서 열기
 2. 또는 `run.bat` 더블클릭 (Windows)
 
-## 📞 문의
+## 문의
 - 이메일: we@manwonyori.com
 - 전화: 070-8835-2885
 - 사이트: 만원요리 최씨남매

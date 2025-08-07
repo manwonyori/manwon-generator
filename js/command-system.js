@@ -183,7 +183,7 @@ const CommandSystem = {
     
     // 완벽한 콘텐츠 생성
     async generatePerfectContent(command, analysis) {
-        console.log('✨ 콘텐츠 생성 중...');
+        console.log('[완료] 콘텐츠 생성 중...');
         
         const content = {
             // 헤더 섹션
@@ -279,7 +279,7 @@ const CommandSystem = {
         } else {
             // 기본 혜택
             benefits.push(
-                '✨ 뛰어난 가성비',
+                '[완료] 뛰어난 가성비',
                 '🏆 검증된 품질',
                 '🚚 빠른 배송',
                 '💯 만족도 보장',
@@ -632,7 +632,7 @@ const CommandSystem = {
         }
         
         .benefit-list li:before {
-            content: "✨";
+            content: "[완료]";
             position: absolute;
             left: 0;
             font-size: 20px;
@@ -910,7 +910,7 @@ const CommandSystem = {
         
         // 3. 콘텐츠 생성
         const content = await this.generatePerfectContent(command, analysis);
-        console.log('✨ 생성된 콘텐츠:', content);
+        console.log('[완료] 생성된 콘텐츠:', content);
         
         // 4. HTML 생성
         const html = this.generateFinalHTML(command, analysis, content);
@@ -919,7 +919,7 @@ const CommandSystem = {
         const seoData = this.generateCafe24SEO(command.productName, analysis, content);
         console.log('🔍 카페24 SEO 정보:', seoData);
         
-        console.log('✅ 상세페이지 생성 완료!');
+        console.log('[성공] 상세페이지 생성 완료!');
         return { html, seoData };
     }
 };
@@ -927,4 +927,4 @@ const CommandSystem = {
 // 전역 노출
 window.CommandSystem = CommandSystem;
 
-console.log('✅ 명령어 시스템 로드 완료');
+console.log('[성공] 명령어 시스템 로드 완료');
