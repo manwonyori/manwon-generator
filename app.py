@@ -11,9 +11,11 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     """메인 페이지 - 모드 선택 시스템 내장"""
-    # 강제로 새 파일 서빙
+    # 새로운 파일 우선순위로 서빙
     import os
-    if os.path.exists('home.html'):
+    if os.path.exists('mode-selection.html'):
+        return send_from_directory('.', 'mode-selection.html')
+    elif os.path.exists('home.html'):
         return send_from_directory('.', 'home.html')
     return send_from_directory('.', 'index.html')
 

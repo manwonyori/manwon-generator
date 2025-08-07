@@ -1,18 +1,12 @@
 services:
   - type: web
     name: manwon-generator
-    env: python
+    runtime: python3
     region: singapore
     plan: free
-    buildCommand: "pip install -r requirements.txt && echo 'FORCE REBUILD 2025-08-07 22:32'"
-    startCommand: "python app.py"
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn app:app"
     envVars:
       - key: PYTHON_VERSION
-        value: "3.11.0"
-      - key: PORT
-        value: "10000"
-      - key: FORCE_DEPLOY
-        value: "2025-08-07-22-50-CRITICAL"
-      - key: NEW_VERSION
-        value: "MODE_SELECTION_SYSTEM"
+        value: "3.11"
     autoDeploy: true
