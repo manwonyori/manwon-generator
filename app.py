@@ -30,14 +30,15 @@ def serve_files(filename):
     return send_from_directory('.', filename)
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 10000))
+    # Render에서 제공하는 PORT 환경변수 사용
+    port = int(os.environ.get('PORT', 5000))
     print(f"""
 ========================================
   만원요리 상세페이지 생성기 - 완성
 ========================================
 포트: {port}
 모드 선택 시스템: 활성화
-URL: http://localhost:{port}
+URL: http://0.0.0.0:{port}
 ========================================
     """)
     app.run(host='0.0.0.0', port=port, debug=False)
