@@ -169,7 +169,10 @@ def not_found(e):
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 10000))
-    print(f"Starting server on port {port}")
+    print(f"Starting manwon-generator server on port {port}")
     print(f"Root path: {ROOT_PATH}")
     print(f"Files in root: {os.listdir(ROOT_PATH) if os.path.exists(ROOT_PATH) else 'Directory not found'}")
+    print(f"Mode selector exists: {os.path.exists(os.path.join(ROOT_PATH, 'mode-selector.html'))}")
+    print(f"Index exists: {os.path.exists(os.path.join(ROOT_PATH, 'index.html'))}")
+    print("Server ready for deployment!")
     app.run(host='0.0.0.0', port=port, debug=False)
