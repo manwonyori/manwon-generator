@@ -274,12 +274,49 @@
                 card.style.animationDelay = `${0.8 + index * 0.2}s`;
             });
         });
+        
+        // 모드 선택 함수들
+        function showAIMode() {
+            // AI 모드 섹션이 이미 표시되어 있으므로 스크롤만 이동
+            document.getElementById('aiModeSection').scrollIntoView({ behavior: 'smooth' });
+            alert('[AI 모드] 제품명만 입력하면 자동으로 상세페이지를 생성합니다.');
+        }
+        
+        function goToDetailMode() {
+            // 상세 입력 모드로 이동 시도, 실패하면 현재 페이지에서 폼 표시
+            try {
+                window.location.href = 'detail-input.html';
+            } catch (e) {
+                // 대안: 현재 페이지에 상세 입력 폼 표시
+                showDetailInputForm();
+            }
+        }
+        
+        function showDetailInputForm() {
+            alert('[상세 입력] 곧 상세 정보 입력 기능이 추가될 예정입니다. 현재는 AI 모드를 사용해주세요.');
+            // 향후 여기에 상세 입력 폼을 동적으로 생성하는 코드 추가 가능
+        }
     </script>
 
         <main>
             <div class="input-section">
                 <h2>[실행] 간편 명령어 시스템</h2>
-                <div class="form-group" style="background: #f0f9ff; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                
+                <!-- 모드 선택 섹션 -->
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; border-radius: 10px; margin-bottom: 20px; color: white; text-align: center;">
+                    <h3 style="margin-bottom: 15px;">[선택] 생성 방식을 선택하세요</h3>
+                    <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                        <button onclick="showAIMode()" style="background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: bold;">
+                            [AI] 자동 생성 모드
+                        </button>
+                        <button onclick="goToDetailMode()" style="background: #E4A853; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: bold;">
+                            [상세] 정보 입력 모드
+                        </button>
+                    </div>
+                    <p style="margin-top: 10px; font-size: 14px; opacity: 0.9;">[AI] 제품명만 입력 | [상세] 구체적 정보 직접 입력</p>
+                </div>
+
+                <div id="aiModeSection" class="form-group" style="background: #f0f9ff; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
                     <label for="commandInput" style="font-weight: bold; color: #1e40af;">명령어 입력 (제품명 + 참조사이트 + 이미지)</label>
                     <textarea id="commandInput" rows="8" placeholder="[인생]국물닭발800g
 참조 사이트 https://example.com
