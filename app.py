@@ -147,6 +147,58 @@ def handle_templates():
         
         return jsonify({'success': False, 'error': 'Invalid data'})
 
+# 모드 주입 스크립트 제공
+@app.route('/mode-injection.js')
+def serve_mode_injection():
+    """모드 선택 기능을 동적으로 주입하는 스크립트"""
+    try:
+        return send_from_directory('.', 'mode-injection.js', mimetype='application/javascript')
+    except:
+        # 파일이 없으면 인라인으로 생성
+        js_content = """
+(function() {
+    'use strict';
+    console.log('[모드 주입] 스크립트 로드됨');
+    
+    function injectModeSelector() {
+        const headerSection = document.querySelector('.header') || 
+                             document.querySelector('.strategic-header') ||
+                             document.querySelector('header') ||
+                             document.querySelector('.container');
+        
+        if (!headerSection) return;
+        
+        const modeSelectorHTML = `
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; border-radius: 10px; margin: 20px 0; text-align: center; color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+            <h3 style="margin: 0 0 15px 0; font-size: 1.4em; font-weight: 600;">[선택] 생성 방식을 선택하세요</h3>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-bottom: 10px;">
+                <button onclick="alert('[AI 모드] 현재 페이지에서 제품명을 입력하여 자동 생성하세요.')" style="background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 14px;">
+                    [AI] 자동 생성 모드
+                </button>
+                <button onclick="alert('[상세 입력] 상세 입력 기능을 준비 중입니다.')" style="background: #E4A853; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 14px;">
+                    [상세] 정보 입력 모드
+                </button>
+            </div>
+            <p style="margin: 0; font-size: 14px; opacity: 0.9;">[AI] 제품명만 입력 | [상세] 구체적 정보 직접 입력</p>
+        </div>`;
+        
+        headerSection.insertAdjacentHTML('afterend', modeSelectorHTML);
+        console.log('[모드 주입] 모드 선택기 추가 완료');
+    }
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', injectModeSelector);
+    } else {
+        injectModeSelector();
+    }
+    
+    window.addEventListener('load', function() {
+        setTimeout(injectModeSelector, 1000);
+    });
+})();
+        """
+        return Response(js_content, mimetype='application/javascript')
+
 # Health check
 @app.route('/health')
 def health():
