@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상세페이지 생성기 - 상세 입력 모드</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* 추가 스타일 */
+        .mode-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .mode-header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .mode-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        
+        .mode-switch button {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .mode-switch button:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .input-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        
+        .tab-button {
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            color: #6b7280;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-button.active {
+            color: #667eea;
+        }
+        
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #667eea;
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group-full {
+            grid-column: 1 / -1;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #374151;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .optional-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            background: #f3f4f6;
+            color: #9ca3af;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-left: 5px;
+        }
+        
+        .required {
+            color: #ef4444;
+        }
+        
+        .help-text {
+            display: block;
+            margin-top: 5px;
+            font-size: 12px;
+            color: #9ca3af;
+        }
+        
+        .preview-section {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 400px;
+            height: 100vh;
+            background: white;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .preview-section.open {
+            right: 0;
+        }
+        
+        .preview-toggle {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+        
+        .preview-toggle:hover {
+            transform: scale(1.1);
+        }
+        
+        .preview-header {
+            padding: 20px;
+            background: #f9fafb;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .preview-content {
+            padding: 20px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+            padding: 20px;
+            background: #f9fafb;
+            border-radius: 10px;
+            position: sticky;
+            bottom: 0;
+            z-index: 10;
+        }
+        
+        .btn-primary {
+            flex: 1;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            padding: 15px 30px;
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: #f0f4ff;
+        }
+        
+        .ai-assist-btn {
+            padding: 6px 12px;
+            background: #fbbf24;
+            color: #78350f;
+            border: none;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .ai-assist-btn:hover {
+            background: #f59e0b;
+        }
+        
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .loading-overlay.active {
+            display: flex;
+        }
+        
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="mode-header">
+            <h1>📝 상세 정보 입력 모드</h1>
+            <p>제품의 구체적인 정보를 입력하여 완벽한 상세페이지를 생성합니다</p>
+            <div class="mode-switch">
+                <button onclick="window.location.href='mode-selector.html'">모드 변경</button>
+            </div>
+        </div>
+        
+        <!-- 탭 메뉴 -->
+        <div class="input-tabs">
+            <button class="tab-button active" onclick="switchTab('basic')">기본 정보</button>
+            <button class="tab-button" onclick="switchTab('detail')">상세 정보</button>
+            <button class="tab-button" onclick="switchTab('marketing')">마케팅 정보</button>
+            <button class="tab-button" onclick="switchTab('seo')">SEO 설정</button>
+        </div>
+        
+        <!-- 기본 정보 탭 -->
+        <div id="basic-tab" class="tab-content active">
+            <h2>기본 정보</h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>제품명 <span class="required">*</span></label>
+                    <input type="text" id="productName" placeholder="예: [씨씨더블유] 함흥 물냉면 5인분">
+                </div>
+                
+                <div class="form-group">
+                    <label>브랜드 <span class="optional-badge">선택</span></label>
+                    <input type="text" id="brand" placeholder="예: 씨씨더블유" value="만원요리 최씨남매">
+                </div>
+                
+                <div class="form-group">
+                    <label>카테고리</label>
+                    <select id="category">
+                        <option value="">선택하세요</option>
+                        <option value="냉면/면류">냉면/면류</option>
+                        <option value="밀키트">밀키트</option>
+                        <option value="반찬">반찬</option>
+                        <option value="소스/양념">소스/양념</option>
+                        <option value="간식">간식</option>
+                        <option value="기타">기타</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>가격</label>
+                    <input type="text" id="price" placeholder="예: 29,900원">
+                </div>
+                
+                <div class="form-group-full">
+                    <label>구성 및 규격 <button class="ai-assist-btn" onclick="aiAssist('composition')">AI 도움</button></label>
+                    <textarea id="composition" rows="3" placeholder="예: 2.7kg(함흥냉면 1kg / 냉면비빔장 5팩 340g)&#10;식초 / 겨자 서비스 5팩"></textarea>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 상세 정보 탭 -->
+        <div id="detail-tab" class="tab-content">
+            <h2>상세 정보</h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>소비기한</label>
+                    <input type="text" id="expiryDate" placeholder="예: 27.05.10">
+                </div>
+                
+                <div class="form-group">
+                    <label>제품종류</label>
+                    <select id="productType">
+                        <option value="">선택하세요</option>
+                        <option value="가공">가공</option>
+                        <option value="신선">신선</option>
+                        <option value="냉동">냉동</option>
+                        <option value="냉장">냉장</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>원산지</label>
+                    <input type="text" id="origin" placeholder="예: 상품기술서 참조">
+                </div>
+                
+                <div class="form-group">
+                    <label>합배송</label>
+                    <input type="text" id="bundleShipping" placeholder="예: 7세트까지 가능">
+                </div>
+                
+                <div class="form-group">
+                    <label>유형</label>
+                    <select id="storageType">
+                        <option value="">선택하세요</option>
+                        <option value="냉동">냉동</option>
+                        <option value="냉장">냉장</option>
+                        <option value="상온">상온</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>포장방식</label>
+                    <input type="text" id="packagingType" placeholder="예: 스킨포장">
+                </div>
+                
+                <div class="form-group-full">
+                    <label>성분 <button class="ai-assist-btn" onclick="aiAssist('ingredients')">AI 정리</button></label>
+                    <textarea id="ingredients" rows="5" placeholder="제품의 성분 정보를 입력하세요"></textarea>
+                    <span class="help-text">성분 정보를 붙여넣으면 AI가 자동으로 정리해드립니다</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 마케팅 정보 탭 -->
+        <div id="marketing-tab" class="tab-content">
+            <h2>마케팅 정보</h2>
+            <div class="form-grid">
+                <div class="form-group-full">
+                    <label>제품 특성 <button class="ai-assist-btn" onclick="aiAssist('features')">AI 강화</button></label>
+                    <textarea id="productFeatures" rows="8" placeholder="제품의 주요 특징과 장점을 입력하세요"></textarea>
+                    <span class="help-text">제품의 핵심 특징을 입력하면 AI가 마케팅 문구로 강화해드립니다</span>
+                </div>
+                
+                <div class="form-group-full">
+                    <label>타겟 고객 <span class="optional-badge">선택</span></label>
+                    <input type="text" id="targetCustomer" placeholder="예: 1인 가구, 직장인, 간편식을 선호하는 고객">
+                </div>
+                
+                <div class="form-group-full">
+                    <label>주요 판매 포인트 <button class="ai-assist-btn" onclick="aiAssist('sellingPoints')">AI 생성</button></label>
+                    <textarea id="sellingPoints" rows="5" placeholder="• 가성비 좋은 대용량&#10;• 전문점 맛 재현&#10;• 간편한 조리"></textarea>
+                </div>
+                
+                <div class="form-group-full">
+                    <label>조리/사용 방법 <span class="optional-badge">선택</span></label>
+                    <textarea id="usageMethod" rows="5" placeholder="조리 방법이나 사용 방법을 입력하세요"></textarea>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SEO 설정 탭 -->
+        <div id="seo-tab" class="tab-content">
+            <h2>SEO 설정</h2>
+            <div class="form-grid">
+                <div class="form-group-full">
+                    <label>메타 제목 <button class="ai-assist-btn" onclick="aiAssist('metaTitle')">AI 최적화</button></label>
+                    <input type="text" id="metaTitle" placeholder="검색 결과에 표시될 제목">
+                    <span class="help-text">60자 이내 권장</span>
+                </div>
+                
+                <div class="form-group-full">
+                    <label>메타 설명 <button class="ai-assist-btn" onclick="aiAssist('metaDesc')">AI 최적화</button></label>
+                    <textarea id="metaDescription" rows="3" placeholder="검색 결과에 표시될 설명"></textarea>
+                    <span class="help-text">160자 이내 권장</span>
+                </div>
+                
+                <div class="form-group-full">
+                    <label>키워드 <button class="ai-assist-btn" onclick="aiAssist('keywords')">AI 추천</button></label>
+                    <input type="text" id="keywords" placeholder="예: 함흥냉면, 물냉면, 여름별미, 대용량냉면">
+                    <span class="help-text">쉼표로 구분하여 입력</span>
+                </div>
+                
+                <div class="form-group-full">
+                    <label>상품 이미지 URL</label>
+                    <input type="text" id="mainImage" placeholder="메인 이미지 URL">
+                    <input type="text" id="detailImage1" placeholder="상세 이미지 1 URL" style="margin-top: 10px;">
+                    <input type="text" id="detailImage2" placeholder="상세 이미지 2 URL" style="margin-top: 10px;">
+                    <input type="text" id="detailImage3" placeholder="상세 이미지 3 URL" style="margin-top: 10px;">
+                </div>
+            </div>
+        </div>
+        
+        <!-- 액션 버튼 -->
+        <div class="action-buttons">
+            <button class="btn-secondary" onclick="resetForm()">초기화</button>
+            <button class="btn-secondary" onclick="saveTemplate()">템플릿 저장</button>
+            <button class="btn-primary" onclick="generateDetailPage()">
+                <span id="generateBtnText">🚀 상세페이지 생성</span>
+            </button>
+        </div>
+    </div>
+    
+    <!-- 미리보기 패널 -->
+    <button class="preview-toggle" onclick="togglePreview()">👁️</button>
+    <div class="preview-section" id="previewPanel">
+        <div class="preview-header">
+            <h3>실시간 미리보기</h3>
+            <button onclick="togglePreview()" style="float: right; background: none; border: none; font-size: 20px; cursor: pointer;">✕</button>
+        </div>
+        <div class="preview-content" id="previewContent">
+            <p style="color: #9ca3af; text-align: center; padding: 40px;">
+                정보를 입력하면 실시간으로 미리보기가 표시됩니다
+            </p>
+        </div>
+    </div>
+    
+    <!-- 로딩 오버레이 -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+    
+    <!-- 기존 JS 파일들 -->
+    <script src="js/api-config.js"></script>
+    <script src="js/generator.js"></script>
+    <script src="js/manwon-prompt-v9.js"></script>
+    
+    <!-- 새로운 상세 입력 모드 JS -->
+    <script src="js/detail-input-handler.js"></script>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[인생]통마늘 닭근위 양념볶음250g 테스트 페이지</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .input-area {
+            margin-bottom: 30px;
+        }
+        textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 14px;
+        }
+        button {
+            background-color: #E4A853;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #d49743;
+        }
+        .output-area {
+            margin-top: 40px;
+        }
+        .tab-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 4px 4px 0 0;
+            cursor: pointer;
+            font-weight: 700;
+        }
+        .tab.active {
+            background-color: white;
+            border-bottom: 1px solid white;
+        }
+        .tab-content {
+            display: none;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 0 4px 4px 4px;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .seo-info {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        .seo-info h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .seo-item {
+            margin-bottom: 15px;
+        }
+        .seo-label {
+            font-weight: 700;
+            color: #666;
+            display: inline-block;
+            width: 150px;
+        }
+        .seo-value {
+            color: #333;
+        }
+        #preview-frame {
+            width: 100%;
+            min-height: 800px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>만원요리 최씨남매 상세페이지 생성기</h1>
+        
+        <div class="input-area">
+            <h2>상품 정보 입력</h2>
+            <textarea id="commandInput" placeholder="제품명을 첫 줄에 입력하고, 
+참조 사이트와 이미지 URL을 입력해주세요.
+
+예시:
+[인생]통마늘 닭근위 양념볶음250g
+참조: https://insaengdomae.com/product/123
+이미지:
+https://example.com/image1.jpg
+https://example.com/image2.jpg">[인생]통마늘 닭근위 양념볶음250g
+참조: https://insaengdomae.com/product/chicken-gizzard
+이미지:
+https://shopping-phinf.pstatic.net/main_4521935/45219358749.jpg
+https://shopping-phinf.pstatic.net/main_4521935/45219358750.jpg</textarea>
+            <button onclick="generatePage()">상세페이지 생성</button>
+        </div>
+        
+        <div class="output-area" id="outputArea" style="display: none;">
+            <div class="tab-container">
+                <div class="tab active" onclick="showTab('preview')">미리보기</div>
+                <div class="tab" onclick="showTab('seo')">카페24 SEO 정보</div>
+                <div class="tab" onclick="showTab('html')">HTML 코드</div>
+            </div>
+            
+            <div id="preview-tab" class="tab-content active">
+                <iframe id="preview-frame"></iframe>
+            </div>
+            
+            <div id="seo-tab" class="tab-content">
+                <div class="seo-info" id="seoInfo"></div>
+            </div>
+            
+            <div id="html-tab" class="tab-content">
+                <textarea id="htmlOutput" style="width: 100%; min-height: 600px; font-family: monospace; font-size: 12px;"></textarea>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/command-system.js"></script>
+    <script>
+        async function generatePage() {
+            const input = document.getElementById('commandInput').value;
+            if (!input.trim()) {
+                alert('상품 정보를 입력해주세요.');
+                return;
+            }
+            
+            try {
+                // CommandSystem 실행
+                const result = await CommandSystem.execute(input);
+                
+                // 결과 표시
+                document.getElementById('outputArea').style.display = 'block';
+                
+                // HTML 미리보기
+                const previewFrame = document.getElementById('preview-frame');
+                previewFrame.srcdoc = result.html;
+                
+                // HTML 코드
+                document.getElementById('htmlOutput').value = result.html;
+                
+                // SEO 정보 표시
+                displaySEOInfo(result.seoData);
+                
+                // 자동으로 미리보기 탭 활성화
+                showTab('preview');
+                
+            } catch (error) {
+                console.error('에러:', error);
+                alert('상세페이지 생성 중 오류가 발생했습니다.');
+            }
+        }
+        
+        function displaySEOInfo(seoData) {
+            const seoInfoDiv = document.getElementById('seoInfo');
+            seoInfoDiv.innerHTML = `
+                <h3>카페24 SEO 정보</h3>
+                <div class="seo-item">
+                    <span class="seo-label">상품명:</span>
+                    <span class="seo-value">${seoData.productName}</span>
+                </div>
+                <div class="seo-item">
+                    <span class="seo-label">검색어 설정:</span>
+                    <span class="seo-value">${seoData.searchKeywords}</span>
+                </div>
+                <div class="seo-item">
+                    <span class="seo-label">메타 타이틀:</span>
+                    <span class="seo-value">${seoData.metaTitle}</span>
+                </div>
+                <div class="seo-item">
+                    <span class="seo-label">메타 설명:</span>
+                    <span class="seo-value">${seoData.metaDescription}</span>
+                </div>
+                <div class="seo-item">
+                    <span class="seo-label">메타 키워드:</span>
+                    <span class="seo-value">${seoData.metaKeywords}</span>
+                </div>
+                <div class="seo-item">
+                    <span class="seo-label">요약설명:</span>
+                    <span class="seo-value">${seoData.shortDescription}</span>
+                </div>
+                <div class="seo-item">
+                    <span class="seo-label">상세설명:</span>
+                    <span class="seo-value">${seoData.longDescription}</span>
+                </div>
+                <div class="seo-item">
+                    <span class="seo-label">카테고리:</span>
+                    <span class="seo-value">${seoData.category}</span>
+                </div>
+                <div class="seo-item">
+                    <span class="seo-label">제조사:</span>
+                    <span class="seo-value">${seoData.manufacturer}</span>
+                </div>
+                <div class="seo-item">
+                    <span class="seo-label">원산지:</span>
+                    <span class="seo-value">${seoData.origin}</span>
+                </div>
+                <div class="seo-item">
+                    <span class="seo-label">태그:</span>
+                    <span class="seo-value">${seoData.tags}</span>
+                </div>
+            `;
+        }
+        
+        function showTab(tabName) {
+            // 모든 탭과 내용 숨기기
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            // 선택한 탭 활성화
+            if (tabName === 'preview') {
+                document.querySelector('.tab:nth-child(1)').classList.add('active');
+                document.getElementById('preview-tab').classList.add('active');
+            } else if (tabName === 'seo') {
+                document.querySelector('.tab:nth-child(2)').classList.add('active');
+                document.getElementById('seo-tab').classList.add('active');
+            } else if (tabName === 'html') {
+                document.querySelector('.tab:nth-child(3)').classList.add('active');
+                document.getElementById('html-tab').classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
