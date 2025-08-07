@@ -1,14 +1,10 @@
 services:
   - type: static
     name: manwon-generator
-    buildCommand: ""
+    buildCommand: "echo 'Static site build'"
     staticPublishPath: .
     pullRequestPreviewsEnabled: false
-    routes:
-      - type: rewrite
-        source: /
-        destination: /index.html
     headers:
       - path: /*
-        name: X-Robots-Tag
-        value: index
+        name: Cache-Control
+        value: max-age=0
