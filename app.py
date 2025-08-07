@@ -1,4 +1,4 @@
-from flask import Flask, render_template, send_from_directory, jsonify, request, make_response
+from flask import Flask, render_template, send_from_directory, jsonify, request, make_response, Response
 import os
 import json
 from datetime import datetime
@@ -9,43 +9,53 @@ app = Flask(__name__, static_folder='.', template_folder='.')
 # MIME 타입 설정
 mimetypes.add_type('application/javascript', '.js')
 mimetypes.add_type('text/css', '.css')
+mimetypes.add_type('text/html', '.html')
 
-# 정적 파일 서빙을 위한 설정
+# 루트 경로 설정
+ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
+
+# 기본 라우트 - 기존 index.html 또는 mode-selector.html 제공
 @app.route('/')
 def index():
-    """모드 선택 화면"""
-    return send_from_directory('.', 'mode-selector.html')
+    """메인 페이지"""
+    # mode-selector.html이 있으면 그것을, 없으면 index.html 제공
+    if os.path.exists(os.path.join(ROOT_PATH, 'mode-selector.html')):
+        return send_from_directory('.', 'mode-selector.html')
+    else:
+        return send_from_directory('.', 'index.html')
 
-@app.route('/index.html')
-def ai_mode():
-    """AI 자동 생성 모드"""
-    return send_from_directory('.', 'index.html')
-
-@app.route('/detail-input.html')
-def detail_mode():
-    """상세 입력 모드"""
-    return send_from_directory('.', 'detail-input.html')
-
-@app.route('/mode-selector.html')
-def mode_selector():
-    """모드 선택 화면"""
-    return send_from_directory('.', 'mode-selector.html')
+# HTML 파일들 직접 서빙
+@app.route('/<path:filename>')
+def serve_html(filename):
+    """HTML 파일 서빙"""
+    if filename.endswith('.html'):
+        file_path = os.path.join(ROOT_PATH, filename)
+        if os.path.exists(file_path):
+            return send_from_directory('.', filename)
+    # 404 처리
+    return jsonify({"error": "Not found"}), 404
 
 # CSS 파일 서빙
 @app.route('/css/<path:filename>')
 def serve_css(filename):
-    return send_from_directory('css', filename)
+    css_path = os.path.join(ROOT_PATH, 'css')
+    if os.path.exists(css_path):
+        return send_from_directory('css', filename, mimetype='text/css')
+    return jsonify({"error": "Not found"}), 404
 
 # JS 파일 서빙
 @app.route('/js/<path:filename>')
 def serve_js(filename):
-    return send_from_directory('js', filename)
+    js_path = os.path.join(ROOT_PATH, 'js')
+    if os.path.exists(js_path):
+        return send_from_directory('js', filename, mimetype='application/javascript')
+    return jsonify({"error": "Not found"}), 404
 
 # Products 디렉토리 서빙
 @app.route('/products/')
 def list_products():
     """생성된 제품 목록"""
-    products_dir = 'products'
+    products_dir = os.path.join(ROOT_PATH, 'products')
     if os.path.exists(products_dir):
         products = []
         for item in os.listdir(products_dir):
@@ -60,7 +70,27 @@ def list_products():
 
 @app.route('/products/<path:filename>')
 def serve_products(filename):
-    return send_from_directory('products', filename)
+    products_path = os.path.join(ROOT_PATH, 'products')
+    if os.path.exists(products_path):
+        return send_from_directory('products', filename)
+    return jsonify({"error": "Not found"}), 404
+
+# API proxy for Claude (기존 서버 호환)
+@app.route('/api/claude', methods=['POST', 'OPTIONS'])
+def proxy_claude():
+    """Claude API 프록시 (기존 서버 호환)"""
+    if request.method == 'OPTIONS':
+        # CORS preflight
+        response = make_response()
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Methods'] = 'POST, OPTIONS'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+        return response
+    
+    # 실제 Claude API 호출은 클라이언트에서 처리
+    return jsonify({
+        'error': 'Proxy not configured. Use client-side API key.'
+    }), 501
 
 # API 엔드포인트 - AI 보조 기능
 @app.route('/api/ai-assist', methods=['POST'])
@@ -122,6 +152,24 @@ def handle_templates():
 def health():
     return jsonify({'status': 'healthy', 'service': 'manwon-generator'})
 
+# 정적 파일 폴백 처리
+@app.errorhandler(404)
+def not_found(e):
+    # JSON 응답 요청인 경우
+    if request.path.startswith('/api/'):
+        return jsonify({"error": "Not found"}), 404
+    
+    # HTML 파일 요청인 경우 index.html로 폴백
+    if request.path.endswith('.html') or '.' not in request.path:
+        # 기본 페이지로 리다이렉트
+        if os.path.exists(os.path.join(ROOT_PATH, 'index.html')):
+            return send_from_directory('.', 'index.html')
+    
+    return jsonify({"error": "Not found"}), 404
+
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 10000))
+    print(f"Starting server on port {port}")
+    print(f"Root path: {ROOT_PATH}")
+    print(f"Files in root: {os.listdir(ROOT_PATH) if os.path.exists(ROOT_PATH) else 'Directory not found'}")
     app.run(host='0.0.0.0', port=port, debug=False)
