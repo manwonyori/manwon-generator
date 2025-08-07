@@ -14,15 +14,15 @@ mimetypes.add_type('text/html', '.html')
 # 루트 경로 설정
 ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
 
-# 기본 라우트 - 기존 index.html 또는 mode-selector.html 제공
+# 기본 라우트 - 모드 선택이 포함된 index.html 제공
 @app.route('/')
 def index():
-    """메인 페이지"""
-    # mode-selector.html이 있으면 그것을, 없으면 index.html 제공
-    if os.path.exists(os.path.join(ROOT_PATH, 'mode-selector.html')):
-        return send_from_directory('.', 'mode-selector.html')
-    else:
+    """메인 페이지 - 새로운 모드 선택 시스템 포함"""
+    # 항상 업데이트된 index.html을 제공
+    try:
         return send_from_directory('.', 'index.html')
+    except Exception as e:
+        return f"Error serving index.html: {str(e)}", 500
 
 # HTML 파일들 직접 서빙
 @app.route('/<path:filename>')
