@@ -1,37 +1,41 @@
-# Output files
-output/
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
 
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# IDE files
+# IDE
 .vscode/
 .idea/
-*.sublime-project
-*.sublime-workspace
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Project specific
+templates.json
+*.log
+.env
+
+# API Keys (never commit)
+api-keys.json
+config.json
+
+# Claude settings
+.claude/
+
+# Output files
+output/
 
 # Temporary files
 *.tmp
 *.temp
-*.log
 *.cache
-
-# API configuration (if contains sensitive data)
-# js/api-config.js
-
-# Node modules (if added in future)
-node_modules/
-npm-debug.log*
-
-# Environment files
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local

@@ -1,9 +1,14 @@
-from flask import Flask, render_template, send_from_directory, jsonify, request
+from flask import Flask, render_template, send_from_directory, jsonify, request, make_response
 import os
 import json
 from datetime import datetime
+import mimetypes
 
 app = Flask(__name__, static_folder='.', template_folder='.')
+
+# MIME 타입 설정
+mimetypes.add_type('application/javascript', '.js')
+mimetypes.add_type('text/css', '.css')
 
 # 정적 파일 서빙을 위한 설정
 @app.route('/')
