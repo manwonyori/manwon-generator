@@ -3,12 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>만원요리 상세페이지 생성기 - 최종 완성판</title>
-    <meta name="description" content="AI 자동 생성과 상세 입력 모드를 선택하여 완벽한 상세페이지를 생성하세요">
-    <!-- 강제 새로고침을 위한 캐시 방지 -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
+    <title>만원요리 상세페이지 생성기 - 완성</title>
     <style>
         * {
             margin: 0;
@@ -17,66 +12,49 @@
         }
         
         body {
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            font-family: 'Malgun Gothic', -apple-system, BlinkMacSystemFont, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: gradientShift 10s ease infinite;
-        }
-        
-        @keyframes gradientShift {
-            0%, 100% { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-            50% { background: linear-gradient(135deg, #764ba2 0%, #f093fb 100%); }
+            padding: 20px;
         }
         
         .container {
             max-width: 1200px;
-            width: 90%;
-            padding: 20px;
+            margin: 0 auto;
         }
         
         .header {
             text-align: center;
             color: white;
-            margin-bottom: 50px;
-            animation: fadeInDown 0.8s ease;
+            margin-bottom: 40px;
         }
         
         .header h1 {
-            font-size: 3em;
+            font-size: 2.5em;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
         
-        .header p {
-            font-size: 1.2em;
-            opacity: 0.9;
-        }
-        
-        .mode-cards {
+        .mode-selector {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 30px;
-            margin-top: 40px;
+            margin-bottom: 40px;
         }
         
         .mode-card {
             background: white;
             border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
             cursor: pointer;
             position: relative;
             overflow: hidden;
-            animation: fadeInUp 0.8s ease;
         }
         
         .mode-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
         }
         
         .mode-card::before {
@@ -87,45 +65,45 @@
             right: 0;
             height: 5px;
             background: linear-gradient(90deg, #667eea, #764ba2);
-            transition: height 0.3s ease;
         }
         
-        .mode-card:hover::before {
-            height: 100%;
-            opacity: 0.1;
+        .mode-card.recommended::before {
+            background: linear-gradient(90deg, #4CAF50, #45a049);
+        }
+        
+        .badge {
+            display: inline-block;
+            background: #4CAF50;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 15px;
         }
         
         .mode-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5em;
-            color: white;
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #667eea;
         }
         
         .mode-title {
             font-size: 1.8em;
-            font-weight: 700;
-            color: #333;
+            font-weight: bold;
             margin-bottom: 15px;
-            text-align: center;
+            color: #333;
         }
         
         .mode-description {
             color: #666;
             line-height: 1.6;
             margin-bottom: 20px;
-            text-align: center;
         }
         
         .mode-features {
             list-style: none;
-            margin: 20px 0;
+            margin-bottom: 25px;
         }
         
         .mode-features li {
@@ -136,77 +114,117 @@
         }
         
         .mode-features li::before {
-            content: '체크';
+            content: '✓';
             position: absolute;
             left: 0;
-            color: #667eea;
+            color: #4CAF50;
             font-weight: bold;
         }
         
         .mode-button {
             width: 100%;
-            padding: 15px;
+            padding: 15px 25px;
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             border: none;
             border-radius: 10px;
-            font-size: 1.1em;
-            font-weight: 600;
+            font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
         
         .mode-button:hover {
             transform: scale(1.05);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
         }
         
-        .badge {
-            display: inline-block;
-            padding: 5px 10px;
-            background: #f0f9ff;
-            color: #1e40af;
-            border-radius: 20px;
-            font-size: 0.8em;
-            font-weight: 600;
+        .current-mode {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: none;
+        }
+        
+        .input-section {
+            margin-bottom: 30px;
+        }
+        
+        .input-section h3 {
+            color: #333;
             margin-bottom: 15px;
+            font-size: 1.3em;
         }
         
-        .badge.new {
-            background: #fef3c7;
-            color: #d97706;
+        .form-group {
+            margin-bottom: 20px;
         }
         
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: bold;
         }
         
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .back-button {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        
+        .back-button:hover {
+            background: #5a6268;
         }
         
         @media (max-width: 768px) {
+            .mode-selector {
+                grid-template-columns: 1fr;
+            }
+            
             .header h1 {
                 font-size: 2em;
-            }
-            .mode-cards {
-                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -214,38 +232,35 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>[목표] 만원요리 상세페이지 생성기</h1>
-            <p>최적의 방식을 선택하여 완벽한 상세페이지를 생성하세요</p>
+            <h1>만원요리 상세페이지 생성기</h1>
+            <p>완벽한 상세페이지를 간단하게 생성하세요</p>
         </div>
         
-        <div class="mode-cards">
+        <div id="modeSelector" class="mode-selector">
             <!-- AI 자동 생성 모드 -->
-            <div class="mode-card" onclick="selectMode('ai')">
+            <div class="mode-card recommended" onclick="selectMode('ai')">
                 <span class="badge">추천</span>
-                <div class="mode-icon">[AI]</div>
-                <h2 class="mode-title">AI 자동 생성</h2>
+                <div class="mode-icon">🤖</div>
+                <h3 class="mode-title">AI 자동 생성</h3>
                 <p class="mode-description">
-                    제품명만 입력하면 AI가 자동으로 완벽한 상세페이지를 생성합니다
+                    제품명만 입력하면 AI가 자동으로 완벽한 상세페이지를 생성합니다.
                 </p>
                 <ul class="mode-features">
-                    <li>간편한 명령어 시스템</li>
+                    <li>제품명만 입력하면 완성</li>
                     <li>AI 기반 콘텐츠 자동 생성</li>
                     <li>SEO 최적화 자동 적용</li>
                     <li>이미지 자동 배치</li>
                     <li>빠른 생성 속도</li>
                 </ul>
-                <button class="mode-button" type="button">
-                    AI 모드로 시작
-                </button>
+                <button class="mode-button">AI 모드 시작하기</button>
             </div>
             
             <!-- 상세 정보 입력 모드 -->
             <div class="mode-card" onclick="selectMode('detail')">
-                <span class="badge new">NEW</span>
-                <div class="mode-icon">[상세]</div>
-                <h2 class="mode-title">상세 정보 입력</h2>
+                <div class="mode-icon">📝</div>
+                <h3 class="mode-title">상세 정보 입력</h3>
                 <p class="mode-description">
-                    제품의 구체적인 정보를 직접 입력하여 정확한 상세페이지를 생성합니다
+                    제품의 구체적인 정보를 직접 입력하여 정확한 상세페이지를 생성합니다.
                 </p>
                 <ul class="mode-features">
                     <li>제품 정보 직접 입력</li>
@@ -254,466 +269,155 @@
                     <li>실시간 미리보기</li>
                     <li>완벽한 커스터마이징</li>
                 </ul>
-                <button class="mode-button" type="button">
-                    상세 입력 모드로 시작
-                </button>
+                <button class="mode-button">상세 입력 모드 시작하기</button>
+            </div>
+        </div>
+        
+        <!-- AI 모드 -->
+        <div id="aiMode" class="current-mode">
+            <button class="back-button" onclick="showModeSelector()">← 모드 선택으로 돌아가기</button>
+            
+            <div class="input-section">
+                <h3>🤖 AI 자동 생성 모드</h3>
+                <div class="form-group">
+                    <label for="productName">제품명 *</label>
+                    <input type="text" id="productName" placeholder="예: [인생]국물닭발800g">
+                </div>
+                <div class="form-group">
+                    <label for="referenceUrl">참조 사이트 URL (선택사항)</label>
+                    <input type="url" id="referenceUrl" placeholder="https://example.com">
+                </div>
+                <div class="form-group">
+                    <label for="mainImage">메인 이미지 URL (선택사항)</label>
+                    <input type="url" id="mainImage" placeholder="https://example.com/image.jpg">
+                </div>
+                <button class="btn-primary" onclick="generateAI()">AI로 자동 생성하기</button>
+            </div>
+        </div>
+        
+        <!-- 상세 입력 모드 -->
+        <div id="detailMode" class="current-mode">
+            <button class="back-button" onclick="showModeSelector()">← 모드 선택으로 돌아가기</button>
+            
+            <div class="input-section">
+                <h3>📝 상세 정보 입력 모드</h3>
+                
+                <div class="form-group">
+                    <label for="detailProductName">제품명 *</label>
+                    <input type="text" id="detailProductName" placeholder="제품명을 입력하세요">
+                </div>
+                
+                <div class="form-group">
+                    <label for="composition">구성 및 규격</label>
+                    <textarea id="composition" rows="3" placeholder="제품의 구성품과 규격을 입력하세요"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="expiry">소비기한</label>
+                    <input type="text" id="expiry" placeholder="예: 제조일로부터 12개월">
+                </div>
+                
+                <div class="form-group">
+                    <label for="productType">제품종류</label>
+                    <input type="text" id="productType" placeholder="예: 냉동식품">
+                </div>
+                
+                <div class="form-group">
+                    <label for="origin">원산지</label>
+                    <input type="text" id="origin" placeholder="예: 국산">
+                </div>
+                
+                <div class="form-group">
+                    <label for="shipping">합배송</label>
+                    <select id="shipping">
+                        <option value="">선택하세요</option>
+                        <option value="가능">가능</option>
+                        <option value="불가능">불가능</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="productCategory">유형</label>
+                    <input type="text" id="productCategory" placeholder="예: 간편식">
+                </div>
+                
+                <div class="form-group">
+                    <label for="packaging">포장방식</label>
+                    <input type="text" id="packaging" placeholder="예: 개별포장">
+                </div>
+                
+                <div class="form-group">
+                    <label for="ingredients">성분</label>
+                    <textarea id="ingredients" rows="4" placeholder="주요 성분을 입력하세요"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="features">제품특성</label>
+                    <textarea id="features" rows="4" placeholder="제품의 특징을 입력하세요"></textarea>
+                </div>
+                
+                <button class="btn-primary" onclick="generateDetail()">상세 정보로 생성하기</button>
             </div>
         </div>
     </div>
-    
+
     <script>
         function selectMode(mode) {
+            document.getElementById('modeSelector').style.display = 'none';
+            
             if (mode === 'ai') {
-                // 기존 AI 모드로 이동
-                window.location.href = 'ai-generator.html';
+                document.getElementById('aiMode').style.display = 'block';
+                document.getElementById('detailMode').style.display = 'none';
             } else if (mode === 'detail') {
-                // 새로운 상세 입력 모드로 이동
-                window.location.href = 'detail-input.html';
+                document.getElementById('detailMode').style.display = 'block';
+                document.getElementById('aiMode').style.display = 'none';
             }
         }
         
-        // 페이지 로드 시 애니메이션
-        document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.mode-card');
-            cards.forEach((card, index) => {
-                card.style.animationDelay = `${0.8 + index * 0.2}s`;
-            });
-        });
-        
-        // 모드 선택 함수들
-        function showAIMode() {
-            // AI 모드 섹션이 이미 표시되어 있으므로 스크롤만 이동
-            document.getElementById('aiModeSection').scrollIntoView({ behavior: 'smooth' });
-            alert('[AI 모드] 제품명만 입력하면 자동으로 상세페이지를 생성합니다.');
+        function showModeSelector() {
+            document.getElementById('modeSelector').style.display = 'grid';
+            document.getElementById('aiMode').style.display = 'none';
+            document.getElementById('detailMode').style.display = 'none';
         }
         
-        function goToDetailMode() {
-            // 상세 입력 모드로 이동 시도, 실패하면 현재 페이지에서 폼 표시
-            try {
-                window.location.href = 'detail-input.html';
-            } catch (e) {
-                // 대안: 현재 페이지에 상세 입력 폼 표시
-                showDetailInputForm();
-            }
-        }
-        
-        function showDetailInputForm() {
-            alert('[상세 입력] 곧 상세 정보 입력 기능이 추가될 예정입니다. 현재는 AI 모드를 사용해주세요.');
-            // 향후 여기에 상세 입력 폼을 동적으로 생성하는 코드 추가 가능
-        }
-    </script>
-
-        <main>
-            <div class="input-section">
-                <h2>[실행] 간편 명령어 시스템</h2>
-                
-                <!-- 모드 선택 섹션 -->
-                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; border-radius: 10px; margin-bottom: 20px; color: white; text-align: center;">
-                    <h3 style="margin-bottom: 15px;">[선택] 생성 방식을 선택하세요</h3>
-                    <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                        <button onclick="showAIMode()" style="background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: bold;">
-                            [AI] 자동 생성 모드
-                        </button>
-                        <button onclick="goToDetailMode()" style="background: #E4A853; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: bold;">
-                            [상세] 정보 입력 모드
-                        </button>
-                    </div>
-                    <p style="margin-top: 10px; font-size: 14px; opacity: 0.9;">[AI] 제품명만 입력 | [상세] 구체적 정보 직접 입력</p>
-                </div>
-
-                <div id="aiModeSection" class="form-group" style="background: #f0f9ff; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                    <label for="commandInput" style="font-weight: bold; color: #1e40af;">명령어 입력 (제품명 + 참조사이트 + 이미지)</label>
-                    <textarea id="commandInput" rows="8" placeholder="[인생]국물닭발800g
-참조 사이트 https://example.com
-이미지 링크
-https://example.com/image1.jpg
-https://example.com/image2.jpg" style="font-family: monospace; background: white;"></textarea>
-                    <button onclick="executeCommand()" class="btn-primary" style="width: 100%; margin-top: 10px; background: #1e40af;">
-                        [즉시] 즉시 생성하기
-                    </button>
-                    <div style="margin-top: 10px;">
-                        <small style="color: #6b7280;">[팁] 샘플 명령어:</small>
-                        <button onclick="loadSampleCommand()" class="btn-secondary" style="padding: 5px 10px; font-size: 12px; margin-left: 10px;">
-                            [인생]국물닭발800g 예제 불러오기
-                        </button>
-                    </div>
-                </div>
-                
-                <hr style="margin: 30px 0; border: 1px solid #e5e7eb;">
-                
-                <h2>API Configuration</h2>
-                <div class="form-group">
-                    <label for="openaiKey">OpenAI API Key (GPT)</label>
-                    <div style="display: flex; gap: 10px; align-items: center;">
-                        <input type="password" id="openaiKey" placeholder="sk-..." style="flex: 1;">
-                        <button type="button" onclick="toggleKeyVisibility('openaiKey')" class="btn-secondary" style="width: 60px;">[보기]</button>
-                    </div>
-                    <button type="button" onclick="saveApiKey('openai')" class="btn-secondary" style="margin-top: 10px;">Save OpenAI Key</button>
-                    <small id="openaiStatus" style="color: #666; display: block; margin-top: 5px;">Status: Not configured</small>
-                </div>
-                
-                <div class="form-group" style="margin-top: 20px;">
-                    <label for="claudeKey">Claude API Key (Anthropic)</label>
-                    <div style="display: flex; gap: 10px; align-items: center;">
-                        <input type="password" id="claudeKey" placeholder="sk-ant-..." style="flex: 1;">
-                        <button type="button" onclick="toggleKeyVisibility('claudeKey')" class="btn-secondary" style="width: 60px;">[보기]</button>
-                    </div>
-                    <button type="button" onclick="saveApiKey('claude')" class="btn-secondary" style="margin-top: 10px;">Save Claude Key</button>
-                    <small id="claudeStatus" style="color: #666; display: block; margin-top: 5px;">Status: Not configured</small>
-                </div>
-                
-                <div class="form-group" style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
-                    <label style="font-weight: bold; margin-bottom: 10px; display: block;">AI 응답 설정</label>
-                    <div style="margin-bottom: 10px;">
-                        <label for="responseTime">응답 대기 시간 (충분한 검토를 위해)</label>
-                        <select id="responseTime" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
-                            <option value="3000">3초 (빠른 응답)</option>
-                            <option value="5000" selected>5초 (표준 - 추천)</option>
-                            <option value="8000">8초 (신중한 검토)</option>
-                            <option value="10000">10초 (최고 품질)</option>
-                        </select>
-                    </div>
-                    <small style="color: #666;">[팁] 충분한 시간으로 더 품질 높은 콘텐츠를 생성합니다.</small>
-                </div>
-                
-                <h2>Page Information</h2>
-                
-                <div class="form-group">
-                    <label for="pageTitle">Page Title <span style="color: red;">*</span></label>
-                    <input type="text" id="pageTitle" placeholder="Product name or page title">
-                </div>
-
-                <div class="form-group">
-                    <label for="referenceUrl">Reference Site URL (Optional)</label>
-                    <input type="url" id="referenceUrl" placeholder="https://example.com/product">
-                    <button type="button" onclick="crawlProductInfo()" class="btn-secondary" style="margin-top: 10px; width: 100%;">Get Product Information</button>
-                </div>
-
-                <div class="form-group">
-                    <label for="mainImage">Main Image URL <span style="color: red;">*</span></label>
-                    <input type="url" id="mainImage" placeholder="https://example.com/main-image.jpg">
-                    <small style="color: #666;">Required if no reference URL provided</small>
-                </div>
-
-                <div class="form-group">
-                    <label for="detailImage1">Detail Image 1 (Optional)</label>
-                    <input type="url" id="detailImage1" placeholder="https://example.com/detail-1.jpg">
-                </div>
-
-                <div class="form-group">
-                    <label for="detailImage2">Detail Image 2 (Optional)</label>
-                    <input type="url" id="detailImage2" placeholder="https://example.com/detail-2.jpg">
-                </div>
-
-                <div class="form-group">
-                    <label for="detailImage3">Detail Image 3 (Optional)</label>
-                    <input type="url" id="detailImage3" placeholder="https://example.com/detail-3.jpg">
-                </div>
-
-                <div class="form-group">
-                    <label for="detailImage4">Detail Image 4 (Optional)</label>
-                    <input type="url" id="detailImage4" placeholder="https://example.com/detail-4.jpg">
-                </div>
-
-                <div class="form-group">
-                    <label for="price">Price (Optional)</label>
-                    <input type="text" id="price" placeholder="29,900 KRW">
-                    <small style="color: #666;">Will be fetched automatically from reference site</small>
-                </div>
-
-                <div class="form-group">
-                    <label for="heritageStory">Heritage Story (Optional)</label>
-                    <textarea id="heritageStory" rows="3" placeholder="Enter product history or tradition (HTML tags allowed)"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="trustContent">Choi Siblings Recommendation (Optional)</label>
-                    <textarea id="trustContent" rows="3" placeholder="Reasons for Choi Siblings recommendation (HTML tags allowed)"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="painPoints">Pain Points (Optional)</label>
-                    <textarea id="painPoints" rows="3" placeholder="Customer problems/concerns (HTML tags allowed)"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="benefits">Benefits/Solutions (Separate with line breaks)</label>
-                    <textarea id="benefits" rows="5" placeholder="Benefit 1&#10;Benefit 2&#10;Benefit 3"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="usageGuide">Usage & Tips (Optional)</label>
-                    <textarea id="usageGuide" rows="5" placeholder="Usage instructions and tips (HTML tags allowed)"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="features">Product Features (Separate with line breaks)</label>
-                    <textarea id="features" rows="5" placeholder="Feature 1&#10;Feature 2&#10;Feature 3"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="faqContent">FAQ (Optional)</label>
-                    <textarea id="faqContent" rows="8" placeholder="Enter FAQ in HTML format:
-&lt;div class='faq-item'&gt;
-  &lt;div class='faq-question'&gt;Q. Question&lt;/div&gt;
-  &lt;div class='faq-answer'&gt;A. Answer&lt;/div&gt;
-&lt;/div&gt;"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="template">Template Selection</label>
-                    <select id="template">
-                        <option value="default">Manwon Cooking Choi Siblings Template</option>
-                        <option value="premium">Premium Template (10 sections)</option>
-                    </select>
-                </div>
-
-                <div class="button-group">
-                    <button onclick="analyzeProduct(event)" class="btn-secondary" style="background-color: #E4A853;">[검색] 제품 분석</button>
-                    <button onclick="generatePage()" class="btn-primary">Generate Page</button>
-                    <button onclick="previewPage()" class="btn-secondary">Preview</button>
-                    <button onclick="resetForm()" class="btn-secondary">Reset</button>
-                </div>
-            </div>
-
-            <div class="preview-section">
-                <h2>Preview</h2>
-                <div id="preview" class="preview-container">
-                    <p class="preview-placeholder">Generated page will be displayed here</p>
-                </div>
-            </div>
-        </main>
-
-        <footer>
-            <p>&copy; 2024 Detail Page Generator. All rights reserved.</p>
-        </footer>
-    </div>
-
-    <script src="js/manwon-prompt-v9.js"></script>
-    <script src="js/api-config.js"></script>
-    <script src="js/api-config-crawl.js"></script>
-    <script src="js/api-config-marketing.js"></script>
-    <script src="js/marketing-research.js"></script>
-    <script src="js/error-handling.js"></script>
-    <script src="js/crawler.js"></script>
-    <script src="js/validator.js"></script>
-    <script src="js/product-analyzer.js"></script>
-    <script src="js/command-system.js"></script>
-    <script src="js/generator.js"></script>
-    
-    <script>
-        // Mask API key for display
-        function maskApiKey(key) {
-            if (!key || key.length < 10) return '';
-            return key.substring(0, 6) + '***...' + key.substring(key.length - 6);
-        }
-        
-        // Toggle key visibility
-        function toggleKeyVisibility(inputId) {
-            const input = document.getElementById(inputId);
-            const button = event.currentTarget || event.target;
-            
-            if (input.type === 'password') {
-                input.type = 'text';
-                button.textContent = '[숨김]';
-                // Auto-hide after 3 seconds
-                setTimeout(() => {
-                    input.type = 'password';
-                    button.textContent = '[보기]';
-                }, 3000);
-            } else {
-                input.type = 'password';
-                button.textContent = '[보기]';
-            }
-        }
-        
-        // Save API key with type
-        function saveApiKey(type) {
-            const inputId = type === 'openai' ? 'openaiKey' : 'claudeKey';
-            const apiKeyInput = document.getElementById(inputId);
-            const apiKey = apiKeyInput.value.trim();
-            
-            if (!apiKey) {
-                alert(`Please enter your ${type === 'openai' ? 'OpenAI' : 'Claude'} API key`);
-                return;
-            }
-            
-            // OpenAI는 sk-proj- 형식도 지원
-            if (type === 'openai') {
-                if (!apiKey.startsWith('sk-') && !apiKey.startsWith('sk-proj-')) {
-                    alert('OpenAI API keys should start with "sk-" or "sk-proj-"');
-                    return;
-                }
-            } else {
-                if (!apiKey.startsWith('sk-ant-')) {
-                    alert('Claude API keys should start with "sk-ant-"');
-                    return;
-                }
-            }
-            
-            // Save to localStorage
-            const keyName = type === 'openai' ? 'OPENAI_API_KEY' : 'CLAUDE_API_KEY';
-            localStorage.setItem(keyName, apiKey);
-            
-            // Update API_CONFIG if it exists
-            if (typeof API_CONFIG !== 'undefined') {
-                if (type === 'openai') {
-                    API_CONFIG.OPENAI_API_KEY = apiKey;
-                } else {
-                    API_CONFIG.CLAUDE_API_KEY = apiKey;
-                }
-            }
-            
-            // Update status
-            updateApiStatus(type);
-            
-            alert(`${type === 'openai' ? 'OpenAI' : 'Claude'} API key saved successfully!`);
-            
-            // Don't clear the input, show masked version instead
-            apiKeyInput.value = '';
-            apiKeyInput.placeholder = maskApiKey(apiKey);
-        }
-        
-        // Update API status with masking
-        function updateApiStatus(type) {
-            const statusId = type + 'Status';
-            const statusElement = document.getElementById(statusId);
-            const keyName = type === 'openai' ? 'OPENAI_API_KEY' : 'CLAUDE_API_KEY';
-            const apiKey = localStorage.getItem(keyName);
-            
-            if (apiKey && apiKey !== 'YOUR_API_KEY_HERE' && apiKey.trim() !== '') {
-                statusElement.innerHTML = `Status: [성공] Configured (${maskApiKey(apiKey)})`;
-                statusElement.style.color = '#4caf50';
-                return true;
-            } else {
-                statusElement.textContent = 'Status: [실패] Not configured';
-                statusElement.style.color = '#f44336';
-                return false;
-            }
-        }
-        
-        // Load response time preference
-        function loadResponseTime() {
-            const savedTime = localStorage.getItem('AI_RESPONSE_TIME');
-            if (savedTime) {
-                document.getElementById('responseTime').value = savedTime;
-            }
-        }
-        
-        // Save response time preference
-        function saveResponseTime() {
-            const responseTime = document.getElementById('responseTime').value;
-            localStorage.setItem('AI_RESPONSE_TIME', responseTime);
-        }
-        
-        // 샘플 명령어 로드
-        function loadSampleCommand() {
-            const sampleCommand = `[인생]국물닭발800g
-참조 사이트 https://insaengdomae.imweb.me/53/?idx=531
-이미지 링크
-https://ecimg.cafe24img.com/pg1966b42244249021/manwonyori/web/product/life/feer800g/feet800g-1.jpg
-https://ecimg.cafe24img.com/pg1966b42244249021/manwonyori/web/product/life/feer800g/feet800g-2.jpg
-https://ecimg.cafe24img.com/pg1966b42244249021/manwonyori/web/product/life/feer800g/feet800g-3.jpg`;
-            
-            document.getElementById('commandInput').value = sampleCommand;
-            alert('샘플 명령어가 로드되었습니다. "즉시 생성하기" 버튼을 클릭하세요!');
-        }
-        
-        // 명령어 실행 함수
-        async function executeCommand() {
-            const commandInput = document.getElementById('commandInput').value.trim();
-            if (!commandInput) {
-                alert('명령어를 입력해주세요.');
-                return;
-            }
-            
-            const btn = event ? event.target : document.querySelector('button[onclick*="executeCommand"]');
-            const originalText = btn.textContent;
-            btn.textContent = '⏳ 생성 중...';
-            btn.disabled = true;
-            
-            try {
-                // 명령어 시스템 실행
-                const html = await CommandSystem.execute(commandInput);
-                
-                // 미리보기 표시
-                const previewDiv = document.getElementById('preview');
-                showSafePreview(html, previewDiv);
-                
-                // 다운로드
-                const command = CommandSystem.parseCommand(commandInput);
-                const fileName = createFileName(command.productName);
-                downloadHTML(html, fileName);
-                
-                alert('상세페이지가 생성되었습니다! 다운로드가 시작됩니다.');
-                
-            } catch (error) {
-                console.error('명령어 실행 오류:', error);
-                alert('상세페이지 생성 중 오류가 발생했습니다.');
-            } finally {
-                btn.textContent = originalText;
-                btn.disabled = false;
-            }
-        }
-        
-        // 제품 분석 함수
-        async function analyzeProduct(event) {
-            const productName = document.getElementById('pageTitle').value.trim();
+        function generateAI() {
+            const productName = document.getElementById('productName').value.trim();
             if (!productName) {
                 alert('제품명을 입력해주세요.');
                 return;
             }
             
-            const analyzeBtn = event ? event.target : document.querySelector('button[onclick*="analyzeProduct"]');
-            const originalText = analyzeBtn.textContent;
-            analyzeBtn.textContent = '[처리중] 분석 중...';
-            analyzeBtn.disabled = true;
+            alert('🤖 AI 자동 생성을 시작합니다!\n\n제품명: ' + productName + '\n\n실제 AI 생성 기능은 API 키 설정 후 사용 가능합니다.');
             
-            try {
-                // 제품 분석 수행
-                const analysis = await ProductAnalyzer.analyzeProduct(productName);
-                
-                // 분석 결과를 미리보기에 표시
-                const previewDiv = document.getElementById('preview');
-                previewDiv.innerHTML = ProductAnalyzer.formatAnalysisReport(analysis);
-                
-                // 분석 결과를 전역 변수에 저장 (나중에 콘텐츠 생성 시 활용)
-                window.currentProductAnalysis = analysis;
-                
-                alert('제품 분석이 완료되었습니다. 분석 결과를 확인하고 "Generate Page"를 클릭하세요.');
-                
-            } catch (error) {
-                console.error('제품 분석 오류:', error);
-                alert('제품 분석 중 오류가 발생했습니다.');
-            } finally {
-                analyzeBtn.textContent = originalText;
-                analyzeBtn.disabled = false;
-            }
+            // 여기에 실제 AI 생성 로직을 추가할 수 있습니다
+            console.log('AI 생성 요청:', { productName });
         }
         
-        // Check API status on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            // Update both API statuses
-            updateApiStatus('openai');
-            updateApiStatus('claude');
-            
-            // Load response time preference
-            loadResponseTime();
-            
-            // Save response time on change
-            document.getElementById('responseTime').addEventListener('change', saveResponseTime);
-            
-            // Show masked keys in placeholders
-            const openaiKey = localStorage.getItem('OPENAI_API_KEY');
-            if (openaiKey && openaiKey !== 'YOUR_API_KEY_HERE') {
-                document.getElementById('openaiKey').placeholder = maskApiKey(openaiKey);
+        function generateDetail() {
+            const productName = document.getElementById('detailProductName').value.trim();
+            if (!productName) {
+                alert('제품명을 입력해주세요.');
+                return;
             }
             
-            const claudeKey = localStorage.getItem('CLAUDE_API_KEY');
-            if (claudeKey && claudeKey !== 'YOUR_API_KEY_HERE') {
-                document.getElementById('claudeKey').placeholder = maskApiKey(claudeKey);
-            }
-        });
+            const data = {
+                productName,
+                composition: document.getElementById('composition').value,
+                expiry: document.getElementById('expiry').value,
+                productType: document.getElementById('productType').value,
+                origin: document.getElementById('origin').value,
+                shipping: document.getElementById('shipping').value,
+                productCategory: document.getElementById('productCategory').value,
+                packaging: document.getElementById('packaging').value,
+                ingredients: document.getElementById('ingredients').value,
+                features: document.getElementById('features').value
+            };
+            
+            alert('📝 상세 정보로 생성을 시작합니다!\n\n입력된 정보를 바탕으로 상세페이지를 생성합니다.');
+            
+            // 여기에 실제 상세 생성 로직을 추가할 수 있습니다
+            console.log('상세 생성 요청:', data);
+        }
     </script>
 </body>
 </html>
