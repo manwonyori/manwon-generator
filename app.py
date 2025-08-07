@@ -11,6 +11,10 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     """메인 페이지 - 모드 선택 시스템 내장"""
+    # 강제로 새 파일 서빙
+    import os
+    if os.path.exists('home.html'):
+        return send_from_directory('.', 'home.html')
     return send_from_directory('.', 'index.html')
 
 @app.route('/health')

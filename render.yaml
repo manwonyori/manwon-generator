@@ -12,5 +12,7 @@ services:
       - key: PORT
         value: "10000"
       - key: FORCE_DEPLOY
-        value: "2025-08-07-22-32"
+        value: "2025-08-07-22-50-CRITICAL"
+      - key: NEW_VERSION
+        value: "MODE_SELECTION_SYSTEM"
     autoDeploy: true
