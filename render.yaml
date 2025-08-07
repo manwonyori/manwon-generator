@@ -4,11 +4,13 @@ services:
     env: python
     region: singapore
     plan: free
-    buildCommand: "pip install -r requirements.txt"
+    buildCommand: "pip install -r requirements.txt && echo 'FORCE REBUILD 2025-08-07 22:32'"
     startCommand: "python app.py"
     envVars:
       - key: PYTHON_VERSION
         value: "3.11.0"
       - key: PORT
         value: "10000"
+      - key: FORCE_DEPLOY
+        value: "2025-08-07-22-32"
     autoDeploy: true
