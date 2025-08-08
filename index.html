@@ -238,10 +238,10 @@
 
         <div id="modeSelector" class="mode-selector">
             <!-- AI 간편 모드 -->
-            <div class="mode-card recommended" onclick="selectMode('ai')">
+            <div class="mode-card recommended" onclick="window.location.href='/ai-generator.html'">
                 <span class="badge">추천</span>
                 <div class="mode-icon">🤖</div>
-                <h3 class="mode-title">AI 간편 모드</h3>
+                <h3 class="mode-title">AI 간편 모드 (V9.0)</h3>
                 <p class="mode-description">
                     상품명만 입력하면 AI가 자동으로 완성된 상세페이지를 생성합니다.
                 </p>
@@ -252,11 +252,11 @@
                     <li>✅ 브랜드 일관성</li>
                     <li>✅ 즉시 사용</li>
                 </ul>
-                <button class="mode-button">AI 모드 시작</button>
+                <button class="mode-button">AI 생성기 바로가기</button>
             </div>
 
             <!-- 상세 입력 모드 -->
-            <div class="mode-card" onclick="selectMode('detail')">
+            <div class="mode-card" onclick="window.location.href='/detail-input.html'">
                 <div class="mode-icon">📝</div>
                 <h3 class="mode-title">상세 입력 모드</h3>
                 <p class="mode-description">
@@ -269,108 +269,20 @@
                     <li>✅ 완전 맞춤화</li>
                     <li>✅ 전문가 수준</li>
                 </ul>
-                <button class="mode-button">상세 모드 시작</button>
-            </div>
-        </div>
-
-        <!-- AI 모드 -->
-        <div id="aiMode" class="current-mode">
-            <button class="back-button" onclick="showModeSelector()">← 모드 선택</button>
-
-            <div class="input-section">
-                <h3>🤖 AI 간편 생성</h3>
-                <div class="form-group">
-                    <label for="productName">상품명 *</label>
-                    <input type="text" id="productName" placeholder="예시: [인생]국물닭발800g">
-                </div>
-                <div class="form-group">
-                    <label for="referenceUrl">참고 URL (선택사항)</label>
-                    <input type="url" id="referenceUrl" placeholder="https://example.com">
-                </div>
-                <div class="form-group">
-                    <label for="mainImage">상품 이미지 URL (선택사항)</label>
-                    <input type="url" id="mainImage" placeholder="https://example.com/image.jpg">
-                </div>
-                <button class="btn-primary" onclick="generateAI()">AI 생성 시작</button>
-            </div>
-        </div>
-
-        <!-- 상세 입력 모드 -->
-        <div id="detailMode" class="current-mode">
-            <button class="back-button" onclick="showModeSelector()">← 모드 선택</button>
-
-            <div class="input-section">
-                <h3>📝 상세 정보 입력</h3>
-
-                <div class="form-group">
-                    <label for="detailProductName">상품명 *</label>
-                    <input type="text" id="detailProductName" placeholder="상품명을 입력하세요">
-                </div>
-
-                <div class="form-group">
-                    <label for="composition">구성 정보</label>
-                    <textarea id="composition" rows="3" placeholder="예: 닭발 800g, 양념장 포함"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="expiry">유통기한</label>
-                    <input type="text" id="expiry" placeholder="예: 제조일로부터 12개월">
-                </div>
-
-                <div class="form-group">
-                    <label for="productType">제품 유형</label>
-                    <input type="text" id="productType" placeholder="예: 냉동식품">
-                </div>
-
-                <div class="form-group">
-                    <label for="origin">원산지</label>
-                    <input type="text" id="origin" placeholder="예: 국내산">
-                </div>
-
-                <div class="form-group">
-                    <label for="shipping">배송 정보</label>
-                    <select id="shipping">
-                        <option value="">배송 방법 선택</option>
-                        <option value="냉동배송">냉동배송</option>
-                        <option value="상온배송">상온배송</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="productCategory">상품 카테고리</label>
-                    <input type="text" id="productCategory" placeholder="예: 닭요리">
-                </div>
-
-                <div class="form-group">
-                    <label for="packaging">포장 정보</label>
-                    <input type="text" id="packaging" placeholder="예: 진공포장">
-                </div>
-
-                <div class="form-group">
-                    <label for="ingredients">주요 원재료</label>
-                    <textarea id="ingredients" rows="4" placeholder="주요 원재료와 성분을 입력하세요"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="features">제품 특징</label>
-                    <textarea id="features" rows="4" placeholder="제품의 특징과 장점을 입력하세요"></textarea>
-                </div>
-
-                <button class="btn-primary" onclick="generateDetail()">상세페이지 생성</button>
+                <button class="mode-button">상세 입력기 바로가기</button>
             </div>
         </div>
     </div>
 
     <script>
         function selectMode(mode) {
-            document.getElementById('modeSelector').style.display = 'none';
-
+            // 실제 페이지로 이동
             if (mode === 'ai') {
-                document.getElementById('aiMode').style.display = 'block';
-                document.getElementById('detailMode').style.display = 'none';
+                // AI 생성 페이지로 이동
+                window.location.href = '/ai-generator.html';
             } else if (mode === 'detail') {
-                document.getElementById('detailMode').style.display = 'block';
-                document.getElementById('aiMode').style.display = 'none';
+                // 상세 입력 페이지로 이동
+                window.location.href = '/detail-input.html';
             }
         }
 
@@ -387,10 +299,8 @@
                 return;
             }
 
-            alert('🤖 AI 상세페이지 생성을 시작합니다!\n\n상품명: ' + productName + '\n\n잠시만 기다려주세요. AI가 상세 정보를 분석하고 있습니다.');
-
-            // 실제 AI 생성 로직
-            console.log('AI 생성 요청:', { productName });
+            // AI 생성 페이지로 데이터와 함께 이동
+            window.location.href = '/ai-generator.html?product=' + encodeURIComponent(productName);
         }
 
         function generateDetail() {
@@ -400,8 +310,9 @@
                 return;
             }
 
-            const data = {
-                productName,
+            // 모든 데이터를 URL 파라미터로 전달
+            const params = new URLSearchParams({
+                productName: productName,
                 composition: document.getElementById('composition').value,
                 expiry: document.getElementById('expiry').value,
                 productType: document.getElementById('productType').value,
@@ -411,12 +322,10 @@
                 packaging: document.getElementById('packaging').value,
                 ingredients: document.getElementById('ingredients').value,
                 features: document.getElementById('features').value
-            };
+            });
 
-            alert('📝 상세페이지 생성을 시작합니다!\n\n입력하신 정보를 바탕으로 페이지를 생성합니다.');
-
-            // 실제 상세 생성 로직
-            console.log('상세 생성 요청:', data);
+            // 상세 입력 페이지로 데이터와 함께 이동
+            window.location.href = '/detail-input.html?' + params.toString();
         }
     </script>
 </body>
