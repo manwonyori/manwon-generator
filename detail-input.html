@@ -455,6 +455,19 @@
     <div id="statusMessage" class="status-message"></div>
     
     <script>
+        // 페이지 로드 시 인증 확인
+        window.addEventListener('DOMContentLoaded', function() {
+            // 인증 확인 - API_AUTO_SETUP이 없으면 mode-selection으로 리다이렉트
+            const hasAutoSetup = localStorage.getItem('API_AUTO_SETUP');
+            
+            if (!hasAutoSetup) {
+                // 인증되지 않은 접근 - 메인 페이지로 리다이렉트
+                alert('비밀번호 인증이 필요합니다.');
+                window.location.href = '/mode-selection.html';
+                return;
+            }
+        });
+        
         // 폼 제출 처리
         document.getElementById('detailForm').addEventListener('submit', function(e) {
             e.preventDefault();

@@ -185,29 +185,62 @@ https://example.com/image2.jpg" style="font-family: monospace; background: white
     <script src="js/error-handling.js"></script>
     
     <script>
-        // 페이지 로드 시 API 키 자동 확인 및 설정
+        // 페이지 로드 시 인증 확인 및 API 키 설정
         window.addEventListener('DOMContentLoaded', function() {
-            // API 키가 이미 저장되어 있는지 확인
+            // 인증 확인 - API_AUTO_SETUP이 없으면 mode-selection으로 리다이렉트
             const hasAutoSetup = localStorage.getItem('API_AUTO_SETUP');
             
-            if (hasAutoSetup) {
-                // 저장된 키로 API_CONFIG 업데이트
-                const openaiKey = localStorage.getItem('OPENAI_API_KEY');
-                const claudeKey = localStorage.getItem('CLAUDE_API_KEY');
-                
-                if (openaiKey) API_CONFIG.OPENAI_API_KEY = openaiKey;
-                if (claudeKey) API_CONFIG.CLAUDE_API_KEY = claudeKey;
-                
-                // 상태 업데이트
+            if (!hasAutoSetup) {
+                // 인증되지 않은 접근 - 메인 페이지로 리다이렉트
+                alert('비밀번호 인증이 필요합니다.');
+                window.location.href = '/mode-selection.html';
+                return;
+            }
+            
+            // 저장된 키로 API_CONFIG 업데이트
+            const openaiKey = localStorage.getItem('OPENAI_API_KEY');
+            const claudeKey = localStorage.getItem('CLAUDE_API_KEY');
+            
+            if (openaiKey) API_CONFIG.OPENAI_API_KEY = openaiKey;
+            if (claudeKey) API_CONFIG.CLAUDE_API_KEY = claudeKey;
+            
+            // 상태 업데이트
+            if (typeof updateAPIStatus === 'function') {
                 updateAPIStatus();
-                
-                // API 키 입력 필드 숨기기 (선택적)
+            }
+            
+            // API 키 입력 필드 업데이트
+            setTimeout(() => {
                 const openaiInput = document.getElementById('openaiKey');
                 const claudeInput = document.getElementById('claudeKey');
+                const openaiStatus = document.getElementById('openaiStatus');
+                const claudeStatus = document.getElementById('claudeStatus');
                 
-                if (openaiInput) openaiInput.value = '••••••••••••••••••••';
-                if (claudeInput) claudeInput.value = '••••••••••••••••••••';
-            }
+                if (openaiInput && openaiKey) {
+                    openaiInput.value = '••••••••••••••••••••';
+                    openaiInput.disabled = true;
+                }
+                if (claudeInput && claudeKey) {
+                    claudeInput.value = '••••••••••••••••••••';
+                    claudeInput.disabled = true;
+                }
+                
+                // 상태 텍스트 업데이트
+                if (openaiStatus) {
+                    openaiStatus.textContent = 'Status: Configured (Auto-setup)';
+                    openaiStatus.style.color = '#4CAF50';
+                }
+                if (claudeStatus) {
+                    claudeStatus.textContent = 'Status: Configured (Auto-setup)';
+                    claudeStatus.style.color = '#4CAF50';
+                }
+                
+                // Save 버튼 비활성화
+                const saveButtons = document.querySelectorAll('button[onclick*="saveApiKey"]');
+                saveButtons.forEach(btn => {
+                    btn.style.display = 'none';
+                });
+            }, 100);
         });
         
         // 모드 변경 버튼 경로 수정
