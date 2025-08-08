@@ -1,10 +1,14 @@
+#!/usr/bin/env python3
 """
-Render 배포 상태 확인 스크립트
+SuperClaude 배포 상태 확인 스크립트
+Render 배포 최적화 및 상세 진단 포함
 """
 
 import requests
 import time
 import sys
+import json
+from datetime import datetime
 
 # UTF-8 인코딩 설정
 import io
@@ -31,7 +35,7 @@ def check_deployment():
             
             if response.status_code == 200:
                 data = response.json()
-                if data.get('status') == 'healthy':
+                if data.get('status') == 'ok':
                     print("[성공] 성공!")
                     print("\n" + "="*50)
                     print("[완료] 배포 완료!")

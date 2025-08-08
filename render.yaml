@@ -7,10 +7,13 @@ services:
     branch: main
     dockerfilePath: ./Dockerfile
     healthCheckPath: /health
+    startCommand: sh -c "gunicorn --bind 0.0.0.0:$PORT --workers 1 --timeout 120 --access-logfile - --error-logfile - app:app"
     envVars:
       - key: PORT
         value: 10000
       - key: FLASK_ENV
         value: production
-      - key: FORCE_REBUILD
-        value: "2025-08-08-DOCKER-DEPLOY"
+      - key: PYTHON_VERSION
+        value: "3.11"
+      - key: SUPERCLAUD_REBUILD
+        value: "2025-08-08-OPTIMIZED"
