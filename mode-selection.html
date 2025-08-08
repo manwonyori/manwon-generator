@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>   - </title>
+    <title>만원요리 상세페이지 생성기</title>
     <style>
         * {
             margin: 0;
@@ -35,8 +35,50 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
+        /* 로그인 섹션 */
+        .login-section {
+            max-width: 400px;
+            margin: 100px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .login-section h2 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .login-section input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .login-section button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .login-section button:hover {
+            transform: scale(1.02);
+        }
+
+        /* 모드 선택 섹션 (처음에는 숨김) */
         .mode-selector {
-            display: grid;
+            display: none;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 30px;
             margin-bottom: 40px;
@@ -114,7 +156,7 @@
         }
 
         .mode-features li::before {
-            content: '';
+            content: '✓';
             position: absolute;
             left: 0;
             color: #4CAF50;
@@ -139,85 +181,6 @@
             box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
         }
 
-        .current-mode {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            margin-top: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            display: none;
-        }
-
-        .input-section {
-            margin-bottom: 30px;
-        }
-
-        .input-section h3 {
-            color: #333;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #555;
-            font-weight: bold;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
-        }
-
-        .back-button {
-            background: #6c757d;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-bottom: 20px;
-        }
-
-        .back-button:hover {
-            background: #5a6268;
-        }
-
         @media (max-width: 768px) {
             .mode-selector {
                 grid-template-columns: 1fr;
@@ -232,191 +195,80 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>  </h1>
-            <p>   </p>
+            <h1>만원요리 최씨남매</h1>
+            <p>상세페이지 생성기 v9.0</p>
         </div>
 
+        <!-- 로그인 섹션 -->
+        <div id="loginSection" class="login-section">
+            <h2>🔒 팀 비밀번호 입력</h2>
+            <input type="password" id="passwordInput" placeholder="비밀번호를 입력하세요" onkeypress="if(event.key==='Enter') checkPassword()">
+            <button onclick="checkPassword()">로그인</button>
+        </div>
+
+        <!-- 모드 선택 섹션 -->
         <div id="modeSelector" class="mode-selector">
-            <!-- AI    -->
-            <div class="mode-card recommended" onclick="selectMode('ai')">
-                <span class="badge"></span>
-                <div class="mode-icon"></div>
-                <h3 class="mode-title">AI  </h3>
+            <!-- AI 간편 모드 -->
+            <div class="mode-card recommended" onclick="goToAI()">
+                <span class="badge">추천</span>
+                <div class="mode-icon">🤖</div>
+                <h3 class="mode-title">AI 간편 모드 (V9.0)</h3>
                 <p class="mode-description">
-                      AI    .
+                    상품명만 입력하면 AI가 자동으로 완성된 상세페이지를 생성합니다.
                 </p>
                 <ul class="mode-features">
-                    <li>  </li>
-                    <li>AI    </li>
-                    <li>SEO   </li>
-                    <li>  </li>
-                    <li>  </li>
+                    <li>빠른 생성</li>
+                    <li>AI 자동 분석</li>
+                    <li>SEO 최적화</li>
+                    <li>브랜드 일관성</li>
+                    <li>즉시 사용 가능</li>
                 </ul>
-                <button class="mode-button">AI  </button>
+                <button class="mode-button">AI 생성기 시작</button>
             </div>
 
-            <!--     -->
-            <div class="mode-card" onclick="selectMode('detail')">
-                <div class="mode-icon"></div>
-                <h3 class="mode-title">  </h3>
+            <!-- 상세 입력 모드 -->
+            <div class="mode-card" onclick="goToDetail()">
+                <div class="mode-icon">📝</div>
+                <h3 class="mode-title">상세 입력 모드</h3>
                 <p class="mode-description">
-                           .
+                    제품 정보를 직접 입력하여 맞춤형 상세페이지를 생성합니다.
                 </p>
                 <ul class="mode-features">
-                    <li>   </li>
-                    <li>, ,   </li>
-                    <li>AI   </li>
-                    <li> </li>
-                    <li> </li>
+                    <li>세부 조정 가능</li>
+                    <li>성분, 원산지, 배송 정보</li>
+                    <li>AI 향상 기능</li>
+                    <li>완전 맞춤화</li>
+                    <li>전문가 수준</li>
                 </ul>
-                <button class="mode-button">   </button>
-            </div>
-        </div>
-
-        <!-- AI  -->
-        <div id="aiMode" class="current-mode">
-            <button class="back-button" onclick="showModeSelector()">←   </button>
-
-            <div class="input-section">
-                <h3> AI   </h3>
-                <div class="form-group">
-                    <label for="productName"> *</label>
-                    <input type="text" id="productName" placeholder=": []800g">
-                </div>
-                <div class="form-group">
-                    <label for="referenceUrl">  URL ()</label>
-                    <input type="url" id="referenceUrl" placeholder="https://example.com">
-                </div>
-                <div class="form-group">
-                    <label for="mainImage">  URL ()</label>
-                    <input type="url" id="mainImage" placeholder="https://example.com/image.jpg">
-                </div>
-                <button class="btn-primary" onclick="generateAI()">AI  </button>
-            </div>
-        </div>
-
-        <!--    -->
-        <div id="detailMode" class="current-mode">
-            <button class="back-button" onclick="showModeSelector()">←   </button>
-
-            <div class="input-section">
-                <h3>    </h3>
-
-                <div class="form-group">
-                    <label for="detailProductName"> *</label>
-                    <input type="text" id="detailProductName" placeholder=" ">
-                </div>
-
-                <div class="form-group">
-                    <label for="composition">  </label>
-                    <textarea id="composition" rows="3" placeholder="   "></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="expiry"></label>
-                    <input type="text" id="expiry" placeholder=":  12">
-                </div>
-
-                <div class="form-group">
-                    <label for="productType"></label>
-                    <input type="text" id="productType" placeholder=": ">
-                </div>
-
-                <div class="form-group">
-                    <label for="origin"></label>
-                    <input type="text" id="origin" placeholder=": ">
-                </div>
-
-                <div class="form-group">
-                    <label for="shipping"></label>
-                    <select id="shipping">
-                        <option value=""></option>
-                        <option value=""></option>
-                        <option value="불">불</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="productCategory"></label>
-                    <input type="text" id="productCategory" placeholder=": ">
-                </div>
-
-                <div class="form-group">
-                    <label for="packaging"></label>
-                    <input type="text" id="packaging" placeholder=": ">
-                </div>
-
-                <div class="form-group">
-                    <label for="ingredients"></label>
-                    <textarea id="ingredients" rows="4" placeholder="  "></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="features"></label>
-                    <textarea id="features" rows="4" placeholder="  "></textarea>
-                </div>
-
-                <button class="btn-primary" onclick="generateDetail()">  </button>
+                <button class="mode-button">상세 입력기 시작</button>
             </div>
         </div>
     </div>
 
     <script>
-        function selectMode(mode) {
-            document.getElementById('modeSelector').style.display = 'none';
-
-            if (mode === 'ai') {
-                document.getElementById('aiMode').style.display = 'block';
-                document.getElementById('detailMode').style.display = 'none';
-            } else if (mode === 'detail') {
-                document.getElementById('detailMode').style.display = 'block';
-                document.getElementById('aiMode').style.display = 'none';
+        function checkPassword() {
+            const password = document.getElementById('passwordInput').value;
+            
+            // 비밀번호 확인 (0221)
+            if (password === '0221') {
+                // 로그인 섹션 숨기고 모드 선택 표시
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('modeSelector').style.display = 'grid';
+                
+                // 헤더 텍스트 변경
+                document.querySelector('.header p').textContent = 'AI 기반 상품 상세페이지를 쉽고 빠르게 생성하세요';
+            } else {
+                alert('비밀번호가 틀렸습니다.');
+                document.getElementById('passwordInput').value = '';
             }
         }
 
-        function showModeSelector() {
-            document.getElementById('modeSelector').style.display = 'grid';
-            document.getElementById('aiMode').style.display = 'none';
-            document.getElementById('detailMode').style.display = 'none';
+        function goToAI() {
+            window.location.href = '/ai-generator.html';
         }
 
-        function generateAI() {
-            const productName = document.getElementById('productName').value.trim();
-            if (!productName) {
-                alert(' .');
-                return;
-            }
-
-            alert(' AI   !\n\n: ' + productName + '\n\n AI   API     .');
-
-            //   AI  직
-            console.log('AI  :', { productName });
-        }
-
-        function generateDetail() {
-            const productName = document.getElementById('detailProductName').value.trim();
-            if (!productName) {
-                alert(' .');
-                return;
-            }
-
-            const data = {
-                productName,
-                composition: document.getElementById('composition').value,
-                expiry: document.getElementById('expiry').value,
-                productType: document.getElementById('productType').value,
-                origin: document.getElementById('origin').value,
-                shipping: document.getElementById('shipping').value,
-                productCategory: document.getElementById('productCategory').value,
-                packaging: document.getElementById('packaging').value,
-                ingredients: document.getElementById('ingredients').value,
-                features: document.getElementById('features').value
-            };
-
-            alert('    !\n\n  바탕  .');
-
-            //     직
-            console.log('  :', data);
+        function goToDetail() {
+            window.location.href = '/detail-input.html';
         }
     </script>
 </body>
