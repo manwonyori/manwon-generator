@@ -1,9 +1,16 @@
 services:
   - type: web
     name: manwon-generator
-    env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
+    runtime: docker
+    plan: free
+    region: oregon
+    branch: main
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
     envVars:
-      - key: PYTHON_VERSION
-        value: 3.11
+      - key: PORT
+        value: 10000
+      - key: FLASK_ENV
+        value: production
+      - key: FORCE_REBUILD
+        value: "2025-08-08-DOCKER-DEPLOY"

@@ -1,0 +1,21 @@
+# Docker ignore - 불필요한 파일 제외
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+.git
+.gitignore
+README*.md
+DEPLOY*.md
+DEPLOYMENT*.md
+*.log
+*.tmp
+test_results_*.json
+*_backup.py
+deploy.bat
+deploy.sh
+monitor_*.py
+check_*.py
+*.bat
