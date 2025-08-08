@@ -3,106 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>상세페이지 생성기 - 상세 입력 모드</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>상세 입력 모드 - 만원요리 상세페이지 생성기</title>
     <style>
-        /* 추가 스타일 */
-        .mode-header {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Malgun Gothic', -apple-system, BlinkMacSystemFont, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            min-height: 100vh;
             padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            position: relative;
         }
         
-        .mode-change-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255,255,255,0.2);
-            color: white;
-            border: 1px solid rgba(255,255,255,0.3);
-            padding: 8px 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
         
-        .mode-change-btn:hover {
-            background: rgba(255,255,255,0.3);
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #f0f0f0;
         }
         
-        .mode-header h1 {
-            font-size: 2em;
+        header h1 {
+            color: #333;
+            font-size: 2.2em;
             margin-bottom: 10px;
         }
         
-        .mode-switch {
+        header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .back-button {
             position: absolute;
             top: 20px;
             right: 20px;
-        }
-        
-        .mode-switch button {
-            background: rgba(255,255,255,0.2);
-            color: white;
-            border: 1px solid rgba(255,255,255,0.3);
-            padding: 8px 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .mode-switch button:hover {
-            background: rgba(255,255,255,0.3);
-        }
-        
-        .input-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-            border-bottom: 2px solid #e5e7eb;
-        }
-        
-        .tab-button {
-            padding: 12px 24px;
-            background: none;
-            border: none;
-            color: #6b7280;
-            font-weight: 600;
-            cursor: pointer;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        
-        .tab-button.active {
+            background: rgba(255,255,255,0.9);
             color: #667eea;
+            border: 2px solid #667eea;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
         }
         
-        .tab-button.active::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            right: 0;
-            height: 2px;
+        .back-button:hover {
             background: #667eea;
+            color: white;
         }
         
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.3s ease;
+        .form-section {
+            margin-bottom: 40px;
         }
         
-        .tab-content.active {
-            display: block;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .form-section h2 {
+            color: #667eea;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
         }
         
         .form-grid {
@@ -112,405 +83,545 @@
             margin-bottom: 20px;
         }
         
-        .form-group-full {
-            grid-column: 1 / -1;
+        .form-group {
+            margin-bottom: 20px;
         }
         
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 600;
-            color: #374151;
+            color: #555;
+            font-weight: bold;
+        }
+        
+        .form-group label .required {
+            color: #e74c3c;
         }
         
         .form-group input,
-        .form-group select,
-        .form-group textarea {
+        .form-group textarea,
+        .form-group select {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
             font-size: 14px;
-            transition: all 0.3s ease;
+            transition: border-color 0.3s ease;
+            font-family: 'Malgun Gothic', sans-serif;
         }
         
         .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
+        .form-group textarea:focus,
+        .form-group select:focus {
             outline: none;
             border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            background-color: #f8f9ff;
         }
         
-        .optional-badge {
-            display: inline-block;
-            padding: 2px 8px;
-            background: #f3f4f6;
-            color: #9ca3af;
-            border-radius: 4px;
-            font-size: 12px;
-            margin-left: 5px;
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
         }
         
-        .required {
-            color: #ef4444;
-        }
-        
-        .help-text {
+        .form-group small {
             display: block;
             margin-top: 5px;
+            color: #999;
             font-size: 12px;
-            color: #9ca3af;
         }
         
-        .preview-section {
-            position: fixed;
-            right: -400px;
-            top: 0;
-            width: 400px;
-            height: 100vh;
-            background: white;
-            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
-            transition: right 0.3s ease;
-            z-index: 1000;
-            overflow-y: auto;
-        }
-        
-        .preview-section.open {
-            right: 0;
-        }
-        
-        .preview-toggle {
-            position: fixed;
-            right: 20px;
-            bottom: 20px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            z-index: 999;
-            transition: all 0.3s ease;
-        }
-        
-        .preview-toggle:hover {
-            transform: scale(1.1);
-        }
-        
-        .preview-header {
+        .image-input-group {
+            background: #f8f9fa;
             padding: 20px;
-            background: #f9fafb;
-            border-bottom: 1px solid #e5e7eb;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-        
-        .preview-content {
-            padding: 20px;
-        }
-        
-        .action-buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: 30px;
-            padding: 20px;
-            background: #f9fafb;
             border-radius: 10px;
-            position: sticky;
-            bottom: 0;
-            z-index: 10;
+            margin-bottom: 20px;
+        }
+        
+        .image-input-group h3 {
+            color: #333;
+            margin-bottom: 15px;
         }
         
         .btn-primary {
-            flex: 1;
-            padding: 15px;
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
+            padding: 18px 40px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 30px;
         }
         
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
         }
         
         .btn-secondary {
-            padding: 15px 30px;
-            background: white;
-            color: #667eea;
-            border: 2px solid #667eea;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
             cursor: pointer;
             transition: all 0.3s ease;
+            margin-top: 10px;
         }
         
         .btn-secondary:hover {
-            background: #f0f4ff;
+            background: #5a6268;
         }
         
-        .ai-assist-btn {
-            padding: 6px 12px;
-            background: #fbbf24;
-            color: #78350f;
-            border: none;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 600;
+        .preview-section {
+            margin-top: 40px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            display: none;
+        }
+        
+        .preview-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .preview-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            min-height: 200px;
+        }
+        
+        .status-message {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            display: none;
+            animation: slideInUp 0.3s ease;
+        }
+        
+        @keyframes slideInUp {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ddd;
+        }
+        
+        .tab {
+            padding: 10px 20px;
             cursor: pointer;
-            margin-left: 10px;
+            background: none;
+            border: none;
+            color: #666;
+            font-weight: bold;
             transition: all 0.3s ease;
         }
         
-        .ai-assist-btn:hover {
-            background: #f59e0b;
+        .tab.active {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
         }
         
-        .loading-overlay {
+        .tab-content {
             display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.5);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
         }
         
-        .loading-overlay.active {
-            display: flex;
-        }
-        
-        .loading-spinner {
-            width: 60px;
-            height: 60px;
-            border: 4px solid #f3f4f6;
-            border-top: 4px solid #667eea;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .tab-content.active {
+            display: block;
         }
     </style>
 </head>
 <body>
+    <button class="back-button" onclick="window.location.href='/mode-selection.html'">← 모드 선택</button>
+    
     <div class="container">
-        <div class="mode-header">
-            <h1>[입력] 상세 정보 입력 모드</h1>
-            <p>제품의 구체적인 정보를 입력하여 완벽한 상세페이지를 생성합니다</p>
-            <a href="index.html" class="mode-change-btn">[변경] 모드 변경</a>
-        </div>
+        <header>
+            <h1>📝 상세 입력 모드</h1>
+            <p>제품 정보를 직접 입력하여 맞춤형 상세페이지를 생성합니다</p>
+        </header>
         
-        <!-- 탭 메뉴 -->
-        <div class="input-tabs">
-            <button class="tab-button active" onclick="switchTab('basic')">기본 정보</button>
-            <button class="tab-button" onclick="switchTab('detail')">상세 정보</button>
-            <button class="tab-button" onclick="switchTab('marketing')">마케팅 정보</button>
-            <button class="tab-button" onclick="switchTab('seo')">SEO 설정</button>
-        </div>
-        
-        <!-- 기본 정보 탭 -->
-        <div id="basic-tab" class="tab-content active">
-            <h2>기본 정보</h2>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label>제품명 <span class="required">*</span></label>
-                    <input type="text" id="productName" placeholder="예: [씨씨더블유] 함흥 물냉면 5인분">
+        <form id="detailForm">
+            <!-- 기본 정보 -->
+            <div class="form-section">
+                <h2>1. 기본 정보</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="productName">
+                            상품명 <span class="required">*</span>
+                        </label>
+                        <input type="text" id="productName" name="productName" required 
+                               placeholder="예: [인생]국물닭발800g">
+                        <small>브랜드명과 용량을 포함해 입력하세요</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="price">판매가격</label>
+                        <input type="text" id="price" name="price" 
+                               placeholder="예: 15,900원">
+                    </div>
                 </div>
                 
                 <div class="form-group">
-                    <label>브랜드 <span class="optional-badge">선택</span></label>
-                    <input type="text" id="brand" placeholder="예: 씨씨더블유" value="만원요리 최씨남매">
+                    <label for="shortDescription">한 줄 설명</label>
+                    <input type="text" id="shortDescription" name="shortDescription" 
+                           placeholder="예: 매콤달콤한 국물이 일품인 프리미엄 닭발">
+                </div>
+            </div>
+            
+            <!-- 상품 구성 -->
+            <div class="form-section">
+                <h2>2. 상품 구성</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="weight">중량/용량</label>
+                        <input type="text" id="weight" name="weight" 
+                               placeholder="예: 800g (2~3인분)">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="components">구성품</label>
+                        <input type="text" id="components" name="components" 
+                               placeholder="예: 닭발 700g, 특제소스 100g">
+                    </div>
                 </div>
                 
                 <div class="form-group">
-                    <label>카테고리</label>
-                    <select id="category">
+                    <label for="packaging">포장 방법</label>
+                    <select id="packaging" name="packaging">
                         <option value="">선택하세요</option>
-                        <option value="냉면/면류">냉면/면류</option>
-                        <option value="밀키트">밀키트</option>
-                        <option value="반찬">반찬</option>
-                        <option value="소스/양념">소스/양념</option>
-                        <option value="간식">간식</option>
-                        <option value="기타">기타</option>
+                        <option value="vacuum">진공포장</option>
+                        <option value="frozen">냉동포장</option>
+                        <option value="refrigerated">냉장포장</option>
+                        <option value="normal">일반포장</option>
                     </select>
                 </div>
-                
+            </div>
+            
+            <!-- 원재료 정보 -->
+            <div class="form-section">
+                <h2>3. 원재료 정보</h2>
                 <div class="form-group">
-                    <label>가격</label>
-                    <input type="text" id="price" placeholder="예: 29,900원">
+                    <label for="ingredients">원재료명 및 함량</label>
+                    <textarea id="ingredients" name="ingredients" 
+                              placeholder="예: 닭발(국내산) 87.5%, 간장, 설탕, 고춧가루, 마늘, 생강 등"></textarea>
+                    <small>주요 원재료와 원산지를 정확히 입력하세요</small>
                 </div>
                 
-                <div class="form-group-full">
-                    <label>구성 및 규격 <button class="ai-assist-btn" onclick="aiAssist('composition')">AI 도움</button></label>
-                    <textarea id="composition" rows="3" placeholder="예: 2.7kg(함흥냉면 1kg / 냉면비빔장 5팩 340g)&#10;식초 / 겨자 서비스 5팩"></textarea>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="origin">원산지</label>
+                        <input type="text" id="origin" name="origin" 
+                               placeholder="예: 국내산">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="allergy">알레르기 정보</label>
+                        <input type="text" id="allergy" name="allergy" 
+                               placeholder="예: 대두, 밀 함유">
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- 상세 정보 탭 -->
-        <div id="detail-tab" class="tab-content">
-            <h2>상세 정보</h2>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label>소비기한</label>
-                    <input type="text" id="expiryDate" placeholder="예: 27.05.10">
+            
+            <!-- 보관 및 조리법 -->
+            <div class="form-section">
+                <h2>4. 보관 및 조리법</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="storage">보관 방법</label>
+                        <input type="text" id="storage" name="storage" 
+                               placeholder="예: -18℃ 이하 냉동보관">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="expiry">유통기한</label>
+                        <input type="text" id="expiry" name="expiry" 
+                               placeholder="예: 제조일로부터 12개월">
+                    </div>
                 </div>
                 
                 <div class="form-group">
-                    <label>제품종류</label>
-                    <select id="productType">
-                        <option value="">선택하세요</option>
-                        <option value="가공">가공</option>
-                        <option value="신선">신선</option>
-                        <option value="냉동">냉동</option>
-                        <option value="냉장">냉장</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label>원산지</label>
-                    <input type="text" id="origin" placeholder="예: 상품기술서 참조">
-                </div>
-                
-                <div class="form-group">
-                    <label>합배송</label>
-                    <input type="text" id="bundleShipping" placeholder="예: 7세트까지 가능">
-                </div>
-                
-                <div class="form-group">
-                    <label>유형</label>
-                    <select id="storageType">
-                        <option value="">선택하세요</option>
-                        <option value="냉동">냉동</option>
-                        <option value="냉장">냉장</option>
-                        <option value="상온">상온</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label>포장방식</label>
-                    <input type="text" id="packagingType" placeholder="예: 스킨포장">
-                </div>
-                
-                <div class="form-group-full">
-                    <label>성분 <button class="ai-assist-btn" onclick="aiAssist('ingredients')">AI 정리</button></label>
-                    <textarea id="ingredients" rows="5" placeholder="제품의 성분 정보를 입력하세요"></textarea>
-                    <span class="help-text">성분 정보를 붙여넣으면 AI가 자동으로 정리해드립니다</span>
+                    <label for="cooking">조리 방법</label>
+                    <textarea id="cooking" name="cooking" 
+                              placeholder="1. 냉동상태의 제품을 봉지째 끓는 물에 넣습니다&#10;2. 약 10분간 중탕하여 해동합니다&#10;3. 봉지를 개봉하여 접시에 담아냅니다"></textarea>
                 </div>
             </div>
-        </div>
-        
-        <!-- 마케팅 정보 탭 -->
-        <div id="marketing-tab" class="tab-content">
-            <h2>마케팅 정보</h2>
-            <div class="form-grid">
-                <div class="form-group-full">
-                    <label>제품 특성 <button class="ai-assist-btn" onclick="aiAssist('features')">AI 강화</button></label>
-                    <textarea id="productFeatures" rows="8" placeholder="제품의 주요 특징과 장점을 입력하세요"></textarea>
-                    <span class="help-text">제품의 핵심 특징을 입력하면 AI가 마케팅 문구로 강화해드립니다</span>
+            
+            <!-- 특징 및 장점 -->
+            <div class="form-section">
+                <h2>5. 특징 및 장점</h2>
+                <div class="form-group">
+                    <label for="features">제품 특징</label>
+                    <textarea id="features" name="features" 
+                              placeholder="• 엄선된 국내산 닭발만 사용&#10;• 24시간 숙성한 특제 양념&#10;• HACCP 인증 시설에서 제조"></textarea>
+                    <small>제품의 특별한 장점을 강조하세요</small>
                 </div>
                 
-                <div class="form-group-full">
-                    <label>타겟 고객 <span class="optional-badge">선택</span></label>
-                    <input type="text" id="targetCustomer" placeholder="예: 1인 가구, 직장인, 간편식을 선호하는 고객">
-                </div>
-                
-                <div class="form-group-full">
-                    <label>주요 판매 포인트 <button class="ai-assist-btn" onclick="aiAssist('sellingPoints')">AI 생성</button></label>
-                    <textarea id="sellingPoints" rows="5" placeholder="• 가성비 좋은 대용량&#10;• 전문점 맛 재현&#10;• 간편한 조리"></textarea>
-                </div>
-                
-                <div class="form-group-full">
-                    <label>조리/사용 방법 <span class="optional-badge">선택</span></label>
-                    <textarea id="usageMethod" rows="5" placeholder="조리 방법이나 사용 방법을 입력하세요"></textarea>
+                <div class="form-group">
+                    <label for="taste">맛 설명</label>
+                    <textarea id="taste" name="taste" 
+                              placeholder="매콤하면서도 달콤한 양념이 닭발과 완벽하게 어우러져, 한 번 먹으면 계속 생각나는 중독성 있는 맛"></textarea>
                 </div>
             </div>
-        </div>
-        
-        <!-- SEO 설정 탭 -->
-        <div id="seo-tab" class="tab-content">
-            <h2>SEO 설정</h2>
-            <div class="form-grid">
-                <div class="form-group-full">
-                    <label>메타 제목 <button class="ai-assist-btn" onclick="aiAssist('metaTitle')">AI 최적화</button></label>
-                    <input type="text" id="metaTitle" placeholder="검색 결과에 표시될 제목">
-                    <span class="help-text">60자 이내 권장</span>
+            
+            <!-- 이미지 -->
+            <div class="form-section">
+                <h2>6. 상품 이미지</h2>
+                <div class="image-input-group">
+                    <h3>메인 이미지</h3>
+                    <div class="form-group">
+                        <label for="mainImage">메인 이미지 URL</label>
+                        <input type="url" id="mainImage" name="mainImage" 
+                               placeholder="https://example.com/main-image.jpg">
+                    </div>
                 </div>
                 
-                <div class="form-group-full">
-                    <label>메타 설명 <button class="ai-assist-btn" onclick="aiAssist('metaDesc')">AI 최적화</button></label>
-                    <textarea id="metaDescription" rows="3" placeholder="검색 결과에 표시될 설명"></textarea>
-                    <span class="help-text">160자 이내 권장</span>
-                </div>
-                
-                <div class="form-group-full">
-                    <label>키워드 <button class="ai-assist-btn" onclick="aiAssist('keywords')">AI 추천</button></label>
-                    <input type="text" id="keywords" placeholder="예: 함흥냉면, 물냉면, 여름별미, 대용량냉면">
-                    <span class="help-text">쉼표로 구분하여 입력</span>
-                </div>
-                
-                <div class="form-group-full">
-                    <label>상품 이미지 URL</label>
-                    <input type="text" id="mainImage" placeholder="메인 이미지 URL">
-                    <input type="text" id="detailImage1" placeholder="상세 이미지 1 URL" style="margin-top: 10px;">
-                    <input type="text" id="detailImage2" placeholder="상세 이미지 2 URL" style="margin-top: 10px;">
-                    <input type="text" id="detailImage3" placeholder="상세 이미지 3 URL" style="margin-top: 10px;">
+                <div class="image-input-group">
+                    <h3>상세 이미지 (선택)</h3>
+                    <div class="form-group">
+                        <label for="detailImage1">상세 이미지 1</label>
+                        <input type="url" id="detailImage1" name="detailImage1" 
+                               placeholder="https://example.com/detail1.jpg">
+                    </div>
+                    <div class="form-group">
+                        <label for="detailImage2">상세 이미지 2</label>
+                        <input type="url" id="detailImage2" name="detailImage2" 
+                               placeholder="https://example.com/detail2.jpg">
+                    </div>
+                    <div class="form-group">
+                        <label for="detailImage3">상세 이미지 3</label>
+                        <input type="url" id="detailImage3" name="detailImage3" 
+                               placeholder="https://example.com/detail3.jpg">
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- 액션 버튼 -->
-        <div class="action-buttons">
-            <button class="btn-secondary" onclick="resetForm()">초기화</button>
-            <button class="btn-secondary" onclick="saveTemplate()">템플릿 저장</button>
-            <button class="btn-primary" onclick="generateDetailPage()">
-                <span id="generateBtnText">[생성] 상세페이지 생성</span>
+            
+            <!-- 추가 정보 -->
+            <div class="form-section">
+                <h2>7. 추가 정보 (선택)</h2>
+                <div class="form-group">
+                    <label for="nutrition">영양 정보</label>
+                    <textarea id="nutrition" name="nutrition" 
+                              placeholder="1회 제공량(100g)당: 열량 250kcal, 탄수화물 15g, 단백질 20g, 지방 10g"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="certification">인증 정보</label>
+                    <input type="text" id="certification" name="certification" 
+                           placeholder="예: HACCP, ISO22000 인증">
+                </div>
+                
+                <div class="form-group">
+                    <label for="manufacturer">제조원/판매원</label>
+                    <input type="text" id="manufacturer" name="manufacturer" 
+                           placeholder="예: 만원요리 최씨남매">
+                </div>
+            </div>
+            
+            <button type="submit" class="btn-primary">
+                상세페이지 생성하기
             </button>
+        </form>
+        
+        <!-- 미리보기 섹션 -->
+        <div id="previewSection" class="preview-section">
+            <h2>생성된 상세페이지 미리보기</h2>
+            <div id="previewContent" class="preview-content">
+                <!-- 생성된 콘텐츠가 여기 표시됩니다 -->
+            </div>
+            <button class="btn-secondary" onclick="downloadHTML()">HTML 다운로드</button>
+            <button class="btn-secondary" onclick="copyToClipboard()">클립보드 복사</button>
         </div>
     </div>
     
-    <!-- 미리보기 패널 -->
-    <button class="preview-toggle" onclick="togglePreview()">[미리보기]</button>
-    <div class="preview-section" id="previewPanel">
-        <div class="preview-header">
-            <h3>실시간 미리보기</h3>
-            <button onclick="togglePreview()" style="float: right; background: none; border: none; font-size: 20px; cursor: pointer;">[닫기]</button>
-        </div>
-        <div class="preview-content" id="previewContent">
-            <p style="color: #9ca3af; text-align: center; padding: 40px;">
-                정보를 입력하면 실시간으로 미리보기가 표시됩니다
-            </p>
-        </div>
-    </div>
+    <!-- 상태 메시지 -->
+    <div id="statusMessage" class="status-message"></div>
     
-    <!-- 로딩 오버레이 -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-spinner"></div>
-    </div>
-    
-    <!-- 기존 JS 파일들 -->
-    <script src="js/api-config.js"></script>
-    <script src="js/generator.js"></script>
-    <script src="js/manwon-prompt-v9.js"></script>
-    
-    <!-- 새로운 상세 입력 모드 JS -->
-    <script src="js/detail-input-handler.js"></script>
+    <script>
+        // 폼 제출 처리
+        document.getElementById('detailForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            generateDetailPage();
+        });
+        
+        function generateDetailPage() {
+            // 폼 데이터 수집
+            const formData = new FormData(document.getElementById('detailForm'));
+            const data = {};
+            
+            for (let [key, value] of formData.entries()) {
+                data[key] = value;
+            }
+            
+            // 필수 필드 확인
+            if (!data.productName) {
+                alert('상품명은 필수 입력 항목입니다.');
+                return;
+            }
+            
+            // 상태 메시지 표시
+            showStatus('상세페이지를 생성하고 있습니다...');
+            
+            // 상세페이지 HTML 생성
+            const html = createDetailPageHTML(data);
+            
+            // 미리보기 표시
+            document.getElementById('previewContent').innerHTML = html;
+            document.getElementById('previewSection').style.display = 'block';
+            
+            // 성공 메시지
+            showStatus('상세페이지가 성공적으로 생성되었습니다!');
+            
+            // 미리보기로 스크롤
+            document.getElementById('previewSection').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function createDetailPageHTML(data) {
+            // 상세페이지 HTML 템플릿 생성
+            return `
+                <div style="max-width: 900px; margin: 0 auto; font-family: 'Malgun Gothic', sans-serif;">
+                    <!-- 메인 이미지 -->
+                    ${data.mainImage ? `<img src="${data.mainImage}" alt="${data.productName}" style="width: 100%; margin-bottom: 30px;">` : ''}
+                    
+                    <!-- 상품명 -->
+                    <h1 style="color: #333; font-size: 2.5em; margin-bottom: 20px; text-align: center;">
+                        ${data.productName}
+                    </h1>
+                    
+                    <!-- 한 줄 설명 -->
+                    ${data.shortDescription ? `
+                        <p style="color: #666; font-size: 1.2em; text-align: center; margin-bottom: 30px;">
+                            ${data.shortDescription}
+                        </p>
+                    ` : ''}
+                    
+                    <!-- 가격 -->
+                    ${data.price ? `
+                        <div style="text-align: center; margin-bottom: 40px;">
+                            <span style="color: #e74c3c; font-size: 2em; font-weight: bold;">
+                                ${data.price}
+                            </span>
+                        </div>
+                    ` : ''}
+                    
+                    <!-- 상품 정보 테이블 -->
+                    <div style="background: #f8f9fa; padding: 30px; border-radius: 10px; margin-bottom: 40px;">
+                        <h2 style="color: #333; margin-bottom: 20px;">상품 정보</h2>
+                        <table style="width: 100%; border-collapse: collapse;">
+                            ${data.weight ? `
+                                <tr style="border-bottom: 1px solid #ddd;">
+                                    <td style="padding: 10px; width: 30%; font-weight: bold;">중량/용량</td>
+                                    <td style="padding: 10px;">${data.weight}</td>
+                                </tr>
+                            ` : ''}
+                            ${data.components ? `
+                                <tr style="border-bottom: 1px solid #ddd;">
+                                    <td style="padding: 10px; font-weight: bold;">구성품</td>
+                                    <td style="padding: 10px;">${data.components}</td>
+                                </tr>
+                            ` : ''}
+                            ${data.origin ? `
+                                <tr style="border-bottom: 1px solid #ddd;">
+                                    <td style="padding: 10px; font-weight: bold;">원산지</td>
+                                    <td style="padding: 10px;">${data.origin}</td>
+                                </tr>
+                            ` : ''}
+                            ${data.storage ? `
+                                <tr style="border-bottom: 1px solid #ddd;">
+                                    <td style="padding: 10px; font-weight: bold;">보관방법</td>
+                                    <td style="padding: 10px;">${data.storage}</td>
+                                </tr>
+                            ` : ''}
+                            ${data.expiry ? `
+                                <tr>
+                                    <td style="padding: 10px; font-weight: bold;">유통기한</td>
+                                    <td style="padding: 10px;">${data.expiry}</td>
+                                </tr>
+                            ` : ''}
+                        </table>
+                    </div>
+                    
+                    <!-- 제품 특징 -->
+                    ${data.features ? `
+                        <div style="margin-bottom: 40px;">
+                            <h2 style="color: #333; margin-bottom: 20px;">제품 특징</h2>
+                            <div style="background: white; padding: 20px; border-left: 4px solid #667eea;">
+                                ${data.features.replace(/\n/g, '<br>')}
+                            </div>
+                        </div>
+                    ` : ''}
+                    
+                    <!-- 조리 방법 -->
+                    ${data.cooking ? `
+                        <div style="margin-bottom: 40px;">
+                            <h2 style="color: #333; margin-bottom: 20px;">조리 방법</h2>
+                            <div style="background: #fff8e1; padding: 20px; border-radius: 10px;">
+                                ${data.cooking.replace(/\n/g, '<br>')}
+                            </div>
+                        </div>
+                    ` : ''}
+                    
+                    <!-- 원재료 정보 -->
+                    ${data.ingredients ? `
+                        <div style="margin-bottom: 40px;">
+                            <h2 style="color: #333; margin-bottom: 20px;">원재료 정보</h2>
+                            <p style="color: #666; line-height: 1.8;">
+                                ${data.ingredients}
+                            </p>
+                        </div>
+                    ` : ''}
+                    
+                    <!-- 상세 이미지들 -->
+                    ${data.detailImage1 ? `<img src="${data.detailImage1}" style="width: 100%; margin-bottom: 20px;">` : ''}
+                    ${data.detailImage2 ? `<img src="${data.detailImage2}" style="width: 100%; margin-bottom: 20px;">` : ''}
+                    ${data.detailImage3 ? `<img src="${data.detailImage3}" style="width: 100%; margin-bottom: 20px;">` : ''}
+                </div>
+            `;
+        }
+        
+        function showStatus(message) {
+            const statusDiv = document.getElementById('statusMessage');
+            statusDiv.textContent = message;
+            statusDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                statusDiv.style.display = 'none';
+            }, 3000);
+        }
+        
+        function downloadHTML() {
+            const content = document.getElementById('previewContent').innerHTML;
+            const blob = new Blob([content], { type: 'text/html' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'detail-page.html';
+            a.click();
+        }
+        
+        function copyToClipboard() {
+            const content = document.getElementById('previewContent').innerHTML;
+            navigator.clipboard.writeText(content).then(() => {
+                showStatus('HTML이 클립보드에 복사되었습니다!');
+            });
+        }
+    </script>
 </body>
 </html>

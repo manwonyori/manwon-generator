@@ -257,6 +257,17 @@
                 
                 // 헤더 텍스트 변경
                 document.querySelector('.header p').textContent = 'AI 기반 상품 상세페이지를 쉽고 빠르게 생성하세요';
+                
+                // API 키 자동 설정 (비밀번호 성공 시)
+                const encryptedOpenAI = 'c2stcHJvai1YNHdVTTJ0RnlCT1JmRlBBRzFiME9nUnpUM0JsYmtGSmxtQkJIS0NwSmlrYmRqdVVxb2R0MHlBZE1jWnRVQkd3aUNBenowRDlJN0FZdHhJMGdBQQ==';
+                const encryptedClaude = 'c2stYW50LWFwaTAzLTNfOEF1RnlQQzlsSS11X2VRUURncjBMNGdIRVlvMFoyMllTOWVQMDlzSWluRFVjQjRUT0xOaGhPa1dQaDc1dF9BQQ==';
+                
+                // localStorage에 자동 저장
+                localStorage.setItem('OPENAI_API_KEY', atob(encryptedOpenAI));
+                localStorage.setItem('CLAUDE_API_KEY', atob(encryptedClaude));
+                localStorage.setItem('API_AUTO_SETUP', 'true');
+                
+                console.log('API 키가 자동으로 설정되었습니다.');
             } else {
                 alert('비밀번호가 틀렸습니다.');
                 document.getElementById('passwordInput').value = '';

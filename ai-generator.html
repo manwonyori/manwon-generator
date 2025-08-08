@@ -11,7 +11,7 @@
         <header>
             <h1>AI 자동 생성 모드</h1>
             <p>제품명만 입력하면 AI가 자동으로 완벽한 상세페이지를 생성합니다</p>
-            <button onclick="window.location.href='index.html'" style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 8px 16px; border-radius: 5px; cursor: pointer;">[변경] 모드 변경</button>
+            <button onclick="window.location.href='/mode-selection.html'" style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 8px 16px; border-radius: 5px; cursor: pointer;">[변경] 모드 변경</button>
         </header>
 
         <main>
@@ -183,5 +183,37 @@ https://example.com/image2.jpg" style="font-family: monospace; background: white
     <script src="js/manwon-prompt-v9.js"></script>
     <script src="js/validator.js"></script>
     <script src="js/error-handling.js"></script>
+    
+    <script>
+        // 페이지 로드 시 API 키 자동 확인 및 설정
+        window.addEventListener('DOMContentLoaded', function() {
+            // API 키가 이미 저장되어 있는지 확인
+            const hasAutoSetup = localStorage.getItem('API_AUTO_SETUP');
+            
+            if (hasAutoSetup) {
+                // 저장된 키로 API_CONFIG 업데이트
+                const openaiKey = localStorage.getItem('OPENAI_API_KEY');
+                const claudeKey = localStorage.getItem('CLAUDE_API_KEY');
+                
+                if (openaiKey) API_CONFIG.OPENAI_API_KEY = openaiKey;
+                if (claudeKey) API_CONFIG.CLAUDE_API_KEY = claudeKey;
+                
+                // 상태 업데이트
+                updateAPIStatus();
+                
+                // API 키 입력 필드 숨기기 (선택적)
+                const openaiInput = document.getElementById('openaiKey');
+                const claudeInput = document.getElementById('claudeKey');
+                
+                if (openaiInput) openaiInput.value = '••••••••••••••••••••';
+                if (claudeInput) claudeInput.value = '••••••••••••••••••••';
+            }
+        });
+        
+        // 모드 변경 버튼 경로 수정
+        function goToModeSelection() {
+            window.location.href = '/mode-selection.html';
+        }
+    </script>
 </body>
 </html>

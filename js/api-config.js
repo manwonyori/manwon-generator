@@ -42,13 +42,37 @@ if (document.readyState === 'loading') {
     setTimeout(loadV9Prompt, 100);
 }
 
+// 암호화된 API 키 자동 설정
+function decryptKey(encrypted) {
+    // 간단한 복호화 (실제로는 더 복잡한 암호화 필요)
+    return atob(encrypted);
+}
+
+// 비밀번호 확인 후 자동으로 API 키 설정
+function autoSetupAPIKeys() {
+    // 비밀번호가 맞으면 자동으로 키 설정
+    const encryptedOpenAI = 'c2stcHJvai1YNHdVTTJ0RnlCT1JmRlBBRzFiME9nUnpUM0JsYmtGSmxtQkJIS0NwSmlrYmRqdVVxb2R0MHlBZE1jWnRVQkd3aUNBenowRDlJN0FZdHhJMGdBQQ==';
+    const encryptedClaude = 'c2stYW50LWFwaTAzLTNfOEF1RnlQQzlsSS11X2VRUURncjBMNGdIRVlvMFoyMllTOWVQMDlzSWluRFVjQjRUT0xOaGhPa1dQaDc1dF9BQQ==';
+    
+    // localStorage에 저장
+    localStorage.setItem('OPENAI_API_KEY', decryptKey(encryptedOpenAI));
+    localStorage.setItem('CLAUDE_API_KEY', decryptKey(encryptedClaude));
+    
+    // API_CONFIG 업데이트
+    API_CONFIG.OPENAI_API_KEY = decryptKey(encryptedOpenAI);
+    API_CONFIG.CLAUDE_API_KEY = decryptKey(encryptedClaude);
+    
+    // 상태 업데이트
+    updateAPIStatus();
+}
+
 const API_CONFIG = {
     // OpenAI API 설정 - localStorage에서 가져오기
-    OPENAI_API_KEY: localStorage.getItem('OPENAI_API_KEY') || 'YOUR_API_KEY_HERE',
+    OPENAI_API_KEY: localStorage.getItem('OPENAI_API_KEY') || '',
     OPENAI_API_URL: 'https://api.openai.com/v1/chat/completions',
     
     // Claude API 설정
-    CLAUDE_API_KEY: localStorage.getItem('CLAUDE_API_KEY') || 'YOUR_API_KEY_HERE',
+    CLAUDE_API_KEY: localStorage.getItem('CLAUDE_API_KEY') || '',
     CLAUDE_API_URL: 'https://api.anthropic.com/v1/messages',
     
     // 응답 대기 시간 설정
@@ -127,6 +151,26 @@ const API_CONFIG = {
         `
     }
 };
+
+// API 상태 업데이트 함수
+function updateAPIStatus() {
+    const openaiStatus = document.getElementById('openaiStatus');
+    const claudeStatus = document.getElementById('claudeStatus');
+    
+    if (openaiStatus) {
+        openaiStatus.textContent = API_CONFIG.OPENAI_API_KEY && API_CONFIG.OPENAI_API_KEY !== '' 
+            ? 'Status: Configured (Auto-setup)' 
+            : 'Status: Not configured';
+        openaiStatus.style.color = API_CONFIG.OPENAI_API_KEY ? '#4CAF50' : '#666';
+    }
+    
+    if (claudeStatus) {
+        claudeStatus.textContent = API_CONFIG.CLAUDE_API_KEY && API_CONFIG.CLAUDE_API_KEY !== '' 
+            ? 'Status: Configured (Auto-setup)' 
+            : 'Status: Not configured';
+        claudeStatus.style.color = API_CONFIG.CLAUDE_API_KEY ? '#4CAF50' : '#666';
+    }
+}
 
 // 컨텐츠별 최적 API 선택
 function selectOptimalAPI(contentType) {
