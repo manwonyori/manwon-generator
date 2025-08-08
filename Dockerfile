@@ -1,4 +1,5 @@
 # Manwon Generator - SuperClaude Optimized Docker Configuration
+# FORCE REBUILD: 2025-01-08-V10
 FROM python:3.11-slim
 
 # Set working directory

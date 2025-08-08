@@ -16,4 +16,6 @@ services:
       - key: PYTHON_VERSION
         value: "3.11"
       - key: SUPERCLAUD_REBUILD
-        value: "2025-08-08-OPTIMIZED"
+        value: "2025-01-08-FORCE-V10"
+      - key: CACHE_BUST
+        value: "FORCE_REDEPLOY_NOW"
