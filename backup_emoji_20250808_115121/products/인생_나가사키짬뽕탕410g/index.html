@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[]410g -  </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* v9.0 Design System */
+        :root {
+            --saffron-gold: #E4A853;
+            --deep-rose: #C53030;
+            --deep-charcoal: #1F2937;
+            --pure-white: #FFFFFF;
+            --light-gray: #F9FAFB;
+            --medium-gray: #6B7280;
+            --border-gray: #E5E7EB;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            color: var(--deep-charcoal);
+            background-color: var(--pure-white);
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0;
+            background-color: var(--pure-white);
+        }
+
+        /* Typography System */
+        h1 {
+            font-size: clamp(28px, 5vw, 36px);
+            font-weight: 700;
+            color: var(--deep-charcoal);
+            line-height: 1.4;
+        }
+
+        h2 {
+            font-size: clamp(22px, 4vw, 28px);
+            font-weight: 700;
+            color: var(--deep-charcoal);
+            margin-bottom: 24px;
+        }
+
+        h3 {
+            font-size: clamp(18px, 3vw, 22px);
+            font-weight: 700;
+            color: var(--deep-charcoal);
+            margin-bottom: 16px;
+        }
+
+        p {
+            font-size: clamp(14px, 2.5vw, 16px);
+            line-height: 1.8;
+            color: var(--deep-charcoal);
+            margin-bottom: 16px;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 40px 24px;
+            background-color: var(--pure-white);
+            border-bottom: 1px solid var(--border-gray);
+        }
+
+        .section:nth-child(even) {
+            background-color: var(--light-gray);
+        }
+
+        /* Strategic Header */
+        .strategic-header {
+            text-align: center;
+            padding: 60px 24px;
+            background: linear-gradient(135deg, var(--light-gray) 0%, var(--pure-white) 100%);
+        }
+
+        .brand-label {
+            color: var(--saffron-gold);
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .main-copy {
+            font-size: clamp(24px, 5vw, 32px);
+            font-weight: 700;
+            color: var(--deep-charcoal);
+            margin-bottom: 32px;
+            line-height: 1.4;
+        }
+
+        /* Image Styles */
+        .main-product-image {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-top: 24px;
+        }
+
+        .product-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin: 24px 0;
+        }
+
+        /* Highlight Text */
+        .highlight {
+            color: var(--deep-rose);
+            font-weight: 700;
+        }
+
+        /* Benefit List */
+        .benefit-list {
+            list-style: none;
+            padding: 0;
+            margin: 24px 0;
+        }
+
+        .benefit-list li {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 12px;
+            font-size: clamp(14px, 2.5vw, 16px);
+            line-height: 1.8;
+        }
+
+        .benefit-list li:before {
+            content: "[]";
+            position: absolute;
+            left: 0;
+            color: var(--saffron-gold);
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        /* Trust Box */
+        .trust-box {
+            background-color: var(--light-gray);
+            padding: 32px;
+            border-radius: 16px;
+            margin: 24px 0;
+        }
+
+        /* FAQ Styles */
+        .faq-item {
+            margin-bottom: 24px;
+            padding: 20px;
+            background-color: var(--light-gray);
+            border-radius: 12px;
+        }
+
+        .faq-question {
+            font-weight: 700;
+            color: var(--deep-charcoal);
+            margin-bottom: 8px;
+            font-size: clamp(16px, 2.5vw, 18px);
+        }
+
+        .faq-answer {
+            color: var(--medium-gray);
+            font-size: clamp(14px, 2.5vw, 16px);
+            line-height: 1.8;
+        }
+
+        /* CTA Button Style */
+        .cta-button {
+            display: inline-block;
+            background-color: var(--saffron-gold);
+            color: var(--pure-white);
+            padding: 16px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin: 16px 0;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(228, 168, 83, 0.3);
+        }
+
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            .section {
+                padding: 32px 20px;
+            }
+
+            .strategic-header {
+                padding: 40px 20px;
+            }
+
+            .trust-box {
+                padding: 24px;
+            }
+
+            .main-copy {
+                font-size: 24px;
+            }
+        }
+
+        /* Company Info Table */
+        .info-table {
+            width: 100%;
+            margin: 24px 0;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .info-table th,
+        .info-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-gray);
+        }
+
+        .info-table th {
+            background-color: var(--light-gray);
+            font-weight: 700;
+            width: 30%;
+            color: var(--deep-charcoal);
+        }
+
+        .info-table td {
+            color: var(--medium-gray);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 1. Strategic Header -->
+        <div class="strategic-header">
+            <span class="brand-label">  X    </span>
+            <h1 class="main-copy">   !    </h1>
+            <img src="https://ecimg.cafe24img.com/pg1966b42244249021/manwonyori/web/product/life/champon410g/champon-1-410g.jpg" alt="[]410g" class="main-product-image">
+        </div>
+
+        <!-- 2. Why Section -->
+        <div class="section">
+            <div style="text-align: center;">
+                <h2>Why?    어야 ?</h2>
+            </div>
+            <div>
+
+        <p>   <strong>  </strong> ?    <strong>짬뽕</strong>    ?</p>
+        <p>제   ! <span class="highlight">    </span>      짬뽕 .</p>
+
+                <ul class="benefit-list">
+                    <li><strong> </strong>  </li>
+                    <li><strong> </strong>    </li>
+                    <li><strong>, </strong>   </li>
+                    <li><strong>5 </strong>  </li>
+                    <li><strong>HACCP </strong>   </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 3. Story Section -->
+        <div class="section">
+            <div style="text-align: center;">
+                <h2>  야기</h2>
+            </div>
+            <div>
+
+        <p>! <strong> </strong>.  <strong>[]410g</strong>  야기 .</p>
+        <p>짬뽕은  에서   , <strong> 요리 </strong>  . 국   <strong>   </strong>   국 죠.</p>
+        <p>    <strong> </strong>  .  에  ,    <strong>  </strong> .</p>
+        <p class="highlight"> :   밥  먹으 !  하  도   .</p>
+
+            </div>
+        </div>
+
+        <!-- 4. How Section -->
+        <div class="section">
+            <div style="text-align: center;">
+                <h2>How? 렇게 !</h2>
+            </div>
+            <div>
+
+        <p><strong> </strong> 200%  !</p>
+        <ol style="line-height: 2;">
+            <li> <strong>550ml</strong> 주세요</li>
+            <li>제품  <strong>5간</strong> 주세요</li>
+            <li> 부드러워지 <strong>!</strong></li>
+            <li>  <strong>, 숙주나</strong> </li>
+            <li>매운 원하시 <strong></strong> </li>
+        </ol>
+        <div style="background: var(--light-gray); padding: 20px; border-radius: 8px; margin-top: 20px;">
+            <p style="margin: 0;"><strong> :</strong> ,    하  ! 계란  넣으     .</p>
+        </div>
+
+            </div>
+        </div>
+
+        <!-- 5. Trust Section -->
+        <div class="section">
+            <div style="text-align: center;">
+                <h2>Trust! 믿   유</h2>
+            </div>
+            <div class="trust-box">
+                <h3> 가 </h3>
+
+        <p><span class="highlight">" 에서    !  국 에요!"</span></p>
+        <p> 가 <strong>  </strong> 제품.  <strong> </strong> <strong>신선 </strong>  ! 국식        .</p>
+
+            </div>
+
+            <h3 style="margin-top: 32px;">제품  </h3>
+            <ul class="benefit-list">
+                <li><strong> </strong>  </li>
+                <li><strong> </strong> + 베스</li>
+                <li><strong>신선 </strong> ,  </li>
+                <li><strong>410g 푸짐</strong> 1인</li>
+                <li><strong>5 </strong>  </li>
+            </ul>
+
+            <img src="https://ecimg.cafe24img.com/pg1966b42244249021/manwonyori/web/product/life/champon410g/champon-2-410g.jpg" alt=" 미지" class="product-image">
+            <img src="https://ecimg.cafe24img.com/pg1966b42244249021/manwonyori/web/product/life/feer800g/feet800g-3.jpg" alt=" 미지" class="product-image">
+        </div>
+
+        <!-- 6. FAQ Section -->
+        <div class="section">
+            <div style="text-align: center;">
+                <h2>  </h2>
+            </div>
+            <div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Q. 국   가요?</div>
+                    <div class="faq-answer">A. 짬뽕은   베스로   국 . 국     .</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Q. 매운인가요?</div>
+                    <div class="faq-answer">A.  순 . 매운 원하시 나 청양고추 해서 !</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Q.   되?</div>
+                    <div class="faq-answer">A. 410g  1인    양. , ,    .</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Q. 로 넣으   있?</div>
+                    <div class="faq-answer">A. , 숙주나, 계란 하 .   넣으      !</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. Company Information -->
+        <div class="section">
+            <h3 style="text-align: center; margin-bottom: 24px;"> </h3>
+            <table class="info-table">
+                <tr>
+                    <th></th>
+                    <td>㈜값끼</td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>사업자록번</th>
+                    <td>434-86-03863</td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td>2025-경기주-2195</td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td> 주시 경로 1246, 11 1105-19</td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td>070-8835-2885</td>
+                </tr>
+                <tr>
+                    <th>메일</th>
+                    <td>we@manwonyori.com</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

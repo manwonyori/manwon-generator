@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>만원요리 상세페이지 생성기 - 모드 선택</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: gradientShift 10s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+            50% { background: linear-gradient(135deg, #764ba2 0%, #f093fb 100%); }
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 90%;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+            animation: fadeInDown 0.8s ease;
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .mode-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .mode-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease;
+        }
+        
+        .mode-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+        }
+        
+        .mode-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: height 0.3s ease;
+        }
+        
+        .mode-card:hover::before {
+            height: 100%;
+            opacity: 0.1;
+        }
+        
+        .mode-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+        }
+        
+        .mode-title {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .mode-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .mode-features {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .mode-features li {
+            padding: 8px 0;
+            color: #555;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .mode-features li::before {
+            content: '[완료]';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .mode-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .mode-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            background: #f0f9ff;
+            color: #1e40af;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .badge.new {
+            background: #fef3c7;
+            color: #d97706;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            .mode-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>[목표] 만원요리 상세페이지 생성기</h1>
+            <p>최적의 방식을 선택하여 완벽한 상세페이지를 생성하세요</p>
+        </div>
+        
+        <div class="mode-cards">
+            <!-- AI 자동 생성 모드 -->
+            <div class="mode-card" onclick="selectMode('ai')">
+                <span class="badge">추천</span>
+                <div class="mode-icon">[AI]</div>
+                <h2 class="mode-title">AI 자동 생성</h2>
+                <p class="mode-description">
+                    제품명만 입력하면 AI가 자동으로 완벽한 상세페이지를 생성합니다
+                </p>
+                <ul class="mode-features">
+                    <li>간편한 명령어 시스템</li>
+                    <li>AI 기반 콘텐츠 자동 생성</li>
+                    <li>SEO 최적화 자동 적용</li>
+                    <li>이미지 자동 배치</li>
+                    <li>빠른 생성 속도</li>
+                </ul>
+                <button class="mode-button" type="button">
+                    AI 모드로 시작
+                </button>
+            </div>
+            
+            <!-- 상세 정보 입력 모드 -->
+            <div class="mode-card" onclick="selectMode('detail')">
+                <span class="badge new">NEW</span>
+                <div class="mode-icon">[상세]</div>
+                <h2 class="mode-title">상세 정보 입력</h2>
+                <p class="mode-description">
+                    제품의 구체적인 정보를 직접 입력하여 정확한 상세페이지를 생성합니다
+                </p>
+                <ul class="mode-features">
+                    <li>제품 정보 직접 입력</li>
+                    <li>구성, 규격, 성분 상세 기재</li>
+                    <li>AI 보완 기능 제공</li>
+                    <li>실시간 미리보기</li>
+                    <li>완벽한 커스터마이징</li>
+                </ul>
+                <button class="mode-button" type="button">
+                    상세 입력 모드로 시작
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function selectMode(mode) {
+            if (mode === 'ai') {
+                // 기존 index.html로 이동
+                window.location.href = 'index.html';
+            } else if (mode === 'detail') {
+                // 새로운 상세 입력 모드로 이동
+                window.location.href = 'detail-input.html';
+            }
+        }
+        
+        // 페이지 로드 시 애니메이션
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.mode-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${0.8 + index * 0.2}s`;
+            });
+        });
+    </script>
+</body>
+</html>

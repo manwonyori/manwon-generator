@@ -1,0 +1,50 @@
+{
+  "timestamp": "2025-08-07T22:19:23.103533",
+  "total_tests": 7,
+  "passed": 1,
+  "failed": 6,
+  "tests": [
+    {
+      "name": "메인 페이지 접속",
+      "status": "PASS",
+      "http_code": 200,
+      "response_time": 0.651905
+    },
+    {
+      "name": "자동 로그인 스크립트",
+      "status": "FAIL",
+      "http_code": 404,
+      "error": "Content check failed"
+    },
+    {
+      "name": "모드 주입 스크립트",
+      "status": "FAIL",
+      "http_code": 404,
+      "error": "Content check failed"
+    },
+    {
+      "name": "헬스 체크",
+      "status": "FAIL",
+      "http_code": 404,
+      "error": "Content check failed"
+    },
+    {
+      "name": "상세 입력 페이지",
+      "status": "FAIL",
+      "http_code": 404,
+      "error": "Status code mismatch"
+    },
+    {
+      "name": "CSS 스타일시트",
+      "status": "FAIL",
+      "http_code": 404,
+      "error": "Status code mismatch"
+    },
+    {
+      "name": "JavaScript 파일",
+      "status": "FAIL",
+      "http_code": 404,
+      "error": "Status code mismatch"
+    }
+  ]
+}

@@ -1,43 +1,43 @@
 {
-  "briefDescription": "진짜 나가사키 현지의 맛! 시원한 해물짬뽕탕 410g",
-  "additionalDescription": "일본 나가사키 정통 레시피로 만든 진한 해물육수의 프리미엄 짬뽕탕",
-  "searchKeywords": "나가사키짬뽕, 짬뽕탕, 해물짬뽕, 나가사키짬뽕탕, 일본짬뽕, 해물라면, 인생짬뽕, 만원요리, 최씨남매, 간편짬뽕, 냉동짬뽕, 간편조리, 밀키트, 짬뽕밀키트, HACCP인증, 시원한맛, 해물맛, 짬뽕요리, 짬뽕라면, 술안주짬뽕, 5분요리, 15분요리, 새우짬뽕, 오징어짬뽕, 해물안주, 밥반찬, 야식짬뽕, 인기짬뽕, 베스트짬뽕, 추천짬뽕, 짬뽕배달, 즉석짬뽕, 레토르트짬뽕, 간편식, 시원한국물, 해물육수, 진한육수, 라면사리, 우동사리, 매운짬뽕, 순한짬뽕, 라유추가, 해물추가, 면요리, 한국짬뽕, 겨울짬뽕, 뜨끈한짬뽕",
-  "browserTitle": "[인생]나가사키짬뽕탕410g - 진짜 나가사키 현지의 해물짬뽕 | 만원요리 최씨남매",
-  "metaAuthor": "만원요리 최씨남매",
-  "metaDescription": "일본 나가사키 정통 레시피! 돼지뼈와 닭뼈를 푹 고아낸 진한 육수에 시원한 해물의 조화, 410g 푸짐한 양으로 든든한 한 끼. HACCP 인증 시설에서 위생적으로 제조한 [인생]나가사키짬뽕탕410g",
-  "metaKeywords": "나가사키짬뽕, 짬뽕탕, 해물짬뽕, 일본짬뽕, 간편조리, 밀키트, 만원요리, 최씨남매, HACCP인증",
+  "briefDescription": "   !   410g",
+  "additionalDescription": "        ",
+  "searchKeywords": ", , , , , , , , , , , , , , HACCP, , , , , , 5, 15, , , , , , , , , , , , , , , , , , , , , , , , , ",
+  "browserTitle": "[]410g -     |  ",
+  "metaAuthor": " ",
+  "metaDescription": "   !         , 410g     . HACCP     []410g",
+  "metaKeywords": ", , , , , , , , HACCP",
   "imageAltText": {
-    "main": "[인생]나가사키짬뽕탕410g 메인 이미지 - 시원하고 진한 나가사키짬뽕",
-    "detail1": "나가사키짬뽕탕 상세 이미지 - 풍성한 해물과 야채가 가득한 짬뽕",
-    "detail2": "나가사키짬뽕탕 조리 예시 - 간편하게 즐기는 나가사키짬뽕"
+    "main": "[]410g   -   ",
+    "detail1": "   -     ",
+    "detail2": "   -   "
   },
   "openGraph": {
-    "title": "[인생]나가사키짬뽕탕410g - 만원요리 최씨남매",
-    "description": "진짜 나가사키 현지의 맛! 깊고 진한 해물육수의 정석",
+    "title": "[]410g -  ",
+    "description": "   !    ",
     "image": "https://ecimg.cafe24img.com/pg1966b42244249021/manwonyori/web/product/life/champon410g/champon-1-410g.jpg",
     "type": "product"
   },
   "productDetails": {
-    "manufacturer": "인생도매",
-    "brand": "인생",
+    "manufacturer": "",
+    "brand": "",
     "weight": "410g",
-    "storageMethod": "냉동보관",
-    "expirationDate": "제조일로부터 12개월",
-    "mainIngredient": "면, 해물, 야채, 특제 짬뽕소스"
+    "storageMethod": "",
+    "expirationDate": " 12",
+    "mainIngredient": ", , ,  "
   },
   "productTags": [
-    "나가사키짬뽕",
-    "해물짬뽕",
-    "간편조리",
-    "일본정통",
-    "시원한맛",
-    "HACCP인증"
+    "",
+    "",
+    "",
+    "",
+    "",
+    "HACCP"
   ],
   "sellingPoints": [
-    "일본 나가사키 현지 레시피 그대로",
-    "돼지뼈와 닭뼈를 푹 고아낸 진한 육수",
-    "오징어, 새우 등 풍부한 해물",
-    "5분 완성 간편 조리",
-    "HACCP 인증 시설에서 위생적으로 제조"
+    "    ",
+    "     ",
+    ",    ",
+    "5   ",
+    "HACCP    "
   ]
 }

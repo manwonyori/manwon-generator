@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI    - Detail Page Generator</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AI   </h1>
+            <p>  AI 으로   합니다</p>
+            <button onclick="window.location.href='index.html'" style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 8px 16px; border-radius: 5px; cursor: pointer;">[]  </button>
+        </header>
+
+        <main>
+            <div class="input-section">
+                <h2>[]   </h2>
+                <div class="form-group" style="background: #f0f9ff; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <label for="commandInput" style="font-weight: bold; color: #1e40af;">  ( +  + )</label>
+                    <textarea id="commandInput" rows="8" placeholder="[]800g
+  https://example.com
+
+https://example.com/image1.jpg
+https://example.com/image2.jpg" style="font-family: monospace; background: white;"></textarea>
+                    <button onclick="executeCommand()" class="btn-primary" style="width: 100%; margin-top: 10px; background: #1e40af;">
+                        []  하기
+                    </button>
+                    <div style="margin-top: 10px;">
+                        <small style="color: #6b7280;">[]  :</small>
+                        <button onclick="loadSampleCommand()" class="btn-secondary" style="padding: 5px 10px; font-size: 12px; margin-left: 10px;">
+                            []800g
+                        </button>
+                    </div>
+                </div>
+
+                <hr style="margin: 30px 0; border: 1px solid #e5e7eb;">
+
+                <h2>API Configuration</h2>
+                <div class="form-group">
+                    <label for="openaiKey">OpenAI API Key (GPT)</label>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <input type="password" id="openaiKey" placeholder="sk-..." style="flex: 1;">
+                        <button type="button" onclick="toggleKeyVisibility('openaiKey')" class="btn-secondary" style="width: 60px;">[]</button>
+                    </div>
+                    <button type="button" onclick="saveApiKey('openai')" class="btn-secondary" style="margin-top: 10px;">Save OpenAI Key</button>
+                    <small id="openaiStatus" style="color: #666; display: block; margin-top: 5px;">Status: Not configured</small>
+                </div>
+
+                <div class="form-group" style="margin-top: 20px;">
+                    <label for="claudeKey">Claude API Key (Anthropic)</label>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <input type="password" id="claudeKey" placeholder="sk-ant-..." style="flex: 1;">
+                        <button type="button" onclick="toggleKeyVisibility('claudeKey')" class="btn-secondary" style="width: 60px;">[]</button>
+                    </div>
+                    <button type="button" onclick="saveApiKey('claude')" class="btn-secondary" style="margin-top: 10px;">Save Claude Key</button>
+                    <small id="claudeStatus" style="color: #666; display: block; margin-top: 5px;">Status: Not configured</small>
+                </div>
+
+                <div class="form-group" style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                    <label style="font-weight: bold; margin-bottom: 10px; display: block;">AI  </label>
+                    <div style="margin-bottom: 10px;">
+                        <label for="responseTime">   (  )</label>
+                        <select id="responseTime" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                            <option value="3000">3 ( )</option>
+                            <option value="5000" selected>5 ( - )</option>
+                            <option value="8000">8 ( )</option>
+                            <option value="10000">10 ( )</option>
+                        </select>
+                    </div>
+                    <small style="color: #666;">[]  으로     합니다.</small>
+                </div>
+
+                <h2>Page Information</h2>
+
+                <div class="form-group">
+                    <label for="pageTitle">Page Title <span style="color: red;">*</span></label>
+                    <input type="text" id="pageTitle" placeholder="Product name or page title">
+                </div>
+
+                <div class="form-group">
+                    <label for="referenceUrl">Reference Site URL (Optional)</label>
+                    <input type="url" id="referenceUrl" placeholder="https://example.com/product">
+                    <button type="button" onclick="crawlProductInfo()" class="btn-secondary" style="margin-top: 10px; width: 100%;">Get Product Information</button>
+                </div>
+
+                <div class="form-group">
+                    <label for="mainImage">Main Image URL <span style="color: red;">*</span></label>
+                    <input type="url" id="mainImage" placeholder="https://example.com/main-image.jpg">
+                    <small style="color: #666;">Required if no reference URL provided</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="detailImage1">Detail Image 1 (Optional)</label>
+                    <input type="url" id="detailImage1" placeholder="https://example.com/detail-1.jpg">
+                </div>
+
+                <div class="form-group">
+                    <label for="detailImage2">Detail Image 2 (Optional)</label>
+                    <input type="url" id="detailImage2" placeholder="https://example.com/detail-2.jpg">
+                </div>
+
+                <div class="form-group">
+                    <label for="detailImage3">Detail Image 3 (Optional)</label>
+                    <input type="url" id="detailImage3" placeholder="https://example.com/detail-3.jpg">
+                </div>
+
+                <div class="form-group">
+                    <label for="detailImage4">Detail Image 4 (Optional)</label>
+                    <input type="url" id="detailImage4" placeholder="https://example.com/detail-4.jpg">
+                </div>
+
+                <div class="form-group">
+                    <label for="price">Price (Optional)</label>
+                    <input type="text" id="price" placeholder="29,900 KRW">
+                    <small style="color: #666;">Will be fetched automatically from reference site</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="heritageStory">Heritage Story (Optional)</label>
+                    <textarea id="heritageStory" rows="3" placeholder="Enter product history or tradition (HTML tags allowed)"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="trustContent">Choi Siblings Recommendation (Optional)</label>
+                    <textarea id="trustContent" rows="3" placeholder="Reasons for Choi Siblings recommendation (HTML tags allowed)"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="painPoints">Pain Points (Optional)</label>
+                    <textarea id="painPoints" rows="3" placeholder="Customer problems/concerns (HTML tags allowed)"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="benefits">Benefits/Solutions (Separate with line breaks)</label>
+                    <textarea id="benefits" rows="5" placeholder="Benefit 1&#10;Benefit 2&#10;Benefit 3"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="usageGuide">Usage & Tips (Optional)</label>
+                    <textarea id="usageGuide" rows="5" placeholder="Usage instructions and tips (HTML tags allowed)"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="features">Product Features (Separate with line breaks)</label>
+                    <textarea id="features" rows="5" placeholder="Feature 1&#10;Feature 2&#10;Feature 3"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="faqContent">FAQ (Optional)</label>
+                    <textarea id="faqContent" rows="5" placeholder="Q: Question 1&#10;A: Answer 1&#10;&#10;Q: Question 2&#10;A: Answer 2"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="template">Template</label>
+                    <select id="template">
+                        <option value="default">Default Template</option>
+                        <option value="premium">Premium Template</option>
+                        <option value="minimal">Minimal Template</option>
+                    </select>
+                </div>
+
+                <button onclick="generatePage()" class="btn-primary" style="width: 100%; padding: 20px; font-size: 18px; margin-top: 30px;">
+                    [] Generate Page
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Status Display -->
+    <div id="status-display" style="position: fixed; bottom: 20px; right: 20px; background: rgba(0,0,0,0.8); color: white; padding: 10px 20px; border-radius: 5px; display: none;">
+        Status: Ready
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/api-config.js"></script>
+    <script src="js/command-system.js"></script>
+    <script src="js/generator.js"></script>
+    <script src="js/crawler.js"></script>
+    <script src="js/product-analyzer.js"></script>
+    <script src="js/marketing-research.js"></script>
+    <script src="js/manwon-prompt-v9.js"></script>
+    <script src="js/validator.js"></script>
+    <script src="js/error-handling.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+# FORCE DOCKER DEPLOY - 2025-08-08
+# 강제 배포 트리거 파일
+
+DEPLOYMENT_ID: DOCKER_FORCE_2025_08_08_001
+TIMESTAMP: 2025-08-08 15:00:00
+REBUILD_REASON: Converting from static to Flask Docker deployment
+
+CRITICAL CHANGES:
+- render.yaml: Python runtime → Docker runtime
+- Dockerfile: Added with proper Flask + Gunicorn setup
+- Health check endpoint: /health
+- Port configuration: 10000
+- Cache invalidation: FORCE_REBUILD env var
+
+EXPECTED RESULT: 
+Flask application running on https://manwon-generator.onrender.com/
+
+VERIFICATION COMMANDS:
+curl https://manwon-generator.onrender.com/health
+curl https://manwon-generator.onrender.com/

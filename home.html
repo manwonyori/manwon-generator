@@ -3,45 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>만원요리 상세페이지 생성기 - 완성</title>
+    <title>   - </title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Malgun Gothic', -apple-system, BlinkMacSystemFont, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
         }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
         }
-        
+
         .header {
             text-align: center;
             color: white;
             margin-bottom: 40px;
         }
-        
+
         .header h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
-        
+
         .mode-selector {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 30px;
             margin-bottom: 40px;
         }
-        
+
         .mode-card {
             background: white;
             border-radius: 20px;
@@ -52,11 +52,11 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .mode-card:hover {
             transform: translateY(-10px);
         }
-        
+
         .mode-card::before {
             content: '';
             position: absolute;
@@ -66,11 +66,11 @@
             height: 5px;
             background: linear-gradient(90deg, #667eea, #764ba2);
         }
-        
+
         .mode-card.recommended::before {
             background: linear-gradient(90deg, #4CAF50, #45a049);
         }
-        
+
         .badge {
             display: inline-block;
             background: #4CAF50;
@@ -81,46 +81,46 @@
             font-weight: bold;
             margin-bottom: 15px;
         }
-        
+
         .mode-icon {
             font-size: 3em;
             margin-bottom: 20px;
             color: #667eea;
         }
-        
+
         .mode-title {
             font-size: 1.8em;
             font-weight: bold;
             margin-bottom: 15px;
             color: #333;
         }
-        
+
         .mode-description {
             color: #666;
             line-height: 1.6;
             margin-bottom: 20px;
         }
-        
+
         .mode-features {
             list-style: none;
             margin-bottom: 25px;
         }
-        
+
         .mode-features li {
             padding: 8px 0;
             color: #555;
             position: relative;
             padding-left: 25px;
         }
-        
+
         .mode-features li::before {
-            content: '✓';
+            content: '';
             position: absolute;
             left: 0;
             color: #4CAF50;
             font-weight: bold;
         }
-        
+
         .mode-button {
             width: 100%;
             padding: 15px 25px;
@@ -133,12 +133,12 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        
+
         .mode-button:hover {
             transform: scale(1.05);
             box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
         }
-        
+
         .current-mode {
             background: white;
             border-radius: 15px;
@@ -147,28 +147,28 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             display: none;
         }
-        
+
         .input-section {
             margin-bottom: 30px;
         }
-        
+
         .input-section h3 {
             color: #333;
             margin-bottom: 15px;
             font-size: 1.3em;
         }
-        
+
         .form-group {
             margin-bottom: 20px;
         }
-        
+
         .form-group label {
             display: block;
             margin-bottom: 8px;
             color: #555;
             font-weight: bold;
         }
-        
+
         .form-group input,
         .form-group textarea,
         .form-group select {
@@ -179,14 +179,14 @@
             font-size: 14px;
             transition: border-color 0.3s ease;
         }
-        
+
         .form-group input:focus,
         .form-group textarea:focus,
         .form-group select:focus {
             outline: none;
             border-color: #667eea;
         }
-        
+
         .btn-primary {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
@@ -198,12 +198,12 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        
+
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
         }
-        
+
         .back-button {
             background: #6c757d;
             color: white;
@@ -213,16 +213,16 @@
             cursor: pointer;
             margin-bottom: 20px;
         }
-        
+
         .back-button:hover {
             background: #5a6268;
         }
-        
+
         @media (max-width: 768px) {
             .mode-selector {
                 grid-template-columns: 1fr;
             }
-            
+
             .header h1 {
                 font-size: 2em;
             }
@@ -232,131 +232,131 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>만원요리 상세페이지 생성기</h1>
-            <p>완벽한 상세페이지를 간단하게 생성하세요</p>
+            <h1>  </h1>
+            <p>   </p>
         </div>
-        
+
         <div id="modeSelector" class="mode-selector">
-            <!-- AI 자동 생성 모드 -->
+            <!-- AI    -->
             <div class="mode-card recommended" onclick="selectMode('ai')">
-                <span class="badge">추천</span>
-                <div class="mode-icon">🤖</div>
-                <h3 class="mode-title">AI 자동 생성</h3>
+                <span class="badge"></span>
+                <div class="mode-icon"></div>
+                <h3 class="mode-title">AI  </h3>
                 <p class="mode-description">
-                    제품명만 입력하면 AI가 자동으로 완벽한 상세페이지를 생성합니다.
+                      AI    .
                 </p>
                 <ul class="mode-features">
-                    <li>제품명만 입력하면 완성</li>
-                    <li>AI 기반 콘텐츠 자동 생성</li>
-                    <li>SEO 최적화 자동 적용</li>
-                    <li>이미지 자동 배치</li>
-                    <li>빠른 생성 속도</li>
+                    <li>  </li>
+                    <li>AI    </li>
+                    <li>SEO   </li>
+                    <li>  </li>
+                    <li>  </li>
                 </ul>
-                <button class="mode-button">AI 모드 시작하기</button>
+                <button class="mode-button">AI  </button>
             </div>
-            
-            <!-- 상세 정보 입력 모드 -->
+
+            <!--     -->
             <div class="mode-card" onclick="selectMode('detail')">
-                <div class="mode-icon">📝</div>
-                <h3 class="mode-title">상세 정보 입력</h3>
+                <div class="mode-icon"></div>
+                <h3 class="mode-title">  </h3>
                 <p class="mode-description">
-                    제품의 구체적인 정보를 직접 입력하여 정확한 상세페이지를 생성합니다.
+                           .
                 </p>
                 <ul class="mode-features">
-                    <li>제품 정보 직접 입력</li>
-                    <li>구성, 규격, 성분 상세 기재</li>
-                    <li>AI 보완 기능 제공</li>
-                    <li>실시간 미리보기</li>
-                    <li>완벽한 커스터마이징</li>
+                    <li>   </li>
+                    <li>, ,   </li>
+                    <li>AI   </li>
+                    <li> </li>
+                    <li> </li>
                 </ul>
-                <button class="mode-button">상세 입력 모드 시작하기</button>
+                <button class="mode-button">   </button>
             </div>
         </div>
-        
-        <!-- AI 모드 -->
+
+        <!-- AI  -->
         <div id="aiMode" class="current-mode">
-            <button class="back-button" onclick="showModeSelector()">← 모드 선택으로 돌아가기</button>
-            
+            <button class="back-button" onclick="showModeSelector()">←   </button>
+
             <div class="input-section">
-                <h3>🤖 AI 자동 생성 모드</h3>
+                <h3> AI   </h3>
                 <div class="form-group">
-                    <label for="productName">제품명 *</label>
-                    <input type="text" id="productName" placeholder="예: [인생]국물닭발800g">
+                    <label for="productName"> *</label>
+                    <input type="text" id="productName" placeholder=": []800g">
                 </div>
                 <div class="form-group">
-                    <label for="referenceUrl">참조 사이트 URL (선택사항)</label>
+                    <label for="referenceUrl">  URL ()</label>
                     <input type="url" id="referenceUrl" placeholder="https://example.com">
                 </div>
                 <div class="form-group">
-                    <label for="mainImage">메인 이미지 URL (선택사항)</label>
+                    <label for="mainImage">  URL ()</label>
                     <input type="url" id="mainImage" placeholder="https://example.com/image.jpg">
                 </div>
-                <button class="btn-primary" onclick="generateAI()">AI로 자동 생성하기</button>
+                <button class="btn-primary" onclick="generateAI()">AI  </button>
             </div>
         </div>
-        
-        <!-- 상세 입력 모드 -->
+
+        <!--    -->
         <div id="detailMode" class="current-mode">
-            <button class="back-button" onclick="showModeSelector()">← 모드 선택으로 돌아가기</button>
-            
+            <button class="back-button" onclick="showModeSelector()">←   </button>
+
             <div class="input-section">
-                <h3>📝 상세 정보 입력 모드</h3>
-                
+                <h3>    </h3>
+
                 <div class="form-group">
-                    <label for="detailProductName">제품명 *</label>
-                    <input type="text" id="detailProductName" placeholder="제품명을 입력하세요">
+                    <label for="detailProductName"> *</label>
+                    <input type="text" id="detailProductName" placeholder=" ">
                 </div>
-                
+
                 <div class="form-group">
-                    <label for="composition">구성 및 규격</label>
-                    <textarea id="composition" rows="3" placeholder="제품의 구성품과 규격을 입력하세요"></textarea>
+                    <label for="composition">  </label>
+                    <textarea id="composition" rows="3" placeholder="   "></textarea>
                 </div>
-                
+
                 <div class="form-group">
-                    <label for="expiry">소비기한</label>
-                    <input type="text" id="expiry" placeholder="예: 제조일로부터 12개월">
+                    <label for="expiry"></label>
+                    <input type="text" id="expiry" placeholder=":  12">
                 </div>
-                
+
                 <div class="form-group">
-                    <label for="productType">제품종류</label>
-                    <input type="text" id="productType" placeholder="예: 냉동식품">
+                    <label for="productType"></label>
+                    <input type="text" id="productType" placeholder=": ">
                 </div>
-                
+
                 <div class="form-group">
-                    <label for="origin">원산지</label>
-                    <input type="text" id="origin" placeholder="예: 국산">
+                    <label for="origin"></label>
+                    <input type="text" id="origin" placeholder=": ">
                 </div>
-                
+
                 <div class="form-group">
-                    <label for="shipping">합배송</label>
+                    <label for="shipping"></label>
                     <select id="shipping">
-                        <option value="">선택하세요</option>
-                        <option value="가능">가능</option>
-                        <option value="불가능">불가능</option>
+                        <option value=""></option>
+                        <option value=""></option>
+                        <option value="불">불</option>
                     </select>
                 </div>
-                
+
                 <div class="form-group">
-                    <label for="productCategory">유형</label>
-                    <input type="text" id="productCategory" placeholder="예: 간편식">
+                    <label for="productCategory"></label>
+                    <input type="text" id="productCategory" placeholder=": ">
                 </div>
-                
+
                 <div class="form-group">
-                    <label for="packaging">포장방식</label>
-                    <input type="text" id="packaging" placeholder="예: 개별포장">
+                    <label for="packaging"></label>
+                    <input type="text" id="packaging" placeholder=": ">
                 </div>
-                
+
                 <div class="form-group">
-                    <label for="ingredients">성분</label>
-                    <textarea id="ingredients" rows="4" placeholder="주요 성분을 입력하세요"></textarea>
+                    <label for="ingredients"></label>
+                    <textarea id="ingredients" rows="4" placeholder="  "></textarea>
                 </div>
-                
+
                 <div class="form-group">
-                    <label for="features">제품특성</label>
-                    <textarea id="features" rows="4" placeholder="제품의 특징을 입력하세요"></textarea>
+                    <label for="features"></label>
+                    <textarea id="features" rows="4" placeholder="  "></textarea>
                 </div>
-                
-                <button class="btn-primary" onclick="generateDetail()">상세 정보로 생성하기</button>
+
+                <button class="btn-primary" onclick="generateDetail()">  </button>
             </div>
         </div>
     </div>
@@ -364,7 +364,7 @@
     <script>
         function selectMode(mode) {
             document.getElementById('modeSelector').style.display = 'none';
-            
+
             if (mode === 'ai') {
                 document.getElementById('aiMode').style.display = 'block';
                 document.getElementById('detailMode').style.display = 'none';
@@ -373,33 +373,33 @@
                 document.getElementById('aiMode').style.display = 'none';
             }
         }
-        
+
         function showModeSelector() {
             document.getElementById('modeSelector').style.display = 'grid';
             document.getElementById('aiMode').style.display = 'none';
             document.getElementById('detailMode').style.display = 'none';
         }
-        
+
         function generateAI() {
             const productName = document.getElementById('productName').value.trim();
             if (!productName) {
-                alert('제품명을 입력해주세요.');
+                alert(' .');
                 return;
             }
-            
-            alert('🤖 AI 자동 생성을 시작합니다!\n\n제품명: ' + productName + '\n\n실제 AI 생성 기능은 API 키 설정 후 사용 가능합니다.');
-            
-            // 여기에 실제 AI 생성 로직을 추가할 수 있습니다
-            console.log('AI 생성 요청:', { productName });
+
+            alert(' AI   !\n\n: ' + productName + '\n\n AI   API     .');
+
+            //   AI  직
+            console.log('AI  :', { productName });
         }
-        
+
         function generateDetail() {
             const productName = document.getElementById('detailProductName').value.trim();
             if (!productName) {
-                alert('제품명을 입력해주세요.');
+                alert(' .');
                 return;
             }
-            
+
             const data = {
                 productName,
                 composition: document.getElementById('composition').value,
@@ -412,11 +412,11 @@
                 ingredients: document.getElementById('ingredients').value,
                 features: document.getElementById('features').value
             };
-            
-            alert('📝 상세 정보로 생성을 시작합니다!\n\n입력된 정보를 바탕으로 상세페이지를 생성합니다.');
-            
-            // 여기에 실제 상세 생성 로직을 추가할 수 있습니다
-            console.log('상세 생성 요청:', data);
+
+            alert('    !\n\n  바탕  .');
+
+            //     직
+            console.log('  :', data);
         }
     </script>
 </body>

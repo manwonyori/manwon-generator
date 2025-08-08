@@ -1,0 +1,78 @@
+{
+  "timestamp": "2025-08-07T21:04:22.718081",
+  "base_url": "http://localhost:10000",
+  "tests": {
+    "/health_Health_Check": {
+      "endpoint": "/health",
+      "description": "Health Check",
+      "success": false,
+      "message": "HTTPConnectionPool(host='localhost', port=10000): Max retries exceeded with url: /health (Caused by "
+    },
+    "/_메인_페이지": {
+      "endpoint": "/",
+      "description": "메인 페이지",
+      "success": false,
+      "message": "HTTPConnectionPool(host='localhost', port=10000): Max retries exceeded with url: / (Caused by NewCon"
+    },
+    "/mode-selector.html_모드_선택_페이지": {
+      "endpoint": "/mode-selector.html",
+      "description": "모드 선택 페이지",
+      "success": false,
+      "message": "HTTPConnectionPool(host='localhost', port=10000): Max retries exceeded with url: /mode-selector.html"
+    },
+    "/index.html_AI_자동_생성_모드": {
+      "endpoint": "/index.html",
+      "description": "AI 자동 생성 모드",
+      "success": false,
+      "message": "HTTPConnectionPool(host='localhost', port=10000): Max retries exceeded with url: /index.html (Caused"
+    },
+    "/detail-input.html_상세_입력_모드": {
+      "endpoint": "/detail-input.html",
+      "description": "상세 입력 모드",
+      "success": false,
+      "message": "HTTPConnectionPool(host='localhost', port=10000): Max retries exceeded with url: /detail-input.html "
+    },
+    "/css/style.css_CSS_스타일시트": {
+      "endpoint": "/css/style.css",
+      "description": "CSS 스타일시트",
+      "success": false,
+      "message": "HTTPConnectionPool(host='localhost', port=10000): Max retries exceeded with url: /css/style.css (Cau"
+    },
+    "/js/generator.js_JavaScript_파일": {
+      "endpoint": "/js/generator.js",
+      "description": "JavaScript 파일",
+      "success": false,
+      "message": "HTTPConnectionPool(host='localhost', port=10000): Max retries exceeded with url: /js/generator.js (C"
+    },
+    "/products/_제품_목록_API": {
+      "endpoint": "/products/",
+      "description": "제품 목록 API",
+      "success": false,
+      "message": "HTTPConnectionPool(host='localhost', port=10000): Max retries exceeded with url: /products/ (Caused "
+    },
+    "/products/인생_국물닭발800g/index.html_제품:_인생_국물닭발800g": {
+      "endpoint": "/products/인생_국물닭발800g/index.html",
+      "description": "제품: 인생_국물닭발800g",
+      "success": false,
+      "message": "HTTPConnectionPool(host='localhost', port=10000): Max retries exceeded with url: /products/%EC%9D%B8"
+    },
+    "/products/인생_나가사키짬뽕탕410g/index.html_제품:_인생_나가사키짬뽕탕410g": {
+      "endpoint": "/products/인생_나가사키짬뽕탕410g/index.html",
+      "description": "제품: 인생_나가사키짬뽕탕410g",
+      "success": false,
+      "message": "HTTPConnectionPool(host='localhost', port=10000): Max retries exceeded with url: /products/%EC%9D%B8"
+    },
+    "/nonexistent.html_404_에러_처리": {
+      "endpoint": "/nonexistent.html",
+      "description": "404 에러 처리",
+      "success": false,
+      "message": "HTTPConnectionPool(host='localhost', port=10000): Max retries exceeded with url: /nonexistent.html ("
+    }
+  },
+  "summary": {
+    "total": 12,
+    "passed": 0,
+    "failed": 12,
+    "warnings": 0
+  }
+}

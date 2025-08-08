@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>   - </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Malgun Gothic', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .mode-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .mode-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mode-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .mode-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .mode-card.recommended::before {
+            background: linear-gradient(90deg, #4CAF50, #45a049);
+        }
+
+        .badge {
+            display: inline-block;
+            background: #4CAF50;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .mode-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #667eea;
+        }
+
+        .mode-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .mode-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .mode-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .mode-features li {
+            padding: 8px 0;
+            color: #555;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .mode-features li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .mode-button {
+            width: 100%;
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .mode-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .current-mode {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .input-section {
+            margin-bottom: 30px;
+        }
+
+        .input-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .back-button {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .back-button:hover {
+            background: #5a6268;
+        }
+
+        @media (max-width: 768px) {
+            .mode-selector {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>  </h1>
+            <p> 를  </p>
+        </div>
+
+        <div id="modeSelector" class="mode-selector">
+            <!-- AI    -->
+            <div class="mode-card recommended" onclick="selectMode('ai')">
+                <span class="badge"></span>
+                <div class="mode-icon"></div>
+                <h3 class="mode-title">AI  </h3>
+                <p class="mode-description">
+                      AI 으  를 합니다.
+                </p>
+                <ul class="mode-features">
+                    <li>  </li>
+                    <li>AI    </li>
+                    <li>SEO   </li>
+                    <li>  </li>
+                    <li>  </li>
+                </ul>
+                <button class="mode-button">AI  </button>
+            </div>
+
+            <!--     -->
+            <div class="mode-card" onclick="selectMode('detail')">
+                <div class="mode-icon"></div>
+                <h3 class="mode-title">  </h3>
+                <p class="mode-description">
+                      를  하여  를 합니다.
+                </p>
+                <ul class="mode-features">
+                    <li>   </li>
+                    <li>, ,   </li>
+                    <li>AI   </li>
+                    <li> </li>
+                    <li> </li>
+                </ul>
+                <button class="mode-button">   </button>
+            </div>
+        </div>
+
+        <!-- AI  -->
+        <div id="aiMode" class="current-mode">
+            <button class="back-button" onclick="showModeSelector()">←   돌아기</button>
+
+            <div class="input-section">
+                <h3> AI   </h3>
+                <div class="form-group">
+                    <label for="productName">명 *</label>
+                    <input type="text" id="productName" placeholder=": []800g">
+                </div>
+                <div class="form-group">
+                    <label for="referenceUrl">  URL ()</label>
+                    <input type="url" id="referenceUrl" placeholder="https://example.com">
+                </div>
+                <div class="form-group">
+                    <label for="mainImage">  URL ()</label>
+                    <input type="url" id="mainImage" placeholder="https://example.com/image.jpg">
+                </div>
+                <button class="btn-primary" onclick="generateAI()">AI  하기</button>
+            </div>
+        </div>
+
+        <!--    -->
+        <div id="detailMode" class="current-mode">
+            <button class="back-button" onclick="showModeSelector()">←   돌아기</button>
+
+            <div class="input-section">
+                <h3>    </h3>
+
+                <div class="form-group">
+                    <label for="detailProductName">명 *</label>
+                    <input type="text" id="detailProductName" placeholder="명을 하세요">
+                </div>
+
+                <div class="form-group">
+                    <label for="composition">  </label>
+                    <textarea id="composition" rows="3" placeholder=" 품과 을 하세요"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="expiry"></label>
+                    <input type="text" id="expiry" placeholder=": 제조일부터 12">
+                </div>
+
+                <div class="form-group">
+                    <label for="productType">종류</label>
+                    <input type="text" id="productType" placeholder=": ">
+                </div>
+
+                <div class="form-group">
+                    <label for="origin"></label>
+                    <input type="text" id="origin" placeholder=": ">
+                </div>
+
+                <div class="form-group">
+                    <label for="shipping"></label>
+                    <select id="shipping">
+                        <option value=""></option>
+                        <option value="능">능</option>
+                        <option value="불능">불능</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="productCategory"></label>
+                    <input type="text" id="productCategory" placeholder=": ">
+                </div>
+
+                <div class="form-group">
+                    <label for="packaging"></label>
+                    <input type="text" id="packaging" placeholder=": ">
+                </div>
+
+                <div class="form-group">
+                    <label for="ingredients"></label>
+                    <textarea id="ingredients" rows="4" placeholder=" 을 하세요"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="features">특성</label>
+                    <textarea id="features" rows="4" placeholder="  하세요"></textarea>
+                </div>
+
+                <button class="btn-primary" onclick="generateDetail()">  하기</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function selectMode(mode) {
+            document.getElementById('modeSelector').style.display = 'none';
+
+            if (mode === 'ai') {
+                document.getElementById('aiMode').style.display = 'block';
+                document.getElementById('detailMode').style.display = 'none';
+            } else if (mode === 'detail') {
+                document.getElementById('detailMode').style.display = 'block';
+                document.getElementById('aiMode').style.display = 'none';
+            }
+        }
+
+        function showModeSelector() {
+            document.getElementById('modeSelector').style.display = 'grid';
+            document.getElementById('aiMode').style.display = 'none';
+            document.getElementById('detailMode').style.display = 'none';
+        }
+
+        function generateAI() {
+            const productName = document.getElementById('productName').value.trim();
+            if (!productName) {
+                alert('명을 해주세요.');
+                return;
+            }
+
+            alert(' AI  을 !\n\n명: ' + productName + '\n\n AI  은 API     능합니다.');
+
+            //   AI  직을 추할
+            console.log('AI  :', { productName });
+        }
+
+        function generateDetail() {
+            const productName = document.getElementById('detailProductName').value.trim();
+            if (!productName) {
+                alert('명을 해주세요.');
+                return;
+            }
+
+            const data = {
+                productName,
+                composition: document.getElementById('composition').value,
+                expiry: document.getElementById('expiry').value,
+                productType: document.getElementById('productType').value,
+                origin: document.getElementById('origin').value,
+                shipping: document.getElementById('shipping').value,
+                productCategory: document.getElementById('productCategory').value,
+                packaging: document.getElementById('packaging').value,
+                ingredients: document.getElementById('ingredients').value,
+                features: document.getElementById('features').value
+            };
+
+            alert('   을 !\n\n된 를 바탕으 를 합니다.');
+
+            //     직을 추할
+            console.log('  :', data);
+        }
+    </script>
+</body>
+</html>

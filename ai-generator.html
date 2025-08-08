@@ -3,77 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI 자동 생성 모드 - Detail Page Generator</title>
+    <title>AI    - Detail Page Generator</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>AI 자동 생성 모드</h1>
-            <p>제품명만 입력하면 AI가 자동으로 완벽한 상세페이지를 생성합니다</p>
-            <button onclick="window.location.href='index.html'" style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 8px 16px; border-radius: 5px; cursor: pointer;">[변경] 모드 변경</button>
+            <h1>AI   </h1>
+            <p>  AI    </p>
+            <button onclick="window.location.href='index.html'" style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 8px 16px; border-radius: 5px; cursor: pointer;">[]  </button>
         </header>
 
         <main>
             <div class="input-section">
-                <h2>[실행] 간편 명령어 시스템</h2>
+                <h2>[]   </h2>
                 <div class="form-group" style="background: #f0f9ff; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                    <label for="commandInput" style="font-weight: bold; color: #1e40af;">명령어 입력 (제품명 + 참조사이트 + 이미지)</label>
-                    <textarea id="commandInput" rows="8" placeholder="[인생]국물닭발800g
-참조 사이트 https://example.com
-이미지 링크
+                    <label for="commandInput" style="font-weight: bold; color: #1e40af;">  ( +  + )</label>
+                    <textarea id="commandInput" rows="8" placeholder="[]800g
+  https://example.com
+
 https://example.com/image1.jpg
 https://example.com/image2.jpg" style="font-family: monospace; background: white;"></textarea>
                     <button onclick="executeCommand()" class="btn-primary" style="width: 100%; margin-top: 10px; background: #1e40af;">
-                        [즉시] 즉시 생성하기
+                        []
                     </button>
                     <div style="margin-top: 10px;">
-                        <small style="color: #6b7280;">[팁] 샘플 명령어:</small>
+                        <small style="color: #6b7280;">[]  :</small>
                         <button onclick="loadSampleCommand()" class="btn-secondary" style="padding: 5px 10px; font-size: 12px; margin-left: 10px;">
-                            [인생]국물닭발800g 예제 불러오기
+                            []800g
                         </button>
                     </div>
                 </div>
-                
+
                 <hr style="margin: 30px 0; border: 1px solid #e5e7eb;">
-                
+
                 <h2>API Configuration</h2>
                 <div class="form-group">
                     <label for="openaiKey">OpenAI API Key (GPT)</label>
                     <div style="display: flex; gap: 10px; align-items: center;">
                         <input type="password" id="openaiKey" placeholder="sk-..." style="flex: 1;">
-                        <button type="button" onclick="toggleKeyVisibility('openaiKey')" class="btn-secondary" style="width: 60px;">[보기]</button>
+                        <button type="button" onclick="toggleKeyVisibility('openaiKey')" class="btn-secondary" style="width: 60px;">[]</button>
                     </div>
                     <button type="button" onclick="saveApiKey('openai')" class="btn-secondary" style="margin-top: 10px;">Save OpenAI Key</button>
                     <small id="openaiStatus" style="color: #666; display: block; margin-top: 5px;">Status: Not configured</small>
                 </div>
-                
+
                 <div class="form-group" style="margin-top: 20px;">
                     <label for="claudeKey">Claude API Key (Anthropic)</label>
                     <div style="display: flex; gap: 10px; align-items: center;">
                         <input type="password" id="claudeKey" placeholder="sk-ant-..." style="flex: 1;">
-                        <button type="button" onclick="toggleKeyVisibility('claudeKey')" class="btn-secondary" style="width: 60px;">[보기]</button>
+                        <button type="button" onclick="toggleKeyVisibility('claudeKey')" class="btn-secondary" style="width: 60px;">[]</button>
                     </div>
                     <button type="button" onclick="saveApiKey('claude')" class="btn-secondary" style="margin-top: 10px;">Save Claude Key</button>
                     <small id="claudeStatus" style="color: #666; display: block; margin-top: 5px;">Status: Not configured</small>
                 </div>
-                
+
                 <div class="form-group" style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
-                    <label style="font-weight: bold; margin-bottom: 10px; display: block;">AI 응답 설정</label>
+                    <label style="font-weight: bold; margin-bottom: 10px; display: block;">AI  </label>
                     <div style="margin-bottom: 10px;">
-                        <label for="responseTime">응답 대기 시간 (충분한 검토를 위해)</label>
+                        <label for="responseTime">   (  )</label>
                         <select id="responseTime" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
-                            <option value="3000">3초 (빠른 응답)</option>
-                            <option value="5000" selected>5초 (표준 - 추천)</option>
-                            <option value="8000">8초 (신중한 검토)</option>
-                            <option value="10000">10초 (최고 품질)</option>
+                            <option value="3000">3 ( )</option>
+                            <option value="5000" selected>5 ( - )</option>
+                            <option value="8000">8 ( )</option>
+                            <option value="10000">10 ( )</option>
                         </select>
                     </div>
-                    <small style="color: #666;">[팁] 충분한 시간으로 더 품질 높은 콘텐츠를 생성합니다.</small>
+                    <small style="color: #666;">[]       .</small>
                 </div>
-                
+
                 <h2>Page Information</h2>
-                
+
                 <div class="form-group">
                     <label for="pageTitle">Page Title <span style="color: red;">*</span></label>
                     <input type="text" id="pageTitle" placeholder="Product name or page title">
@@ -160,9 +160,9 @@ https://example.com/image2.jpg" style="font-family: monospace; background: white
                         <option value="minimal">Minimal Template</option>
                     </select>
                 </div>
-                
+
                 <button onclick="generatePage()" class="btn-primary" style="width: 100%; padding: 20px; font-size: 18px; margin-top: 30px;">
-                    [시작] Generate Page
+                    [] Generate Page
                 </button>
             </div>
         </main>

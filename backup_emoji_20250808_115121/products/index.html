@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>  -   </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --saffron-gold: #E4A853;
+            --deep-rose: #C53030;
+            --deep-charcoal: #1F2937;
+            --pure-white: #FFFFFF;
+            --light-gray: #F9FAFB;
+            --medium-gray: #6B7280;
+            --border-gray: #E5E7EB;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            color: var(--deep-charcoal);
+            background-color: var(--light-gray);
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: clamp(28px, 5vw, 36px);
+            color: var(--deep-charcoal);
+            margin-bottom: 40px;
+        }
+
+        .brand-label {
+            text-align: center;
+            color: var(--saffron-gold);
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .product-card {
+            background: var(--pure-white);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+        }
+
+        .product-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--deep-charcoal);
+            margin-bottom: 12px;
+        }
+
+        .product-description {
+            color: var(--medium-gray);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .product-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .product-link {
+            display: inline-block;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .link-primary {
+            background-color: var(--saffron-gold);
+            color: var(--pure-white);
+        }
+
+        .link-primary:hover {
+            background-color: #d49843;
+        }
+
+        .link-secondary {
+            background-color: var(--light-gray);
+            color: var(--deep-charcoal);
+            border: 1px solid var(--border-gray);
+        }
+
+        .link-secondary:hover {
+            background-color: var(--border-gray);
+        }
+
+        .product-badge {
+            display: inline-block;
+            background-color: var(--deep-rose);
+            color: var(--pure-white);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: var(--saffron-gold);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 16px;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">←  </a>
+
+        <span class="brand-label">  X 도매</span>
+        <h1>   </h1>
+
+        <div class="product-grid">
+            <!--  -->
+            <div class="product-card">
+                <span class="product-badge"></span>
+                <h2 class="product-title">[]800g</h2>
+                <p class="product-description">
+                       !     입니다.
+                </p>
+                <div class="product-links">
+                    <a href="_800g/index.html" class="product-link link-primary"> </a>
+                    <a href="_800g/cafe24_seo.txt" class="product-link link-secondary">Cafe24 SEO </a>
+                </div>
+            </div>
+
+            <!--  -->
+            <div class="product-card">
+                <span class="product-badge"></span>
+                <h2 class="product-title">[]  250g</h2>
+                <p class="product-description">
+                     !     .
+                </p>
+                <div class="product-links">
+                    <a href="_250g/index.html" class="product-link link-primary"> </a>
+                    <a href="_250g/cafe24_seo.txt" class="product-link link-secondary">Cafe24 SEO </a>
+                </div>
+            </div>
+
+            <!--  -->
+            <div class="product-card">
+                <span class="product-badge"></span>
+                <h2 class="product-title">[]1kg</h2>
+                <p class="product-description">
+                       !       .
+                </p>
+                <div class="product-links">
+                    <a href="_1kg/index.html" class="product-link link-primary"> </a>
+                    <a href="_1kg/cafe24_seo.txt" class="product-link link-secondary">Cafe24 SEO </a>
+                </div>
+            </div>
+
+            <!--  -->
+            <div class="product-card">
+                <span class="product-badge">돼지</span>
+                <h2 class="product-title">[]매콤돼지볶음280g</h2>
+                <p class="product-description">
+                      매콤 !  돼지  .
+                </p>
+                <div class="product-links">
+                    <a href="_매콤돼지볶음280g/index.html" class="product-link link-primary"> </a>
+                    <a href="_매콤돼지볶음280g/cafe24_seo.txt" class="product-link link-secondary">Cafe24 SEO </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
